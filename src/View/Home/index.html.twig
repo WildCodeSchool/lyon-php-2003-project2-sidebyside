@@ -1,5 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Hello Wilder !</h1>
+    <main>
+        <h1>Hello Wilder !</h1>
+        <a href="/Profils/index/">All Profils</a>
+        {%  include '/Home/_profilsCarousel.html.twig' %}
+    </main>
 {% endblock %}
