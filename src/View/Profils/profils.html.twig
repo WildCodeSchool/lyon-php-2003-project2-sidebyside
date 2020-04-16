@@ -3,15 +3,21 @@
 {% block content %}
     <h3>Profils</h3>
     <div class="row">
-        {% for i in 1..9 %}
+        {% for user in users %}
             <div class="card profil-card col-6">
                 <a href="#">
                     <div class="profil-img-container">
-                        <img src="/assets/images/art640.jpg" class="card-img-top profil-img" alt="Photo de profile">
+                        <img src="/assets/images/detective840x500.jpg" class="card-img-top profil-img" alt="Photo de profile">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">José#3226</h5>
-                        <p class="card-text">#Menuisier, #Maçon, #Domotique</p>
+                        <h5 class="card-title">{{ user.first_name }}</h5>
+                        <p class="card-text">
+                            {% for skill in skills %}
+                                {% if skill.user_id == user.id %}
+                                    #{{ skill.name }}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
                     </div>
                 </a>
             </div>

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\UserManager;
+
 class ProfilsController extends AbstractController
 {
     /**
@@ -14,6 +16,10 @@ class ProfilsController extends AbstractController
      */
     public function index()
     {
-        return $this->twig->render('Profils/profils.html.twig');
+        $userManager = new UserManager();
+        $users = $userManager->selectAll();
+        $skills = $userManager->getSkills();
+
+        return $this->twig->render('Profils/profils.html.twig', ['users' => $users, 'skills' => $skills]);
     }
 }
