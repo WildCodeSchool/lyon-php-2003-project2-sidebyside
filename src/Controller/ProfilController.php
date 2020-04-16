@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Model\UserManager;
 
-class ProfilsController extends AbstractController
+class ProfilController extends AbstractController
 {
     /**
      * Display profils page
@@ -14,12 +14,17 @@ class ProfilsController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function all()
     {
         $userManager = new UserManager();
         $users = $userManager->selectAll();
         $skills = $userManager->getSkills();
 
-        return $this->twig->render('Profils/profils.html.twig', ['users' => $users, 'skills' => $skills]);
+        return $this->twig->render('Profil/profils.html.twig', ['users' => $users, 'skills' => $skills]);
+    }
+
+    public function user()
+    {
+        return $this->twig->render('Profil/user-profil.html.twig');
     }
 }
