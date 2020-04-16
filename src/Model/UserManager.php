@@ -20,8 +20,6 @@ class UserManager extends AbstractManager
 
     public function getSkills()
     {
-
         return $this->pdo->query("SELECT user_id, name FROM users JOIN user_has_skills ON users.id=user_id JOIN skills ON skill_id=skills.id ORDER BY user_id")->fetchAll();
-
     }
 }
