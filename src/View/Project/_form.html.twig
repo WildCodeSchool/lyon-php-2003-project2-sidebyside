@@ -1,0 +1,48 @@
+<div class="container h-100">
+        <h1 class="text-center">Créer Un Projet</h1>
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 col-md-10 col-lg-8">
+
+    <form method="POST" action="">
+        <div class="form-group">
+            <label for="inputTitle"></label>
+            <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Titre">
+            <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
+        </div>
+        <div class="form-group">
+            <label for="inputImage"></label>
+            <input type="text" class="form-control" id="inputImage" name="banner_image" placeholder="Upload une image">
+        </div>
+        <div class="form-group">
+            <label for="inputDescribe"></label>
+            <textarea class="form-control" id="inputDescribe" name="description" placeholder="Description" rows="5" ></textarea>
+            <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
+        </div>
+        <div class="form-group">
+            <label for="inputCategory"></label>
+            <select class="form-control" id="inputCategory" name="category">
+                <option value="batiment">Batiment</option>
+                <option value="informatique">Informatique</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="inputSkill"></label>
+            <input type="text" class="form-control" id="inputSkill" name="skills" placeholder="Compétences Recherché">
+        </div>
+        <div class="form-group">
+            <label for="inputAvailable">Disponibilité du Projet</label>
+            <input type="date" class="form-control" id="inputAvailable" name="deadline">
+            <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
+        </div>
+        <div class="form-group">
+            <label for="inputZipCode"></label>
+            <input type="text" class="form-control" id="inputZipCode" name="zip_code" placeholder="Code Postale">
+            <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Créer</button>
+    </form>
+    </div>
+        </div>
+            </div>
+
