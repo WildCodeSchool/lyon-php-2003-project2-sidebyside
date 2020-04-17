@@ -6,7 +6,7 @@
     <form method="POST" action="">
         <div class="form-group">
             <label for="inputTitle"></label>
-            <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Titre">
+            <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Titre" value="{{projects.title }}">
             <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
         </div>
         <div class="form-group">
@@ -15,28 +15,29 @@
         </div>
         <div class="form-group">
             <label for="inputDescribe"></label>
-            <textarea class="form-control" id="inputDescribe" name="description" placeholder="Description" rows="5" ></textarea>
+            <textarea class="form-control" id="inputDescribe" name="description" placeholder="Description" rows="5" >{{projects.description }}</textarea>
             <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
         </div>
         <div class="form-group">
             <label for="inputCategory"></label>
-            <select class="form-control" id="inputCategory" name="category">
+            <select class="form-control" id="inputCategory" name="category" >
+                <option value="">Choissisez votre Catégorie</option>
                 <option value="batiment">Batiment</option>
                 <option value="informatique">Informatique</option>
             </select>
         </div>
         <div class="form-group">
             <label for="inputSkill"></label>
-            <input type="text" class="form-control" id="inputSkill" name="skills" placeholder="Compétences Recherché">
+            <input type="text" class="form-control" id="inputSkill" name="skills" placeholder="Compétences Recherché" value="{{projects.skills}}">
         </div>
         <div class="form-group">
             <label for="inputAvailable">Disponibilité du Projet</label>
-            <input type="date" class="form-control" id="inputAvailable" name="deadline">
+            <input type="date" class="form-control" id="inputAvailable" name="deadline" value="{{projects.deadline }}">
             <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
         </div>
         <div class="form-group">
             <label for="inputZipCode"></label>
-            <input type="text" class="form-control" id="inputZipCode" name="zip_code" placeholder="Code Postale">
+            <input type="text" class="form-control" id="inputZipCode" name="zip_code" placeholder="Code Postale" value="{{projects.zip_code }}">
             <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
         </div>
 

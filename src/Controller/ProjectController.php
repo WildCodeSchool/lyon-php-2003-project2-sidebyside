@@ -19,6 +19,7 @@ class ProjectController extends AbstractController
     public function new()
     {
         $errors = [];
+        $projects = [];
         $title = $bannerImage = $description = $deadline = $zipCode = '';
 
         if (!empty($_POST)) {
@@ -27,6 +28,14 @@ class ProjectController extends AbstractController
             $description = trim($_POST['description']);
             $deadline = trim($_POST['deadline']);
             $zipCode = trim($_POST['zip_code']);
+
+            $projects = [
+                'title' => $title,
+                'banner_image' => $bannerImage,
+                'description' => $description,
+                'deadline' => $deadline,
+                'zip_code' => $zipCode,
+            ];
 
             if (empty($title)) {
                 $errors['title'] = 'Ce Champ est Requis';
@@ -47,18 +56,12 @@ class ProjectController extends AbstractController
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $projectsManager = new ProjectManager();
-                    $projects = [
-                        'title' => $title,
-                        'banner_image' => $bannerImage,
-                        'description' => $description,
-                        'deadline' => $deadline,
-                        'zip_code' => $zipCode,
-                    ];
                     $projectsManager->insert($projects);
                     header('Location:/Home/index');
                 }
             }
         }
-            return $this->twig->render('Project/add.html.twig', ['errors' => $errors]);
+
+            return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects'=>$projects]);
     }
 }
