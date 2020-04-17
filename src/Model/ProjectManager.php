@@ -24,8 +24,10 @@ class ProjectManager extends AbstractManager
     {
         // prepared request
         $statement = $this->pdo->prepare(
-            "INSERT INTO $this->table (`title`, `banner_image`, `description`, `deadline`,`zip_code`, `project_owner_id`, `category_id`, `created_at`)
-                        VALUES (:title, :banner_image, :description, :deadline, :zip_code, 1, 1, NOW())"
+            "INSERT INTO $this->table
+(`title`, `banner_image`, `description`, `deadline`,`zip_code`, `project_owner_id`, `category_id`, `created_at`)
+                        VALUES 
+                        (:title, :banner_image, :description, :deadline, :zip_code, 1, 1, NOW())"
         );
         $statement->bindValue('title', $projects['title'], \PDO::PARAM_STR);
         $statement->bindValue('banner_image', $projects['banner_image'], \PDO::PARAM_STR);
