@@ -1,18 +1,23 @@
 /*__________________ General Navbar CSS __________________*/
 .navbar {
-    padding: 10px 0 0 0;
+    padding: 10px 20px;
     background: var(--primary-color);
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     font-weight: 900;
 }
 .general-navabar-link{
     display: flex;
     flex-direction: row-reverse;
+    width: 100%;
 }
 .social,
 .fas.fa-chevron-right,
-.footer-menu {
+.footer-menu,
+.not-in-desktop{
     display: none;
+}
+.not-in-mobile{
+    display: block;
 }
 .nav-signup {
     background: var(--background-color);
@@ -28,12 +33,57 @@
 #nav-link-white {
     color: #fff;
 }
+.navbar-collapse ul.burger li a.nav-link,
+.navbar-collapse ul.burger li a.nav-link:hover {
+    color: #fff;
+}
+.container-right{
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}
+a.navbar-create-project {
+    background: var(--secondary-color);
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #000;
+    text-decoration: none;
+}
 
+.navbar-profil{
+    background-image: url(/assets/images/profil.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+}
+.container-right>* {
+    margin-left: 20px;
+}
+
+/*__________________________________________________ Mobile View __________________________________________________*/
 @media screen and (max-width: 992px) {
     /*__________________ Head Navbar CSS __________________*/
+    .navbar{
+        padding: 10px 0 0 0;
+    }
+    .navbar-profil{
+        display: none;
+    }
     .navbar-mobile {
         margin-bottom: 10px;
-
+    }
+    .not-in-desktop{
+        display: flex;
+    }
+    .navbar-nav.burger li.not-in-mobile{
+        display: none;
     }
     .general-navabar-link{
         display: contents;
@@ -60,22 +110,15 @@
         flex-direction: row;
         font-size: 13px;
     }
-    .navbar-create-project {
-        background: var(--secondary-color);
-        height: 35px;
-        width: 35px;
+    a.navbar-create-project {
         margin-bottom: 10px;
         margin-left: auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 25px;
-    }
-    .navbar-create-project a {
-        color: #000;
     }
     .nav-signup {
         background: var(--background-color);
+    }
+    .container-right form{
+        display: none;
     }
 
     /*__________________ Collapse Navbar CSS __________________*/
