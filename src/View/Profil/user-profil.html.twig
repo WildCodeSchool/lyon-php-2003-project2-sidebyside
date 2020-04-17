@@ -1,7 +1,46 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}User_profil{% endblock %}
+{% block title %}{{ current_user.first_name }}{% endblock %}
 
 {% block content %}
-    User profil
+    <div class="profil-top">
+        <div class="img profil-banner">
+            <img src="#">
+        </div>
+        <div class="img profil-picture">
+            <img src="/assets/images/detective840x500.jpg" style="height: 150px">
+            <h3>{{ current_user.first_name }}</h3>
+        </div>
+    </div>
+    <div class="profil-content">
+        <div class="profil-description">
+            <h4>Biographie</h4>
+            <p>{{ current_user.description }}</p>
+        </div>
+        <div class="profil-skills">
+            <h4>Compétences</h4>
+            <p>
+                {% for skill in skills %}
+                    {% if skill.user_id == current_user.id %}
+                        #{{ skill.name }}
+                    {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="current-projects">
+            <h4>Projets En Cours</h4>
+            <p>#No Entry#</p>
+        </div>
+    </div>
+    <div class="profil-comments">
+        <form action="" method="POST">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" placeholder="Votre message"></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <div class="profil-comments section ">
+            <div>#No Entry#</div>
+            <div>#No Entry#</div>
+        </div>
+    </div>
 {% endblock %}
