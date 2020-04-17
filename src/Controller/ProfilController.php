@@ -29,6 +29,9 @@ class ProfilController extends AbstractController
         $currentUser = $userManager->selectOneById($id);
         $skills = $userManager->getSkills();
 
-        return $this->twig->render('Profil/user-profil.html.twig', ['current_user' => $currentUser, 'skills' => $skills]);
+        return $this->twig->render(
+            'Profil/user-profil.html.twig',
+            ['current_user' => $currentUser, 'skills' => $skills]
+        );
     }
 }
