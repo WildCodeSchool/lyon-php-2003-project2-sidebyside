@@ -14,8 +14,11 @@ script:
     - ./vendor/bin/phpmd src text phpmd.xml
 notifications:
     email:
-        -  matthieu.martinot@wildcodeschool.fr
+        - matthieu.martinot@wildcodeschool.fr
         - stephaneacl@gmail.com
+        - galgros@yahoo.fr
+        - cvr.contact.pro@gmail.com
+        - r.moulet0@gmail.com
 branches:
     only:
         - master
