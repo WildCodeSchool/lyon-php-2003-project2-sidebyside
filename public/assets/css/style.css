@@ -1,4 +1,10 @@
-.btn{
-    background-color: #F2C526;
-}
 
+/* Colors */
+@import "colors.css";
+
+/* Navbar StyleSheets */
+@import "navbar.css";
+
+.btn{
+    background-color: var(--secondary-color);
+}
