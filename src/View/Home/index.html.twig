@@ -1,6 +1,13 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}Side-by-Side{% endblock %}
+
 {% block content %}
-    <h1>Hello Wilder !</h1>
-    <a href="/Project/new/"><button type="button" class="btn btn-warning">Lancez Votre Projet !</button></a>
+    <main>
+        <h1>Side by Side</h1>
+        <a href="/Profil/all/">All Profils</a>
+        <a href="/Project/new/"><button type="button" class="btn btn-warning">Lancez Votre Projet !</button></a>
+        {%  include '/Home/_profilsCarousel.html.twig' %}
+    </main>
 {% endblock %}
+
