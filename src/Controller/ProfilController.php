@@ -1,34 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: aurelwcs
- * Date: 08/04/19
- * Time: 18:40
- */
 
 namespace App\Controller;
 
 use App\Model\UserManager;
 
-class HomeController extends AbstractController
+class ProfilController extends AbstractController
 {
-
     /**
-     * Display home page
+     * Display profils page
      *
      * @return string
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function all()
     {
-
         $userManager = new UserManager();
         $users = $userManager->selectAll();
-        $nbUsers = count($users);
         $skills = $userManager->getSkills();
 
-        return $this->twig->render('Home/index.html.twig', ['users' => $users, 'nbUsers' => $nbUsers, 'skills' => $skills]);
+        return $this->twig->render('Profil/profils.html.twig', ['users' => $users, 'skills' => $skills]);
+    }
+
+    public function user()
+    {
+        return $this->twig->render('Profil/user-profil.html.twig');
     }
 }

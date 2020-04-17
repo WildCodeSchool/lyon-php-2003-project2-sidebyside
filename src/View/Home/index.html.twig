@@ -1,5 +1,11 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}Side-by-Side{% endblock %}
+
 {% block content %}
-    <h1>Hello Wilder !</h1>
+    <main>
+        <h1>Side by Side</h1>
+        <a href="/Profil/all/">All Profils</a>
+        {%  include '/Home/_profilsCarousel.html.twig' %}
+    </main>
 {% endblock %}
