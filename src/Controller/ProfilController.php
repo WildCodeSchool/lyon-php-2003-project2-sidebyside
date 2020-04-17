@@ -23,8 +23,12 @@ class ProfilController extends AbstractController
         return $this->twig->render('Profil/profils.html.twig', ['users' => $users, 'skills' => $skills]);
     }
 
-    public function user()
+    public function user($id)
     {
-        return $this->twig->render('Profil/user-profil.html.twig');
+        $userManager = new UserManager();
+        $currentUser = $userManager->selectOneById($id);
+        $skills = $userManager->getSkills();
+
+        return $this->twig->render('Profil/user-profil.html.twig', ['current_user' => $currentUser, 'skills' => $skills]);
     }
 }
