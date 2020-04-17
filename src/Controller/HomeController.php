@@ -34,8 +34,8 @@ class HomeController extends AbstractController
         $skills = $userManager->getSkills();
 
         return $this->twig->render(
-          'Home/index.html.twig', 
-          ['users' => $users, 'nbUsers' => $nbUsers, 'skills' => $skills, 'projects'=>$projects]
+            'Home/index.html.twig',
+            ['users' => $users, 'nbUsers' => $nbUsers, 'skills' => $skills, 'projects'=>$projects]
         );
     }
 }
