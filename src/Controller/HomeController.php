@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Model\ProjectManager;
+use App\Model\UserManager;
 
 class HomeController extends AbstractController
 {
@@ -23,8 +24,18 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+
         $projectManager = new ProjectManager();
         $projects = $projectManager->selectAll();
-        return $this->twig->render('Home/index.html.twig', ['projects'=>$projects]);
+       
+        $userManager = new UserManager();
+        $users = $userManager->selectAll();
+        $nbUsers = count($users);
+        $skills = $userManager->getSkills();
+
+        return $this->twig->render(
+          'Home/index.html.twig', 
+          ['users' => $users, 'nbUsers' => $nbUsers, 'skills' => $skills, 'projects'=>$projects]
+        );
     }
 }
