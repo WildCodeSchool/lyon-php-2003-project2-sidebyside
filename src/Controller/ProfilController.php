@@ -34,4 +34,26 @@ class ProfilController extends AbstractController
             ['current_user' => $currentUser, 'skills' => $skills]
         );
     }
+
+    public function getUser($id)
+    {
+        $userManager = new UserManager();
+        $currentUser = $userManager->selectOneById($id);
+        $info = $userManager->getUserInfo();
+        return $this->twig->render(
+            'Profil/edit-user-profil.html.twig',
+            ['current_user' => $currentUser, 'info' => $info]
+        );
+    }
+
+    public function setUser($id)
+    {
+        $userManager = new UserManager();
+        $currentUser = $userManager->selectOneById($id);
+        $info = $userManager->getUserInfo();
+        return $this->twig->render(
+            'Profil/edit-user-profil.html.twig',
+            ['current_user' => $currentUser, 'info' => $info]
+        );
+    }
 }
