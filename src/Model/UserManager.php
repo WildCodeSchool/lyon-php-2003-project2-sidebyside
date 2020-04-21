@@ -33,6 +33,5 @@ WHERE first_name LIKE :keyword";
         $statement->execute();
 
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
-
     }
 }

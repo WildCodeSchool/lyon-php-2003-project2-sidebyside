@@ -28,16 +28,16 @@ class ProfilController extends AbstractController
         $errorsArray = [];
 
         if (!empty($_POST)) {
-
             $keyword = trim($_POST['searched_profil']);
-            if (empty($keyword))
+
+            if (empty($keyword)) {
                 $errorsArray['keyword'] = '1 caractère minimum';
+            }
 
             $userManager = new UserManager();
             $users = $userManager->selectByName($keyword);
             return $this->twig->render('Profil/profils.html.twig', ['users' => $users]);
         }
-
     }
 
     public function user($id)
