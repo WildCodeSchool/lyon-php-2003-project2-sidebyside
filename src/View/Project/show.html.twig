@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Mon Projet {{ project.title }}</h1>
+    <p>{{ project.id }}. {{ project.title }}</p>
+    <a href="/Project/edit/{{ project.id }}">Edit</a></br>
+    <a href="/Project/delete/{{project.id}}">Supprimer</a></br>
+    <a href="/home/index">Retour</a>
+{% endblock %}
+
+
+

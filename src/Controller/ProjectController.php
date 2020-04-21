@@ -64,4 +64,50 @@ class ProjectController extends AbstractController
 
             return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects'=>$projects]);
     }
+
+    /**
+     * Display project informations specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function show($id)
+    {
+        $projectManager = new ProjectManager();
+        $projects = $projectManager->selectOneById($id);
+
+        return $this->twig->render('Project/show.html.twig', ['projects' => $projects]);
+    }
+
+
+    /**
+     * Display project edition page specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function edit($id): string
+    {
+        $projectManager = new ProjectManager();
+        $projects = $projectManager->selectOneById($id);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $projects['title'] = $_POST['title'];
+            $projects['banner_image'] = $_POST['banner_image'];
+            $projects['description'] = $_POST['description'];
+            $projects['zip_code'] = $_POST['zip_code'];
+            $projects['plan'] = $_POST['plan'];
+            $projects['team_description'] = $_POST['team_description'];
+            $projects['deadline'] = $_POST['deadline'];
+            $projectManager->update($projects);
+        }
+
+        return $this->twig->render('Project/edit.html.twig', ['projects' => $projects]);
+    }
 }
