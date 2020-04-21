@@ -4,6 +4,12 @@
 
 {% block content %}
     <h3>Profils</h3>
+    <form action="/Profil/search/" method="POST">
+        <label for="searched_profil"></label>
+        <input type="text" name="searched_profil" id="searched_profil"
+               value="" placeholder="Recherche">
+        <button type="submit">Rechercher</button>
+    </form>
     <div class="row">
         {% for user in users %}
             <div class="card profil-card col-6">

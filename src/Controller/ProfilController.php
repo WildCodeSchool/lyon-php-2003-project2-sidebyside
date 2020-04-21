@@ -23,6 +23,23 @@ class ProfilController extends AbstractController
         return $this->twig->render('Profil/profils.html.twig', ['users' => $users, 'skills' => $skills]);
     }
 
+    public function search()
+    {
+        $errorsArray = [];
+
+        if (!empty($_POST)) {
+
+            $keyword = trim($_POST['searched_profil']);
+            if (empty($keyword))
+                $errorsArray['keyword'] = '1 caractère minimum';
+
+            $userManager = new UserManager();
+            $users = $userManager->selectByName($keyword);
+            return $this->twig->render('Profil/profils.html.twig', ['users' => $users]);
+        }
+
+    }
+
     public function user($id)
     {
         $userManager = new UserManager();
