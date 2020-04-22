@@ -24,7 +24,7 @@ class UserManager extends AbstractManager
 JOIN user_has_skills ON users.id=user_id JOIN skills ON skill_id=skills.id ORDER BY user_id")->fetchAll();
     }
 
-    public function selectByName(string $keyword) : array
+    public function selectByWord(string $keyword) : array
     {
         $query = "SELECT last_name, first_name, id, email, zip_code FROM users 
 WHERE first_name LIKE :keyword OR last_name LIKE :keyword OR id LIKE :keyword OR zip_code LIKE :keyword";

@@ -9,7 +9,11 @@
         <a href="/Profil/all/">All Profils</a>
         <a href="/Project/new/"><button type="button" class="btn btn-warning">Lancez Votre Projet !</button></a>
         {% include '/Home/_projectCard.html.twig' %}
-        {%  include '/Home/_profilsCarousel.html.twig' %}
+        {% if is_searched %}
+            {%  include '/Home/_profilCards.html.twig' %}
+        {% else %}
+            {%  include '/Home/_profilsCarousel.html.twig' %}
+        {% endif %}
     </main>
 
 {% endblock %}
