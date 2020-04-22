@@ -6,7 +6,7 @@
 
 
 {% block content %}
-    <form method="POST" action="/profil/edituser/{{ current_user.id }}" enctype="multipart/form-data">
+    <form method="POST" action="{#/profil/setuser/{{ current_user.id }}#}" enctype="multipart/form-data">
         <div class="form-group">
             <input type="text" class="form-control" id="first_name" placeholder="Prenom" name="first_name" value="{{ current_user.first_name }}">
         </div>
@@ -17,19 +17,19 @@
             <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{ current_user.email }}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="zip_code" placeholder="Code Postal" name="zip_code" value="{{ current_user.post_code }}">
+            <input type="text" class="form-control" id="zip_code" placeholder="Code Postal" name="zip_code" value="{{ current_user.zip_code }}">
         </div>
         <div class="form-group">
             <textarea class="form-control" id="description" rows="3" placeholder="Biographie" name="description" >{{ current_user.description }}</textarea>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect2">Example multiple select</label>
-            <select multiple class="form-control" id="exampleFormControlSelect2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <select multiple class="form-control" id="exampleFormControlSelect2" name="skills[]">
+                <option value="Macon">#Macon</option>
+                <option value="Menuisier">#Menuisier</option>
+                <option value="Ingenieur">#Ingenieur</option>
+                <option value="Guitariste">#Guitariste</option>
+                <option value="Boulanger">#Boulanger</option>
             </select>
         </div>
         <div class="input-group mb-3">
