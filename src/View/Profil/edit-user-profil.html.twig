@@ -6,7 +6,7 @@
 
 
 {% block content %}
-    <form method="POST" action="{#/profil/setuser/{{ info.0.id }}#}" enctype="multipart/form-data">
+    <form method="POST" action="/profil/setuser/{{ info.0.user_id }}" enctype="multipart/form-data">
         <div class="form-group">
             <input type="text" class="form-control" id="first_name" placeholder="Prenom" name="first_name" value="{{ info.0.first_name }}">
         </div>
@@ -25,11 +25,14 @@
         <div class="form-group">
             <label for="exampleFormControlSelect2">Example multiple select</label>
             <select multiple class="form-control" id="exampleFormControlSelect2" name="skills[]">
-                <option value="Macon" selected>#Macon</option>
-                <option value="Menuisier">#Menuisier</option>
-                <option value="Ingenieur">#Ingenieur</option>
-                <option value="Guitariste">#Guitariste</option>
-                <option value="Boulanger">#Boulanger</option>
+                {% for skill in allSkillsAvailable %}
+                    <option value="{{ skill.id }}"
+                            {% for skills in info %}
+                                {% if skill.id == skills.skill_id %}selected{% endif %}
+                            {% endfor %}
+                    >#{{ skill.name }}
+                    </option>
+                {% endfor %}
             </select>
         </div>
         <div class="input-group mb-3">

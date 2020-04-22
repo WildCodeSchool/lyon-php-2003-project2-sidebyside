@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\SkillManager;
 use App\Model\UserManager;
 
 class ProfilController extends AbstractController
@@ -38,11 +39,13 @@ class ProfilController extends AbstractController
     public function getUser($id)
     {
         $userManager = new UserManager();
+        $skillManager = new SkillManager();
+        $skills = $skillManager->getAllSkills();
         $info = $userManager->getUserInfo($id);
-        var_dump($_POST);
+        $skillsUser = $skillManager->getAllUserSkills();
         return $this->twig->render(
             'Profil/edit-user-profil.html.twig',
-            ['info' => $info]
+            ['info' => $info, 'allSkillsAvailable' => $skills, 'skillsUser' => $skillsUser]
         );
     }
 
@@ -56,6 +59,7 @@ class ProfilController extends AbstractController
             $email = trim($_POST['email']);
             $zipCode = trim($_POST['zip_code']);
             $description = trim($_POST['description']);
+            $skills = $_POST['skills'];
             $userId = $id;
 
             $profil = [
@@ -64,6 +68,7 @@ class ProfilController extends AbstractController
                 'email' => $email,
                 'zipCode' => $zipCode,
                 'description' => $description,
+                'skills' => $skills,
             ];
             if (empty($firstName)) {
                 $errors['firstName'] = "Ce champ est requis";
@@ -81,6 +86,9 @@ class ProfilController extends AbstractController
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $userManager = new UserManager();
                     $userManager->setUserInfo($profil, $userId);
+                    var_dump($profil);
+                    $userManager->deleteSkillUser($userId);
+                    $userManager->insertSkillUser($profil, $userId);
                     header("Location: /profil/getuser/$id");
                 }
             }

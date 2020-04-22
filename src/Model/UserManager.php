@@ -66,7 +66,10 @@ class UserManager extends AbstractManager
         $update->bindValue('banner_image', $profil['banner_image'], \PDO::PARAM_STR);
         */
         $update->execute();
+    }
 
+    public function deleteSkillUser(int $id)
+    {
         // REQUEST DELETE THE USER SKILLS IN user_has_skills
         $delete = $this->pdo->prepare(
             "DELETE FROM user_has_skills uhs 
@@ -74,7 +77,10 @@ class UserManager extends AbstractManager
         );
         $delete->bindValue('id', $id, \PDO::PARAM_INT);
         $delete->execute();
+    }
 
+    public function insertSkillUser(array $profil, int $id)
+    {
         // REQUEST INSERT THE USER SKILLS IN user_has_skills AFTER DELETE PRECEDE SKILLS IN user_has_skills
         if (isset($profil['skills'])) {
             foreach ($profil['skills'] as $skillId) {
@@ -88,4 +94,6 @@ class UserManager extends AbstractManager
             }
         }
     }
+
+
 }
