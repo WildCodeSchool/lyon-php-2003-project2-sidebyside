@@ -23,4 +23,15 @@ class UserManager extends AbstractManager
         return $this->pdo->query("SELECT user_id, name FROM users 
 JOIN user_has_skills ON users.id=user_id JOIN skills ON skill_id=skills.id ORDER BY user_id")->fetchAll();
     }
+
+    public function selectByName(string $keyword) : array
+    {
+        $query = "SELECT last_name, first_name, id, email, zip_code FROM users 
+WHERE first_name LIKE :keyword OR last_name LIKE :keyword OR id LIKE :keyword OR zip_code LIKE :keyword";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':keyword', "%$keyword%");
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
