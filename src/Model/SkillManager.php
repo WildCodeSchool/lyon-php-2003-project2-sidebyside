@@ -26,5 +26,4 @@ class SkillManager extends AbstractManager
             "SELECT * FROM user_has_skills"
         )->fetchAll();
     }
-
 }

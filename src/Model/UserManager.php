@@ -94,6 +94,4 @@ class UserManager extends AbstractManager
             }
         }
     }
-
-
 }
