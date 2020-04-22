@@ -62,7 +62,7 @@ class ProjectController extends AbstractController
             }
         }
 
-            return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects'=>$projects]);
+        return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
     }
 
     /**
@@ -77,9 +77,13 @@ class ProjectController extends AbstractController
     public function show($id)
     {
         $projectManager = new ProjectManager();
-        $projects = $projectManager->selectOneById($id);
+        $projects = $projectManager->getInfosProject($id);
+        $currentProjectId = $id;
 
-        return $this->twig->render('Project/show.html.twig', ['projects' => $projects]);
+        return $this->twig->render(
+            'Project/show.html.twig',
+            ['projects' => $projects, 'currentProjectId' => $currentProjectId]
+        );
     }
 
 
@@ -94,20 +98,56 @@ class ProjectController extends AbstractController
      */
     public function edit($id): string
     {
-        $projectManager = new ProjectManager();
-        $projects = $projectManager->selectOneById($id);
+            $projectManager = new ProjectManager();
+            $projects = $projectManager->selectOneById($id);
+            $currentProjectId = $id;
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $projects['title'] = $_POST['title'];
-            $projects['banner_image'] = $_POST['banner_image'];
-            $projects['description'] = $_POST['description'];
-            $projects['zip_code'] = $_POST['zip_code'];
-            $projects['plan'] = $_POST['plan'];
-            $projects['team_description'] = $_POST['team_description'];
-            $projects['deadline'] = $_POST['deadline'];
-            $projectManager->update($projects);
+        $errors = [];
+        $title = $bannerImage = $description = $zipCode = $plan = $deadline = $teamDescription = '';
+
+        if (!empty($_POST)) {
+            $title = trim($_POST['title']);
+            $bannerImage = trim($_POST['banner_image']);
+            $description = trim($_POST['description']);
+            $zipCode = trim($_POST['zip_code']);
+            $plan = trim($_POST['plan']);
+            $deadline = trim($_POST['deadline']);
+            $teamDescription = trim($_POST['team_description']);
+
+
+            $projects = [
+                'id' => $id,
+                'title' => $title,
+                'banner_image' => $bannerImage,
+                'description' => $description,
+                'zip_code' => $zipCode,
+                'plan' => $plan,
+                'team_description' => $teamDescription,
+                'deadline' => $deadline,
+
+            ];
+            if (empty($title)) {
+                $errors['title'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($description)) {
+                $errors['description'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($deadline)) {
+                $errors['deadline'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($errors)) {
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $projectManager->update($projects);
+                    header('Location: /Project/show/' . $currentProjectId . '/');
+                }
+            }
         }
-
-        return $this->twig->render('Project/edit.html.twig', ['projects' => $projects]);
+        return $this->twig->render(
+            'Project/edit.html.twig',
+            ['projects' => $projects, 'errors' => $errors, 'currentProjectId' => $currentProjectId]
+        );
     }
 }
