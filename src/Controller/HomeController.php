@@ -41,7 +41,7 @@ class HomeController extends AbstractController
 
     public function search()
     {
-        $is_searched = true;
+        $isSearched = true;
         $errorsArray = [];
 
         if (!empty($_POST)) {
@@ -60,7 +60,7 @@ class HomeController extends AbstractController
 
             return $this->twig->render(
                 'Home/index.html.twig',
-                ['users' => $users, 'skills' => $skills, 'is_searched' => $is_searched, 'projects' => $projects]
+                ['users' => $users, 'skills' => $skills, 'isSearched' => $isSearched, 'projects' => $projects]
             );
         }
     }

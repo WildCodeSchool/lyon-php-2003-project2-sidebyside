@@ -18,7 +18,7 @@ class ProjectManager extends AbstractManager
     }
 
     /**
-     * @param string
+     * @param string $keyword
      * @return array
      */
     public function selectByWord(string $keyword) : array
