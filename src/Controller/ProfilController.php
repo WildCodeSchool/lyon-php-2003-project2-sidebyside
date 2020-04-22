@@ -38,11 +38,11 @@ class ProfilController extends AbstractController
     public function getUser($id)
     {
         $userManager = new UserManager();
-        $currentUser = $userManager->selectOneById($id);
-        $info = $userManager->getUserInfo();
+        $info = $userManager->getUserInfo($id);
+        var_dump($_POST);
         return $this->twig->render(
             'Profil/edit-user-profil.html.twig',
-            ['current_user' => $currentUser, 'info' => $info]
+            ['info' => $info]
         );
     }
 

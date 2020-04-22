@@ -1,31 +1,31 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}{{ current_user.first_name }}{% endblock %}
+{% block title %}{{ info.0.first_name }}{% endblock %}
 
 
 
 
 {% block content %}
-    <form method="POST" action="{#/profil/setuser/{{ current_user.id }}#}" enctype="multipart/form-data">
+    <form method="POST" action="{#/profil/setuser/{{ info.0.id }}#}" enctype="multipart/form-data">
         <div class="form-group">
-            <input type="text" class="form-control" id="first_name" placeholder="Prenom" name="first_name" value="{{ current_user.first_name }}">
+            <input type="text" class="form-control" id="first_name" placeholder="Prenom" name="first_name" value="{{ info.0.first_name }}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="last_name" placeholder="Nom" name="last_name" value="{{ current_user.last_name }}">
+            <input type="text" class="form-control" id="last_name" placeholder="Nom" name="last_name" value="{{ info.0.last_name }}">
         </div>
         <div class="form-group">
-            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{ current_user.email }}">
+            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{ info.0.email }}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" id="zip_code" placeholder="Code Postal" name="zip_code" value="{{ current_user.zip_code }}">
+            <input type="text" class="form-control" id="zip_code" placeholder="Code Postal" name="zip_code" value="{{ info.0.zip_code }}">
         </div>
         <div class="form-group">
-            <textarea class="form-control" id="description" rows="3" placeholder="Biographie" name="description" >{{ current_user.description }}</textarea>
+            <textarea class="form-control" id="description" rows="3" placeholder="Biographie" name="description" >{{ info.0.description }}</textarea>
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect2">Example multiple select</label>
             <select multiple class="form-control" id="exampleFormControlSelect2" name="skills[]">
-                <option value="Macon">#Macon</option>
+                <option value="Macon" selected>#Macon</option>
                 <option value="Menuisier">#Menuisier</option>
                 <option value="Ingenieur">#Ingenieur</option>
                 <option value="Guitariste">#Guitariste</option>
