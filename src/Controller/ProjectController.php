@@ -3,7 +3,9 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
 use App\Model\ProjectManager;
+use App\Model\SkillManager;
 
 class ProjectController extends AbstractController
 {
@@ -65,8 +67,9 @@ class ProjectController extends AbstractController
         return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
     }
 
+
     /**
-     * Display project informations specified by $id
+     * Display project information specified by $id
      *
      * @param int $id
      * @return string
@@ -77,12 +80,18 @@ class ProjectController extends AbstractController
     public function show($id)
     {
         $projectManager = new ProjectManager();
-        $projects = $projectManager->getInfosProject($id);
-        $currentProjectId = $id;
-
+        $project = $projectManager->selectOneById($id);
+        $categoryManager = new CategoryManager();
+        $category = $categoryManager->getCategory($id);
+        $skillManager = new SkillManager();
+        $skills = $skillManager->getAllForProject($id);
+        $project['skills'] = $skills; //Ajoute directement les skills au tableau project
+        $project['category'] = $category;
+        //var_dump($project);
+        var_dump($category);
         return $this->twig->render(
             'Project/show.html.twig',
-            ['projects' => $projects, 'currentProjectId' => $currentProjectId]
+            ['project' => $project, 'id' => $id]
         );
     }
 
@@ -98,12 +107,21 @@ class ProjectController extends AbstractController
      */
     public function edit($id): string
     {
-            $projectManager = new ProjectManager();
-            $projects = $projectManager->selectOneById($id);
-            $currentProjectId = $id;
+        $projectManager = new ProjectManager();
+        $project = $projectManager->selectOneById($id);
+        $categoryManager = new CategoryManager();
+        $category = $categoryManager->getCategory($id);
+        $categories = $categoryManager->selectAll($category);
+        $skillManager = new SkillManager();
+        $skills = $skillManager->getAllForProject($id);
+        $project['skills'] = $skills; //Ajoute directement les skills au tableau project
+        $project['category'] = $category;
+        var_dump($project);
+        var_dump($categories);
+
 
         $errors = [];
-        $title = $bannerImage = $description = $zipCode = $plan = $deadline = $teamDescription = '';
+        $title = $bannerImage = $description = $zipCode = $plan = $deadline = $teamDescription = " ";
 
         if (!empty($_POST)) {
             $title = trim($_POST['title']);
@@ -115,7 +133,8 @@ class ProjectController extends AbstractController
             $teamDescription = trim($_POST['team_description']);
 
 
-            $projects = [
+
+            $project = [
                 'id' => $id,
                 'title' => $title,
                 'banner_image' => $bannerImage,
@@ -124,7 +143,6 @@ class ProjectController extends AbstractController
                 'plan' => $plan,
                 'team_description' => $teamDescription,
                 'deadline' => $deadline,
-
             ];
             if (empty($title)) {
                 $errors['title'] = 'Ce Champ est Requis';
@@ -140,14 +158,14 @@ class ProjectController extends AbstractController
 
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $projectManager->update($projects);
-                    header('Location: /Project/show/' . $currentProjectId . '/');
+                    $projectManager->update($project);
+                    header('Location: /Project/show/' . $id . '/');
                 }
             }
         }
         return $this->twig->render(
             'Project/edit.html.twig',
-            ['projects' => $projects, 'errors' => $errors, 'currentProjectId' => $currentProjectId]
+            ['project' => $project, 'errors' => $errors, 'id' => $id, 'categories' => $categories ]
         );
     }
 }

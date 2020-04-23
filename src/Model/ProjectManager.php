@@ -41,33 +41,13 @@ class ProjectManager extends AbstractManager
         }
     }
 
-    /**
-     * Get one row from database by ID.
-     *
-     * @param  int $id
-     *
-     * @return array
-     */
-    public function getInfosProject($id)
-    {
-        $statement = $this->pdo->prepare("SELECT p.id, p.title, p.banner_image, p.description, 
-        p.zip_code, p.plan, c.name AS category_name, s.name AS skills_name
-        FROM $this->table AS p 
-        JOIN category AS c ON c.id = p.category_id
-        JOIN project_need_skills AS pns ON p.id = pns.project_id
-        JOIN skills AS s ON s.id = pns.skill_id
-        WHERE p.id=:id");
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $statement->execute();
 
-        return $statement->fetch();
-    }
-
+    // REQUEST TO UPDATE PROJECT INFOS
     /**
-     * @param array $projects
+     * @param array $project
      * @return bool
      */
-    public function update(array $projects):bool
+    public function update(array $project)
     {
 
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET 
@@ -77,15 +57,16 @@ class ProjectManager extends AbstractManager
         `zip_code` = :zip_code,
         `plan`= :plan,
         `team_description` = :team_description, 
-        `deadline`= :deadline WHERE id=:id ");
-        $statement->bindValue('id', $projects['id'], \PDO::PARAM_INT);
-        $statement->bindValue('title', $projects['title'], \PDO::PARAM_STR);
-        $statement->bindValue('banner_image', $projects['banner_image'], \PDO::PARAM_STR);
-        $statement->bindValue('description', $projects['description'], \PDO::PARAM_STR);
-        $statement->bindValue('zip_code', $projects['zip_code'], \PDO::PARAM_STR);
-        $statement->bindValue('plan', $projects['plan'], \PDO::PARAM_STR);
-        $statement->bindValue('team_description', $projects['team_description'], \PDO::PARAM_STR);
-        $statement->bindValue('deadline', $projects['deadline']);
+        `deadline`= :deadline
+         WHERE id=:id ");
+        $statement->bindValue('id', $project['id'], \PDO::PARAM_INT);
+        $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
+        $statement->bindValue('banner_image', $project['banner_image'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
+        $statement->bindValue('zip_code', $project['zip_code'], \PDO::PARAM_STR);
+        $statement->bindValue('plan', $project['plan'], \PDO::PARAM_STR);
+        $statement->bindValue('team_description', $project['team_description'], \PDO::PARAM_STR);
+        $statement->bindValue('deadline', $project['deadline']);
 
 
         return $statement->execute();
@@ -93,3 +74,7 @@ class ProjectManager extends AbstractManager
     //requete delete (skills)
     //insert
 }
+
+
+
+
