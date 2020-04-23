@@ -30,10 +30,7 @@
 
                 <div class="general-navabar-link">
                     <div class="container-right">
-                        <form class="form-inline" method="POST">
-                            <input class="form-control mr-sm-2" name="search" type="search" 
-                                   placeholder="Recherche" aria-label="Search">
-                        </form>
+                        {%  include '_search.html.twig' %}
                         <!-- Button Create Project hidden if user is not connected -->
                         <!-- (current display:none, delete this attribute for see the button) -->
                         <a href="#" class="navbar-create-project" style="display: none">
