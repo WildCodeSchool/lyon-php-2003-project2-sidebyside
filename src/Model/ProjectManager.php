@@ -24,6 +24,7 @@ class ProjectManager extends AbstractManager
     public function insert(array $projects): int
     {
         // prepared request
+        //TODO SESSION CHANGE category and skills
         $statement = $this->pdo->prepare(
             "INSERT INTO $this->table
 (`title`, `banner_image`, `description`, `deadline`,`zip_code`, `project_owner_id`, `category_id`, `created_at`)
@@ -57,7 +58,8 @@ class ProjectManager extends AbstractManager
         `zip_code` = :zip_code,
         `plan`= :plan,
         `team_description` = :team_description, 
-        `deadline`= :deadline
+        `deadline`= :deadline,
+        `category_id` = :category_id
          WHERE id=:id ");
         $statement->bindValue('id', $project['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
@@ -67,10 +69,10 @@ class ProjectManager extends AbstractManager
         $statement->bindValue('plan', $project['plan'], \PDO::PARAM_STR);
         $statement->bindValue('team_description', $project['team_description'], \PDO::PARAM_STR);
         $statement->bindValue('deadline', $project['deadline']);
+        $statement->bindValue('category_id', $project['category_id'], \PDO::PARAM_INT);
 
 
         return $statement->execute();
     }
-    //requete delete (skills)
     //insert
 }

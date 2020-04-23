@@ -82,13 +82,12 @@ class ProjectController extends AbstractController
         $projectManager = new ProjectManager();
         $project = $projectManager->selectOneById($id);
         $categoryManager = new CategoryManager();
-        $category = $categoryManager->getCategory($id);
+        $category = $categoryManager->getCategory($project['category_id']);
         $skillManager = new SkillManager();
-        $skills = $skillManager->getAllForProject($id);
-        $project['skills'] = $skills; //Ajoute directement les skills au tableau project
+        $projectSkills = $skillManager->getAllForProject($id);
+        $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
         $project['category'] = $category;
-        //var_dump($project);
-        var_dump($category);
+
         return $this->twig->render(
             'Project/show.html.twig',
             ['project' => $project, 'id' => $id]
@@ -110,18 +109,18 @@ class ProjectController extends AbstractController
         $projectManager = new ProjectManager();
         $project = $projectManager->selectOneById($id);
         $categoryManager = new CategoryManager();
-        $category = $categoryManager->getCategory($id);
+        $category = $categoryManager->getCategory($project['category_id']);
         $categories = $categoryManager->selectAll();
         $skillManager = new SkillManager();
-        $skills = $skillManager->getAllForProject($id);
-        $project['skills'] = $skills; //Ajoute directement les skills au tableau project
+        $projectSkills = $skillManager->getAllForProject($id);
+        $skills = $skillManager->selectAll();
+        $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
         $project['category'] = $category;
-        var_dump($project);
-        var_dump($categories);
 
 
         $errors = [];
-        $title = $bannerImage = $description = $zipCode = $plan = $deadline = $teamDescription = " ";
+        $title = $bannerImage = $description = $zipCode = "";
+        $plan = $deadline = $teamDescription = $categoryId = $skillsId = "";
 
         if (!empty($_POST)) {
             $title = trim($_POST['title']);
@@ -131,10 +130,11 @@ class ProjectController extends AbstractController
             $plan = trim($_POST['plan']);
             $deadline = trim($_POST['deadline']);
             $teamDescription = trim($_POST['team_description']);
-
-
-
-            $project = [
+            $categoryId = $_POST['category'];
+            if (isset($_POST['skills'])) {
+                $skillsId = $_POST['skills'];
+            }
+            $updatedProject = [
                 'id' => $id,
                 'title' => $title,
                 'banner_image' => $bannerImage,
@@ -143,6 +143,8 @@ class ProjectController extends AbstractController
                 'plan' => $plan,
                 'team_description' => $teamDescription,
                 'deadline' => $deadline,
+                'category_id' => $categoryId,
+                'skills' => $skillsId
             ];
             if (empty($title)) {
                 $errors['title'] = 'Ce Champ est Requis';
@@ -156,16 +158,24 @@ class ProjectController extends AbstractController
                 $errors['deadline'] = 'Ce Champ est Requis';
             }
 
+            if (empty($categoryId)) {
+                $errors['category_id'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($skillsId)) {
+                $errors['skills'] = 'Ce Champ est Requis';
+            }
+
             if (empty($errors)) {
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $projectManager->update($project);
+                    $projectManager->update($updatedProject);
+                    $skillManager->updateForProject($updatedProject, $id);
+
                     header('Location: /Project/show/' . $id . '/');
-                }
             }
         }
         return $this->twig->render(
             'Project/edit.html.twig',
-            ['project' => $project, 'errors' => $errors, 'id' => $id, 'categories' => $categories ]
+            ['project' => $project, 'errors' => $errors, 'id' => $id, 'categories' => $categories, 'skills' => $skills]
         );
     }
 }

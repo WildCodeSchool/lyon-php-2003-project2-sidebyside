@@ -39,27 +39,35 @@
                     <div class="form-group">
                         <label for="inputCategory"></label>
                         <select class="form-control" id="inputCategory" name="category">
-                            <option value="" style="font-weight: bold">{{ project.category.name }}</option>
+                            <option value="{{ project.category.id }}" style="font-weight: bold"
+                                    selected>{{ project.category.name }}</option>
                             {% for category in categories %}
-                            <option value="">{{ category.name }}</option>
+                                <option value="{{ category.id }}">{{ category.name }}</option>
                             {% endfor %}
                         </select>
+                        <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
                     </div>
-                        <div class="form-group">
-                            <label for="inputSkill">Example multiple select</label>
-                            <select multiple class="form-control" id="inputSkill" name="skills" placeholder="Compétences Recherché">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="inputSkill">Compétences recherché</label>
+                        <select multiple class="form-control" id="inputSkill" name="skills[]">
+                            {% for skill in skills %}
+                                <option value="{{ skill.id }}"
+                                        {% for projectSkill in project.skills %}
+                                            {% if skill.id == projectSkill.id %}selected{% endif %}
+                                        {% endfor %}
+                                >{{ skill.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <small class="text-danger">{% if errors is defined %}{{ errors.skills }}{% endif %}</small>
+                    </div>
                     <div class="form-group">
                         <label for="inputTeam">A propos de l'équipe :</label>
                         <textarea class="form-control" id="inputTeam" name="team_description"
                                   rows="5">{{ project.team_description }}</textarea>
-                        <small class="text-danger">{% if errors is defined %}{{ errors.team_description }}{% endif %}</small>
+                        <small class="text-danger">
+                            {% if errors is defined %}{{ errors.team_description }}{% endif %}
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="inputAvailable">Disponibilité du Projet</label>

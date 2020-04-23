@@ -33,4 +33,31 @@ class SkillManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
+    /**
+     * @param array $project
+     * @param int $projectId
+     */
+    public function updateForProject(array $project, int $projectId)
+    {
+        $delete = $this->pdo->prepare(
+            "DELETE FROM project_need_skills  
+                        WHERE project_id=:project_id"
+        );
+        $delete->bindValue('project_id', $projectId, \PDO::PARAM_INT);
+        $delete->execute();
+
+        // REQUEST INSERT THE PROJECT SKILLS IN project_need_skills AFTER DELETE PRECEDE SKILLS IN project_need_skills
+        if (isset($project['skills'])) {
+            foreach ($project['skills'] as $skillId) {
+                $insert = $this->pdo->prepare(
+                    "INSERT INTO project_need_skills (project_id, skill_id)
+                        VALUES (:project_id, :skillId)"
+                );
+                $insert->bindValue('project_id', $projectId, \PDO::PARAM_INT);
+                $insert->bindValue('skillId', $skillId, \PDO::PARAM_INT);
+                $insert->execute();
+            }
+        }
+    }
 }
