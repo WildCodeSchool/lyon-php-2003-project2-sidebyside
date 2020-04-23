@@ -71,6 +71,5 @@ class SkillManager extends AbstractManager
         return $this->pdo->query(
             "SELECT * FROM user_has_skills"
         )->fetchAll();
-
     }
 }
