@@ -6,7 +6,7 @@
 
 
 {% block content %}
-    <form method="POST" action="/profil/setuser/{{ info.0.user_id }}" enctype="multipart/form-data">
+    <form method="POST" action="/profil/setuser/{{ info.0.id }}" enctype="multipart/form-data">
         <div class="form-group">
             <input type="text" class="form-control" id="first_name" placeholder="Prenom" name="first_name" value="{{ info.0.first_name }}">
         </div>
@@ -37,14 +37,14 @@
         </div>
         <div class="input-group mb-3">
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="profil_img" name="profil_img">
-                <label class="custom-file-label" for="profil_img">Photo de profil</label>
+                <input type="file" class="custom-file-input" id="profil_picture" name="profil_picture">
+                <label class="custom-file-label" for="profil_picture">Photo de profil</label>
             </div>
         </div>
         <div class="input-group mb-3">
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="baner_image" name="baner_image">
-                <label class="custom-file-label" for="baner_image">Image de bannière</label>
+                <input type="file" class="custom-file-input" id="banner_image" name="banner_image">
+                <label class="custom-file-label" for="banner_image">Image de bannière</label>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Poster</button>

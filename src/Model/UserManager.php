@@ -28,20 +28,30 @@ class UserManager extends AbstractManager
         )->fetchAll();
     }
 
+    // REQUEST GET ALL USER INFO IN users & user_has_skills
     public function getUserInfo($id)
     {
         return $this->pdo->query(
-            "SELECT * FROM users u 
-                        JOIN user_has_skills uhs ON u.id = uhs.user_id
-                        JOIN skills s ON s.id= uhs.skill_id
+            "SELECT 
+                            u.id, 
+                            u.last_name, 
+                            u.first_name, 
+                            u.email, 
+                            u.zip_code, 
+                            u.description, 
+                            uhs.user_id, 
+                            uhs.skill_id 
+                        FROM users u 
+                        LEFT JOIN user_has_skills uhs ON u.id = uhs.user_id
+                        LEFT JOIN skills s ON s.id= uhs.skill_id
                         WHERE u.id=$id"
         )->fetchAll();
     }
 
 
+    // REQUEST UPDATE THE USER INFO IN users
     public function setUserInfo(array $profil, int $id) : void
     {
-        // REQUEST UPDATE THE USER INFO IN users
         $update = $this->pdo->prepare(
             "UPDATE users u
                         SET 
@@ -49,28 +59,51 @@ class UserManager extends AbstractManager
                             u.last_name = :last_name, 
                             u.email = :email, 
                             u.zip_code = :zip_code,
-                            u.description = :description 
+                            u.description = :description
                         WHERE 
-                              u.id = :id"
+                            u.id = :id"
         );
         $update->bindValue('id', $id, \PDO::PARAM_INT);
-        $update->bindValue('first_name', $profil['firstName'], \PDO::PARAM_STR);
-        $update->bindValue('last_name', $profil['lastName'], \PDO::PARAM_STR);
+        $update->bindValue('first_name', $profil['first_name'], \PDO::PARAM_STR);
+        $update->bindValue('last_name', $profil['last_name'], \PDO::PARAM_STR);
         $update->bindValue('email', $profil['email'], \PDO::PARAM_STR);
-        $update->bindValue('zip_code', $profil['zipCode'], \PDO::PARAM_STR);
+        $update->bindValue('zip_code', $profil['zip_code'], \PDO::PARAM_STR);
         $update->bindValue('description', $profil['description'], \PDO::PARAM_STR);
 
-        //  TODO insert update value for picture image and banner_image after create upload function
-        /*
-        $update->bindValue('profil_picture', $profil['profil_picture'], \PDO::PARAM_STR);
-        $update->bindValue('banner_image', $profil['banner_image'], \PDO::PARAM_STR);
-        */
         $update->execute();
     }
 
+
+    // REQUEST INSERT THE USER PROFIL IMAGE IN users
+    public function updateUserImg(array $path, int $id)
+    {
+        if (isset($path['banner_image']) && isset($path['profil_picture'])) {
+            $update = $this->pdo->prepare("UPDATE users u 
+                                                        SET 
+                                                            u.profil_picture = :profil_picture, 
+                                                            u.banner_image = :banner_image 
+                                                        WHERE u.id = :id");
+            $update->bindParam('profil_picture', $path["profil_picture"], \PDO::PARAM_STR);
+            $update->bindParam('banner_image', $path["banner_image"], \PDO::PARAM_STR);
+        } elseif (isset($path['banner_image']) && !isset($path['profil_picture'])) {
+            $update = $this->pdo->prepare("UPDATE users u 
+                                                        SET u.banner_image = :banner_image 
+                                                        WHERE u.id = :id");
+            $update->bindParam('banner_image', $path["banner_image"], \PDO::PARAM_STR);
+        } elseif (!isset($path['banner_image']) && isset($path['profil_picture'])) {
+            $update = $this->pdo->prepare("UPDATE users u 
+                                                        SET u.profil_picture = :profil_picture 
+                                                        WHERE u.id = :id");
+            $update->bindParam('profil_picture', $path["profil_picture"], \PDO::PARAM_STR);
+        }
+        $update->bindValue('id', $id, \PDO::PARAM_INT);
+        $update->execute();
+    }
+
+
+    // REQUEST DELETE THE USER SKILLS IN user_has_skills
     public function deleteSkillUser(int $id)
     {
-        // REQUEST DELETE THE USER SKILLS IN user_has_skills
         $delete = $this->pdo->prepare(
             "DELETE FROM user_has_skills uhs 
                         WHERE uhs.user_id=:id"
@@ -79,9 +112,9 @@ class UserManager extends AbstractManager
         $delete->execute();
     }
 
+    // REQUEST INSERT THE USER SKILLS IN user_has_skills AFTER DELETE PRECEDE SKILLS IN user_has_skills
     public function insertSkillUser(array $profil, int $id)
     {
-        // REQUEST INSERT THE USER SKILLS IN user_has_skills AFTER DELETE PRECEDE SKILLS IN user_has_skills
         if (isset($profil['skills'])) {
             foreach ($profil['skills'] as $skillId) {
                 $insert = $this->pdo->prepare(

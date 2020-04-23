@@ -43,54 +43,54 @@ class ProfilController extends AbstractController
         $skills = $skillManager->getAllSkills();
         $info = $userManager->getUserInfo($id);
         $skillsUser = $skillManager->getAllUserSkills();
+        echo  $id;
+        var_dump($info);
         return $this->twig->render(
             'Profil/edit-user-profil.html.twig',
             ['info' => $info, 'allSkillsAvailable' => $skills, 'skillsUser' => $skillsUser]
         );
     }
 
+    public function trimPost(array $post)
+    {
+        $profil = [];
+        foreach ($post as $key => $value) {
+            if ($key !== "skills") {
+                $profil[$key] = trim($value);
+            }
+            $profil["skills"] = "";
+        }
+        if (isset($_POST['skills'])) {
+            $profil['skills'] = $post['skills'];
+        }
+        return $profil;
+    }
+
     public function setUser($id)
     {
         $errors = null;
-
         if (!empty($_POST)) {
-            $firstName = trim($_POST['first_name']);
-            $lastName = trim($_POST['last_name']);
-            $email = trim($_POST['email']);
-            $zipCode = trim($_POST['zip_code']);
-            $description = trim($_POST['description']);
-            $skills = $_POST['skills'];
             $userId = $id;
-
-            $profil = [
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'email' => $email,
-                'zipCode' => $zipCode,
-                'description' => $description,
-                'skills' => $skills,
-            ];
-            if (empty($firstName)) {
-                $errors['firstName'] = "Ce champ est requis";
-            } elseif (empty($lastName)) {
-                $errors['lastName'] = "Ce champ est requis";
-            } elseif (empty($email)) {
-                $errors['email'] = "Ce champ est requis";
-            } elseif (empty($zipCode)) {
-                $errors['zipcode'] = "Ce champ est requis";
-            } elseif (empty($description)) {
-                $errors['description'] = "Ce champ est requis";
+            $profil = $this->trimPost($_POST);
+            foreach ($profil as $key => $value) {
+                if ((empty($value) && $key !== "skills")) {
+                    $errors[$key] = "Ce champ est requis";
+                }
             }
 
             if (empty($errors)) {
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $userManager = new UserManager();
-                    $userManager->setUserInfo($profil, $userId);
-                    var_dump($profil);
-                    $userManager->deleteSkillUser($userId);
-                    $userManager->insertSkillUser($profil, $userId);
-                    header("Location: /profil/getuser/$id");
+                $userManager = new UserManager();
+                if (!empty($_FILES['profil_picture']['name'] || $_FILES['banner_image']['name'])) {
+                    $upload = new UploadController();
+                    $path = $upload->uploadProfilImage($_FILES);
+                    $userManager->updateUserImg($path, $userId);
                 }
+                $userManager->setUserInfo($profil, $userId);
+                $userManager->deleteSkillUser($userId);
+                if (!empty($profil['skills'])) {
+                    $userManager->insertSkillUser($profil, $userId);
+                }
+                //header("Location: /profil/getuser/$id");
             }
         }
     }
