@@ -9,7 +9,7 @@ class UploadController extends AbstractController
     {
         $extensions = ['.png', '.jpg', '.jpeg'];
         $errors = [];
-        $folder = "assets/uploads/";
+        $folder = "assets/uploads/profils/";
         $path = [];
 
         if (!empty($file)) {
@@ -30,11 +30,11 @@ class UploadController extends AbstractController
                         $ext = pathinfo($array['name'], PATHINFO_EXTENSION);
                         $filename = uniqid() . '.' . $ext;
                         move_uploaded_file($array['tmp_name'], $folder . $filename);
-                        $path[$key] = "assets/uploads/$filename";
+                        $path[$key] = "assets/uploads/profils/$filename";
                     }
                 }
+                return $path;
             }
         }
-        return $path;
     }
 }

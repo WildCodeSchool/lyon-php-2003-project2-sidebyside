@@ -36,18 +36,20 @@ class ProfilController extends AbstractController
         );
     }
 
-    public function getUser($id)
+    public function updateUser($id)
     {
+        $errors = [];
+        if (!empty($_POST)) {
+            $errors = $this->setUser($id, $_POST);
+        }
         $userManager = new UserManager();
         $skillManager = new SkillManager();
         $skills = $skillManager->getAllSkills();
         $info = $userManager->getUserInfo($id);
         $skillsUser = $skillManager->getAllUserSkills();
-        echo  $id;
-        var_dump($info);
         return $this->twig->render(
             'Profil/edit-user-profil.html.twig',
-            ['info' => $info, 'allSkillsAvailable' => $skills, 'skillsUser' => $skillsUser]
+            ['info' => $info, 'allSkillsAvailable' => $skills, 'skillsUser' => $skillsUser, 'errors' => $errors]
         );
     }
 
@@ -60,18 +62,18 @@ class ProfilController extends AbstractController
             }
             $profil["skills"] = "";
         }
-        if (isset($_POST['skills'])) {
+        if (isset($post['skills'])) {
             $profil['skills'] = $post['skills'];
         }
         return $profil;
     }
 
-    public function setUser($id)
+    public function setUser(int $id, array $post)
     {
         $errors = null;
-        if (!empty($_POST)) {
+        if (!empty($post)) {
             $userId = $id;
-            $profil = $this->trimPost($_POST);
+            $profil = $this->trimPost($post);
             foreach ($profil as $key => $value) {
                 if ((empty($value) && $key !== "skills")) {
                     $errors[$key] = "Ce champ est requis";
@@ -90,8 +92,8 @@ class ProfilController extends AbstractController
                 if (!empty($profil['skills'])) {
                     $userManager->insertSkillUser($profil, $userId);
                 }
-                //header("Location: /profil/getuser/$id");
             }
+            return $errors;
         }
     }
 }

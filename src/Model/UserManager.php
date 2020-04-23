@@ -85,19 +85,23 @@ class UserManager extends AbstractManager
                                                         WHERE u.id = :id");
             $update->bindParam('profil_picture', $path["profil_picture"], \PDO::PARAM_STR);
             $update->bindParam('banner_image', $path["banner_image"], \PDO::PARAM_STR);
+            $update->bindValue('id', $id, \PDO::PARAM_INT);
+            $update->execute();
         } elseif (isset($path['banner_image']) && !isset($path['profil_picture'])) {
             $update = $this->pdo->prepare("UPDATE users u 
                                                         SET u.banner_image = :banner_image 
                                                         WHERE u.id = :id");
             $update->bindParam('banner_image', $path["banner_image"], \PDO::PARAM_STR);
+            $update->bindValue('id', $id, \PDO::PARAM_INT);
+            $update->execute();
         } elseif (!isset($path['banner_image']) && isset($path['profil_picture'])) {
             $update = $this->pdo->prepare("UPDATE users u 
                                                         SET u.profil_picture = :profil_picture 
                                                         WHERE u.id = :id");
             $update->bindParam('profil_picture', $path["profil_picture"], \PDO::PARAM_STR);
+            $update->bindValue('id', $id, \PDO::PARAM_INT);
+            $update->execute();
         }
-        $update->bindValue('id', $id, \PDO::PARAM_INT);
-        $update->execute();
     }
 
 
