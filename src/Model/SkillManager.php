@@ -57,6 +57,7 @@ class SkillManager extends AbstractManager
                 $insert->execute();
             }
         }
+    }
 
     public function getAllSkills()
     {
