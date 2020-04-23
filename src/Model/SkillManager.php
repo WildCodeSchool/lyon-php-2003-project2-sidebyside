@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Model;
 
 class SkillManager extends AbstractManager
@@ -11,12 +10,11 @@ class SkillManager extends AbstractManager
      */
     const TABLE = "skills";
   
-
     public function __construct()
     {
         parent::__construct(self::TABLE);
     }
-
+    
     /**
      * Get one row from database by ID.
      *
