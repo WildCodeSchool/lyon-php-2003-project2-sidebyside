@@ -20,7 +20,7 @@ class SkillManager extends AbstractManager
     /**
      * Get one row from database by ID.
      *
-     * @param $projectId
+     * @param int $projectId
      * @return array
      */
     public function getAllForProject($projectId)

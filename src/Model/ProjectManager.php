@@ -74,7 +74,3 @@ class ProjectManager extends AbstractManager
     //requete delete (skills)
     //insert
 }
-
-
-
-

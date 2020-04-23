@@ -111,7 +111,7 @@ class ProjectController extends AbstractController
         $project = $projectManager->selectOneById($id);
         $categoryManager = new CategoryManager();
         $category = $categoryManager->getCategory($id);
-        $categories = $categoryManager->selectAll($category);
+        $categories = $categoryManager->selectAll();
         $skillManager = new SkillManager();
         $skills = $skillManager->getAllForProject($id);
         $project['skills'] = $skills; //Ajoute directement les skills au tableau project
