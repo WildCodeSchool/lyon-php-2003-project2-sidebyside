@@ -36,7 +36,7 @@ class ProfilController extends AbstractController
 
             $userManager = new UserManager();
             $skills = $userManager->getSkills();
-            $users = $userManager->selectByName($keyword);
+            $users = $userManager->selectByWord($keyword);
             return $this->twig->render('Profil/profils.html.twig', ['users' => $users, 'skills' => $skills]);
         }
     }

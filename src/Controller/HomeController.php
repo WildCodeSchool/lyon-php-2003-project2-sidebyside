@@ -38,4 +38,30 @@ class HomeController extends AbstractController
             ['users' => $users, 'nbUsers' => $nbUsers, 'skills' => $skills, 'projects'=>$projects]
         );
     }
+
+    public function search()
+    {
+        $isSearched = true;
+        $errorsArray = [];
+
+        if (!empty($_POST)) {
+            $keyword = trim($_POST['search']);
+
+            if (empty($keyword)) {
+                $errorsArray['keyword'] = '1 caractère minimum';
+            }
+
+            $projectManager = new ProjectManager();
+            $projects = $projectManager->selectByWord($keyword);
+
+            $userManager = new UserManager();
+            $skills = $userManager->getSkills();
+            $users = $userManager->selectByWord($keyword);
+
+            return $this->twig->render(
+                'Home/index.html.twig',
+                ['users' => $users, 'skills' => $skills, 'isSearched' => $isSearched, 'projects' => $projects]
+            );
+        }
+    }
 }
