@@ -92,6 +92,7 @@ class ProfilController extends AbstractController
         if (!empty($post)) {
             $userId = $id;
             $profil = $this->trimPost($post);
+
             foreach ($profil as $key => $value) {
                 if ((empty($value) && $key !== "skills")) {
                     $errors[$key] = "Ce champ est requis";

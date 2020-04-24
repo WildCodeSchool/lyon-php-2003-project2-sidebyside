@@ -82,7 +82,8 @@ class UserManager extends AbstractManager
                                                         SET 
                                                             u.profil_picture = :profil_picture, 
                                                             u.banner_image = :banner_image 
-                                                        WHERE u.id = :id");
+                                                        WHERE 
+                                                            u.id = :id");
             $update->bindParam('profil_picture', $path["profil_picture"], \PDO::PARAM_STR);
             $update->bindParam('banner_image', $path["banner_image"], \PDO::PARAM_STR);
             $update->bindValue('id', $id, \PDO::PARAM_INT);
@@ -123,7 +124,7 @@ class UserManager extends AbstractManager
             foreach ($profil['skills'] as $skillId) {
                 $insert = $this->pdo->prepare(
                     "INSERT INTO user_has_skills (user_id, skill_id)
-                        VALUES (:id, :skillId)"
+                                VALUES (:id, :skillId)"
                 );
                 $insert->bindValue('id', $id, \PDO::PARAM_INT);
                 $insert->bindValue('skillId', $skillId, \PDO::PARAM_INT);
@@ -135,7 +136,10 @@ class UserManager extends AbstractManager
     public function selectByWord(string $keyword) : array
     {
         $query = "SELECT last_name, first_name, id, email, zip_code FROM users 
-WHERE first_name LIKE :keyword OR last_name LIKE :keyword OR id LIKE :keyword OR zip_code LIKE :keyword";
+                    WHERE first_name LIKE :keyword 
+                    OR last_name LIKE :keyword 
+                    OR id LIKE :keyword 
+                    OR zip_code LIKE :keyword";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':keyword', "%$keyword%");
         $statement->execute();
