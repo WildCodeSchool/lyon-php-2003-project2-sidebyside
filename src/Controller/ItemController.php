@@ -73,7 +73,7 @@ class ItemController extends AbstractController
             $itemManager->update($item);
         }
 
-        return $this->twig->render('Item/edit.html.twig', ['item' => $item]);
+        return $this->twig->render('Item/show.html.twig', ['item' => $item]);
     }
 
 
