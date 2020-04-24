@@ -66,7 +66,6 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
      */
     public function update(array $project)
     {
-
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET 
         `title` = :title, 
         `banner_image`= :banner_image,
@@ -86,7 +85,6 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
         $statement->bindValue('team_description', $project['team_description'], \PDO::PARAM_STR);
         $statement->bindValue('deadline', $project['deadline']);
         $statement->bindValue('category_id', $project['category_id'], \PDO::PARAM_INT);
-
 
         return $statement->execute();
     }

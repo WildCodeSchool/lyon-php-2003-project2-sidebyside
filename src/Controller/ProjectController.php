@@ -9,7 +9,6 @@ use App\Model\SkillManager;
 
 class ProjectController extends AbstractController
 {
-
     /**
      * Display projects creation page
      *
@@ -67,7 +66,6 @@ class ProjectController extends AbstractController
         return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
     }
 
-
     /**
      * Display project information specified by $id
      *
@@ -94,7 +92,6 @@ class ProjectController extends AbstractController
         );
     }
 
-
     /**
      * Display project edition page specified by $id
      *
@@ -116,7 +113,6 @@ class ProjectController extends AbstractController
         $skills = $skillManager->selectAll();
         $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
         $project['category'] = $category;
-
 
         $errors = [];
         $title = $bannerImage = $description = $zipCode = "";

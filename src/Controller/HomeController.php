@@ -24,18 +24,16 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-
         $projectManager = new ProjectManager();
         $projects = $projectManager->selectAll();
        
         $userManager = new UserManager();
         $users = $userManager->selectAll();
-        $nbUsers = count($users);
         $skills = $userManager->getSkills();
 
         return $this->twig->render(
             'Home/index.html.twig',
-            ['users' => $users, 'nbUsers' => $nbUsers, 'skills' => $skills, 'projects'=>$projects]
+            ['users' => $users, 'skills' => $skills, 'projects'=>$projects]
         );
     }
 
