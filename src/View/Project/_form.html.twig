@@ -15,11 +15,17 @@
             <input type="text" class="form-control" id="inputImage" name="banner_image" placeholder="Upload une image">
         </div>
         <div class="form-group">
-            <label for="inputDescribe"></label>
+            <label for="inputDescribe">Description :</label>
             <textarea class="form-control" id="inputDescribe" name="description" placeholder="Description" rows="5" >
-                {{projects.description }}
+                 {{projects.description }}
             </textarea>
             <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
+        </div>
+        <div class="form-group">
+            <label for="inputZipCode"></label>
+            <input type="text" class="form-control" id="inputZipCode" name="zip_code"
+                   placeholder="Code Postale" value="{{projects.zip_code }}">
+            <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
         </div>
         <div class="form-group">
             <label for="inputCategory"></label>
@@ -38,12 +44,6 @@
             <label for="inputAvailable">Disponibilité du Projet</label>
             <input type="date" class="form-control" id="inputAvailable" name="deadline" value="{{projects.deadline }}">
             <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
-        </div>
-        <div class="form-group">
-            <label for="inputZipCode"></label>
-            <input type="text" class="form-control" id="inputZipCode" name="zip_code"
-                   placeholder="Code Postale" value="{{projects.zip_code }}">
-            <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
         </div>
 
         <button type="submit" class="btn btn-warning">Créer</button>
