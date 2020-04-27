@@ -1,0 +1,92 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="container h-100">
+        <h1 class="text-center">Modifier Mon Projet : {{ project.title }}</h1>
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 col-md-10 col-lg-8">
+
+                <form method="POST" action="">
+                    <div class="form-group">
+                        <label for="inputTitle"></label>
+                        <input type="text" class="form-control" id="inputTitle" name="title"
+                               placeholder="Titre" value="{{ project.title }}">
+                        <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputImage"></label>
+                        <input type="text" class="form-control" id="inputImage" name="banner_image"
+                               placeholder="Upload une image">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescribe">Description :</label>
+                        <textarea class="form-control" id="inputDescribe" name="description"
+                                  rows="5">{{ project.description }}</textarea>
+                        <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputZipCode"></label>
+                        <input type="text" class="form-control" id="inputZipCode" name="zip_code"
+                               placeholder="Code Postale" value="{{ project.zip_code }}">
+                        <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPlan">Plan Du Projet : </label>
+                        <textarea class="form-control" id="inputPlan" name="plan" rows="5">{{ project.plan }}</textarea>
+                        <small class="text-danger">{% if errors is defined %}{{ errors.plan }}{% endif %}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCategory"></label>
+                        <select class="form-control" id="inputCategory" name="category">
+                            <option value="{{ project.category.id }}" style="font-weight: bold"
+                                    selected>{{ project.category.name }}</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputSkill">Compétences recherché</label>
+                        <select multiple class="form-control" id="inputSkill" name="skills[]">
+                            {% for skill in skills %}
+                                <option value="{{ skill.id }}"
+                                        {% for projectSkill in project.skills %}
+                                            {% if skill.id == projectSkill.id %}selected{% endif %}
+                                        {% endfor %}
+                                >{{ skill.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <small class="text-danger">{% if errors is defined %}{{ errors.skills }}{% endif %}</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTeam">A propos de l'équipe :</label>
+                        <textarea class="form-control" id="inputTeam" name="team_description"
+                                  rows="5">{{ project.team_description }}</textarea>
+                        <small class="text-danger">
+                            {% if errors is defined %}{{ errors.team_description }}{% endif %}
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAvailable">Disponibilité du Projet</label>
+                        <input type="date" class="form-control" id="inputAvailable" name="deadline"
+                               value="{{ project.deadline }}">
+                        <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning">Poster</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-info"><a href="/Project/show/{{ id }}">Retour</a></button>
+{% endblock %}
+
+
+
+
+
+
