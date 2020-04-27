@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <div class="container sign-in">
+        <div class="header-sign">
+            <!-- Logo Navbar -->
+            <a class="navbar-sign" href="#">
+                <img src="/assets/images/sbs_black.png" width="50px" alt="">
+            </a>
+            <!-- Button Back to Home -->
+            <a href="" class="link-back">
+                <button type="submit" class="btn btn-back">Retour</button>
+            </a>
+        </div>
+        <!-- Form Connexion -->
+        <form class="form-sign-in" method="POST" action="" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="email" class="form-control form-control-sign" id="" name="email"
+                       aria-describedby="emailHelp"
+                       placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control form-control-sign" id="" name="password"
+                       placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-sign">Connexion</button>
+        </form>
+    </div>
+{% endblock %}
