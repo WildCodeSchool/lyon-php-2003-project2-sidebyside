@@ -5,6 +5,77 @@
 /* Navbar StyleSheets */
 @import "navbar.css";
 
+h1 {
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 50px;
+}
 .btn{
     background-color: var(--secondary-color);
+    font-weight: 900;
+}
+.btn-yellow-round {
+    background-color: var(--secondary-color);
+    border-radius: 25px;
+    font-weight: 900;
+}
+.btn-black-square, .btn-black-square:hover {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 900;
+}
+.btn-return-sign {
+    margin: 15px;
+}
+.information {
+    margin: auto;
+    font-size: 14px;
+    width: 80%;
+    color: grey;
+}
+
+.form-control::placeholder {
+    color: white !important;
+}
+
+.form-control-sign,
+.form-control-sign:focus{
+    background-color: var(--primary-color);
+    color: var(--navbar-divider-color);
+    padding: 25px;
+    border-radius: 10px;
+    border: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.sign-upload_label{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    color: var(--navbar-divider-color);
+}
+
+.form-upload-span {
+    padding-right: 45px;
+    overflow: hidden;
+    white-space: pre;
+}
+
+.sign-upload_icon{
+    height: 60px;
+    margin: -30px;
+}
+
+.form-group-submit {
+    text-align: center;
 }

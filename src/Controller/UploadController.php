@@ -5,9 +5,9 @@ namespace App\Controller;
 
 class UploadController extends AbstractController
 {
-    public function uploadProfilImage(array $file)
+    public static function uploadProfilImage(array $file)
     {
-        $extensions = ['.png', '.jpg', '.jpeg'];
+        $extensions = ['.png', '.jpg', '.jpeg', '.gif'];
         $errors = [];
         $folder = "assets/uploads/profils/";
         $path = [];
