@@ -68,82 +68,101 @@ a.navbar-create-project {
 /*_______________________________________________ Mobile View _______________________________________________*/
 @media screen and (max-width: 992px) {
     /*__________________ Head Navbar CSS __________________*/
-    .navbar{
+    .navbar {
         padding: 10px 0 0 0;
     }
-    .navbar-profil{
+
+    .navbar-profil {
         display: none;
     }
+
     .navbar-mobile {
         margin-bottom: 10px;
     }
-    .not-in-desktop{
+
+    .not-in-desktop {
         display: flex;
     }
-    .navbar-nav.burger li.not-in-mobile{
+
+    .navbar-nav.burger li.not-in-mobile {
         display: none;
     }
-    .general-navabar-link{
+
+    .general-navabar-link {
         display: contents;
     }
+
     .navbar-brand {
         display: inline-block;
         padding: 0;
         margin-right: 0;
         margin-left: 12px;
     }
+
     .navbar-dark .navbar-toggler {
         color: transparent;
         border-color: transparent;
     }
+
     .burger-icon {
         color: #fff;
         font-size: 30px;
     }
+
     .navbar-button {
         margin-left: auto;
     }
+
     .navbar-button ul {
         display: flex;
         flex-direction: row;
         font-size: 13px;
     }
+
     a.navbar-create-project {
         margin-bottom: 10px;
         margin-left: auto;
     }
+
     .nav-signup {
         background: var(--background-color);
     }
-    .container-right form{
+
+    .container-right form {
         display: none;
     }
 
     /*__________________ Collapse Navbar CSS __________________*/
     .fas.fa-chevron-right,
-    .footer-menu{
+    .footer-menu {
         display: block;
     }
+
     i.fas.fa-chevron-right {
         margin-left: 25px;
     }
+
     .head-collapse {
         background: var(--navbar-divider-color);
         height: 70px;
     }
+
     .navbar-nav.burger {
         padding: 40px;
         height: 100vh;
     }
+
     .divider {
         background: var(--navbar-divider-color);
         height: 5px;
         margin: 50px 0 60px 0;
     }
+
     .navbar-collapse {
         font-size: 23px;
         background: var(--background-color);
     }
+
     .navbar-collapse ul.burger li a.nav-link,
     .navbar-collapse ul.burger li a.nav-link:hover {
         color: #000;
@@ -156,13 +175,61 @@ a.navbar-create-project {
         justify-content: space-evenly;
         margin-top: 50px;
     }
+
     .navbar-nav.burger li {
         display: flex;
         align-items: center;
         filter: grayscale(1);
     }
+
     .navbar-nav.burger li:hover {
         filter: grayscale(0);
+    }
+
+    /*__________________ Change CSS according to Height of the device__________________*/
+    @media screen and (max-height: 750px) {
+        .divider {
+            margin: 25px 0 20px 0;
+        }
+        .social {
+            margin-top: 30px;
+        }
+        .navbar-nav.burger {
+            padding: 20px 40px;
+        }
+    }
+    @media screen and (max-height: 670px) {
+        .head-collapse {
+            height: 20px;
+        }
+        .divider {
+            margin: 10px 0 5px 0;
+        }
+        .social {
+            margin-top: 30px;
+        }
+        .navbar-nav.burger {
+            padding: 20px 40px;
+        }
+    }
+    @media screen and (max-height: 570px) {
+        .head-collapse {
+            height: 15px;
+        }
+        .divider {
+            margin: 0;
+        }
+        .social {
+            margin-top: 15px;
+        }
+        .navbar-nav.burger {
+            padding: 10px 40px;
+        }
+    }
+}
+@media screen and (max-width: 330px) {
+    .nav-button {
+        padding: 0 15px;
     }
 }
 
