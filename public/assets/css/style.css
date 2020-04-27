@@ -39,6 +39,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 }
 
 ::placeholder {
@@ -46,13 +47,49 @@
 }
 
 .container.sign-in {
+    height: 100vh;
     padding: 20px;
     display: flex;
     flex-direction: column;
+}
+.container-form-sign {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.container.sign-in h1 {
+    font-weight: 700;
+    font-family: Roboto, sans-serif;
+    font-size: 30px;
 }
 
 .header-sign {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.form-sign-in div.form-group {
+    margin-bottom: 30px;
+}
+.form-sign-in div.form-group:nth-child(2) {
+    margin-bottom: 50px;
+}
+
+.forget {
+    color: #6c757d!important;
+    display: block;
+    margin-top: .50rem;
+    font-size: 60%;
+    font-weight: 400;
+}
+
+.container-header-sign {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 20px;
 }
