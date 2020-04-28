@@ -119,12 +119,11 @@ class ProjectController extends AbstractController
 
 
         $errors = [];
-        $title = $bannerImage = $description = $zipCode = "";
+        $title = $description = $zipCode = "";
         $plan = $deadline = $teamDescription = $categoryId = $skillsId = "";
 
         if (!empty($_POST)) {
             $title = trim($_POST['title']);
-            $bannerImage = trim($_POST['banner_image']);
             $description = trim($_POST['description']);
             $zipCode = trim($_POST['zip_code']);
             $plan = trim($_POST['plan']);
@@ -134,10 +133,10 @@ class ProjectController extends AbstractController
             if (isset($_POST['skills'])) {
                 $skillsId = $_POST['skills'];
             }
+
             $updatedProject = [
                 'id' => $id,
                 'title' => $title,
-                'banner_image' => $bannerImage,
                 'description' => $description,
                 'zip_code' => $zipCode,
                 'plan' => $plan,
@@ -146,36 +145,56 @@ class ProjectController extends AbstractController
                 'category_id' => $categoryId,
                 'skills' => $skillsId
             ];
-            if (empty($title)) {
-                $errors['title'] = 'Ce Champ est Requis';
-            }
 
-            if (empty($description)) {
-                $errors['description'] = 'Ce Champ est Requis';
-            }
+            $errors = $this->postVerify($updatedProject);
 
-            if (empty($deadline)) {
-                $errors['deadline'] = 'Ce Champ est Requis';
-            }
-
-            if (empty($categoryId)) {
-                $errors['category_id'] = 'Ce Champ est Requis';
-            }
-
-            if (empty($skillsId)) {
-                $errors['skills'] = 'Ce Champ est Requis';
+            if (!empty($_FILES['banner_image']['name'])) {
+                $upload = new UploadController();
+                $path = $upload->uploadProjectImage($_FILES);
+                if ($path != null) {
+                    $updatedProject['banner_image'] = $path['banner_image'];
+                    $projectManager->updateProjectImg($path, $id);
+                } else {
+                    $errors['upload'] = "Taille trop grande ou mauvais format";
+                }
             }
 
             if (empty($errors)) {
-                    $projectManager->update($updatedProject);
-                    $skillManager->updateForProject($updatedProject, $id);
+                $projectManager->update($updatedProject);
+                $skillManager->updateSkillsForProject($updatedProject, $id);
 
-                    header('Location: /Project/show/' . $id . '/');
+                header('Location: /Project/show/' . $id . '/');
             }
         }
         return $this->twig->render(
             'Project/edit.html.twig',
             ['project' => $project, 'errors' => $errors, 'id' => $id, 'categories' => $categories, 'skills' => $skills]
         );
+    }
+
+    public function postVerify(array $postProject): array
+    {
+        $errors = [];
+
+        if (empty($postProject['title'])) {
+            $errors['title'] = 'Ce Champ est Requis';
+        }
+
+        if (empty($postProject['description'])) {
+            $errors['description'] = 'Ce Champ est Requis';
+        }
+
+        if (empty($postProject['deadline'])) {
+            $errors['deadline'] = 'Ce Champ est Requis';
+        }
+
+        if (empty($postProject['category_id'])) {
+            $errors['category_id'] = 'Ce Champ est Requis';
+        }
+
+        if (empty($postProject['skills'])) {
+            $errors['skills'] = 'Ce Champ est Requis';
+        }
+        return $errors;
     }
 }

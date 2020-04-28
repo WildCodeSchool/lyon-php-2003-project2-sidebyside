@@ -36,7 +36,7 @@ class SkillManager extends AbstractManager
      * @param array $project
      * @param int $projectId
      */
-    public function updateForProject(array $project, int $projectId)
+    public function updateSkillsForProject(array $project, int $projectId)
     {
         $delete = $this->pdo->prepare(
             "DELETE FROM project_need_skills  

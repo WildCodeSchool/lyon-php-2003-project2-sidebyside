@@ -17,7 +17,7 @@ class UploadController extends AbstractController
                 if (!empty($array['name'])) {
                     $extension = strrchr($array['name'], '.');
                     if (!in_array($extension, $extensions)) {
-                        $errors['ext'] = "Vous devez uploader un fichier de type png, jpg ou gif";
+                        $errors['ext'] = "Vous devez uploader un fichier de type png, jpeg ou jpg";
                     }
                     if ($array['size'] >= 1000000) {
                         $errors['size'] = "Taille du fichier trop grand";
@@ -31,6 +31,39 @@ class UploadController extends AbstractController
                         $filename = uniqid() . '.' . $ext;
                         move_uploaded_file($array['tmp_name'], $folder . $filename);
                         $path[$key] = "assets/uploads/profils/$filename";
+                    }
+                }
+                return $path;
+            }
+        }
+    }
+
+    public function uploadProjectImage(array $file)
+    {
+        $extensions = ['.png', '.jpg', '.jpeg'];
+        $errors = [];
+        $folder = "assets/uploads/projects/";
+        $path = [];
+
+        if (!empty($file)) {
+            foreach ($file as $key => $array) {
+                if (!empty($array['name'])) {
+                    $extension = strrchr($array['name'], '.');
+                    if (!in_array($extension, $extensions)) {
+                        $errors['ext'] = "Vous devez uploader un fichier de type png, jpg ou jpeg";
+                    }
+                    if ($array['size'] >= 1000000) {
+                        $errors['size'] = "Taille du fichier trop grand";
+                    }
+                }
+            }
+            if (empty($errors)) {
+                foreach ($file as $key => $array) {
+                    if (!empty($array['name'])) {
+                        $ext = pathinfo($array['name'], PATHINFO_EXTENSION);
+                        $filename = uniqid() . '.' . $ext;
+                        move_uploaded_file($array['tmp_name'], $folder . $filename);
+                        $path[$key] = "$folder/$filename";
                     }
                 }
                 return $path;

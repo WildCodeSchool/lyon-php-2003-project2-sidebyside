@@ -58,7 +58,6 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
         }
     }
 
-
     // REQUEST TO UPDATE PROJECT INFOS
     /**
      * @param array $project
@@ -69,7 +68,6 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
 
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE . " SET 
         `title` = :title, 
-        `banner_image`= :banner_image,
         `description` = :description,
         `zip_code` = :zip_code,
         `plan`= :plan,
@@ -79,7 +77,6 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
          WHERE id=:id ");
         $statement->bindValue('id', $project['id'], \PDO::PARAM_INT);
         $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
-        $statement->bindValue('banner_image', $project['banner_image'], \PDO::PARAM_STR);
         $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
         $statement->bindValue('zip_code', $project['zip_code'], \PDO::PARAM_STR);
         $statement->bindValue('plan', $project['plan'], \PDO::PARAM_STR);
@@ -90,5 +87,18 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
 
         return $statement->execute();
     }
-    //insert
+
+    // REQUEST TO INSERT BANNER IMAGE IN PROJECT
+    public function updateProjectImg(array $path, int $id)
+    {
+        if (isset($path['banner_image'])) {
+            $update = $this->pdo->prepare("UPDATE projects AS p 
+                                                        SET                              
+                                                            p.banner_image = :banner_image 
+                                                        WHERE p.id = :id");
+            $update->bindParam('banner_image', $path["banner_image"], \PDO::PARAM_STR);
+            $update->bindValue('id', $id, \PDO::PARAM_INT);
+            $update->execute();
+        }
+    }
 }
