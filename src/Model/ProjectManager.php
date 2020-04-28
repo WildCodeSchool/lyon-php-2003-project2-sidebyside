@@ -58,6 +58,25 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
         }
     }
 
+    public function selectAllExceptCurrent(int $id)
+    {
+        // Selectionne tous les projets sauf le current
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table WHERE id!=:id");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function selectProjectOwner($id)
+    {
+        $statement = $this->pdo->prepare('SELECT u.profil_picture, u.id FROM users as u
+                JOIN projects as p ON u.id = p.project_owner_id WHERE u.id=:id');
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
 
     // REQUEST TO UPDATE PROJECT INFOS
     /**
@@ -88,5 +107,5 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
 
         return $statement->execute();
     }
-    //insert
+   //insert
 }
