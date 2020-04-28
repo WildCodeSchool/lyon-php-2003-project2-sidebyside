@@ -143,7 +143,7 @@ class ProjectController extends AbstractController
                 'description' => $description,
                 'zip_code' => $zipCode,
                 'plan' => $plan,
-                'team_description' => $teamDescription,>>>>>>> dev
+                'team_description' => $teamDescription,
                 'deadline' => $deadline,
                 'category_id' => $categoryId,
                 'skills' => $skillsId
