@@ -4,6 +4,7 @@
 
 {% block content %}
     <h3>Profils</h3>
+    {% include 'Profil/_search.html.twig' %}
     <div class="row">
         {% for user in users %}
             <div class="card profil-card col-6">
@@ -14,7 +15,8 @@
                              alt="Photo de profile">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ user.first_name }}</h5>
+                        <h5 class="card-title">{{ user.first_name ~ ' ' ~ user.last_name }}</h5>
+                        <p class="card-zip-code">{{ user.zip_code }}</p>
                         <p class="card-text">
                             {% for skill in skills %}
                                 {% if skill.user_id == user.id %}

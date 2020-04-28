@@ -3,12 +3,14 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
 use App\Model\ProjectManager;
 use App\Model\UserManager;
+use App\Model\SkillManager;
+
 
 class ProjectController extends AbstractController
 {
-
     /**
      * Display projects creation page
      *
@@ -66,18 +68,116 @@ class ProjectController extends AbstractController
         return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
     }
 
-
+    /**
+     * Display project information specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function show($id)
     {
         $projectManager = new ProjectManager();
+        $project = $projectManager->selectOneById($id);
+        $categoryManager = new CategoryManager();
+        $category = $categoryManager->getCategory($project['category_id']);
+        $skillManager = new SkillManager();
+        $projectSkills = $skillManager->getAllForProject($id);
+        $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
+        $project['category'] = $category;
         $currentProject = $projectManager->selectOneById($id);
         $similarProjects = $projectManager->selectAllExceptCurrent($id);
         $projectOwner = $projectManager->selectProjectOwner($id);
 
         return $this->twig->render(
             'Project/show.html.twig',
-            ['currentProject' => $currentProject, 'similarProjects' => $similarProjects,
+            ['project' => $project, 'id' => $id, 'currentProject' => $currentProject, 'similarProjects' => $similarProjects,
                 'projectOwner' => $projectOwner]
+        );
+    }
+
+    /**
+     * Display project edition page specified by $id
+     *
+     * @param int $id
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function edit($id): string
+    {
+        $projectManager = new ProjectManager();
+        $project = $projectManager->selectOneById($id);
+        $categoryManager = new CategoryManager();
+        $category = $categoryManager->getCategory($project['category_id']);
+        $categories = $categoryManager->selectAll();
+        $skillManager = new SkillManager();
+        $projectSkills = $skillManager->getAllForProject($id);
+        $skills = $skillManager->selectAll();
+        $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
+        $project['category'] = $category;
+
+        $errors = [];
+        $title = $bannerImage = $description = $zipCode = "";
+        $plan = $deadline = $teamDescription = $categoryId = $skillsId = "";
+
+        if (!empty($_POST)) {
+            $title = trim($_POST['title']);
+            $bannerImage = trim($_POST['banner_image']);
+            $description = trim($_POST['description']);
+            $zipCode = trim($_POST['zip_code']);
+            $plan = trim($_POST['plan']);
+            $deadline = trim($_POST['deadline']);
+            $teamDescription = trim($_POST['team_description']);
+            $categoryId = $_POST['category'];
+            if (isset($_POST['skills'])) {
+                $skillsId = $_POST['skills'];
+            }
+            $updatedProject = [
+                'id' => $id,
+                'title' => $title,
+                'banner_image' => $bannerImage,
+                'description' => $description,
+                'zip_code' => $zipCode,
+                'plan' => $plan,
+                'team_description' => $teamDescription,>>>>>>> dev
+                'deadline' => $deadline,
+                'category_id' => $categoryId,
+                'skills' => $skillsId
+            ];
+            if (empty($title)) {
+                $errors['title'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($description)) {
+                $errors['description'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($deadline)) {
+                $errors['deadline'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($categoryId)) {
+                $errors['category_id'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($skillsId)) {
+                $errors['skills'] = 'Ce Champ est Requis';
+            }
+
+            if (empty($errors)) {
+                    $projectManager->update($updatedProject);
+                    $skillManager->updateForProject($updatedProject, $id);
+
+                    header('Location: /Project/show/' . $id . '/');
+            }
+        }
+        return $this->twig->render(
+            'Project/edit.html.twig',
+            ['project' => $project, 'errors' => $errors, 'id' => $id, 'categories' => $categories, 'skills' => $skills]
         );
     }
 }
