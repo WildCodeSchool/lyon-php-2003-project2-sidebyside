@@ -8,7 +8,6 @@ use App\Model\ProjectManager;
 use App\Model\UserManager;
 use App\Model\SkillManager;
 
-
 class ProjectController extends AbstractController
 {
     /**
@@ -93,8 +92,8 @@ class ProjectController extends AbstractController
 
         return $this->twig->render(
             'Project/show.html.twig',
-            ['project' => $project, 'id' => $id, 'currentProject' => $currentProject, 'similarProjects' => $similarProjects,
-                'projectOwner' => $projectOwner]
+            ['project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+             'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner]
         );
     }
 
