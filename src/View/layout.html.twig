@@ -20,17 +20,18 @@
     </head>
 
     <body>
+    {% block header %}
         <header>
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-navbar">
                 <!-- Logo Navbar -->
-                <a class="navbar-brand navbar-mobile" href="#">
+                <a class="navbar-brand navbar-mobile" href="/">
                     <img src="/assets/images/sbs_white.png" width="50px" alt="">
                 </a>
                 <!--  -->
 
                 <div class="general-navabar-link">
                     <div class="container-right">
-                        {%  include '_search.html.twig' %}
+                        {% include '_search.html.twig' %}
                         <!-- Button Create Project hidden if user is not connected -->
                         <!-- (current display:none, delete this attribute for see the button) -->
                         <a href="#" class="navbar-create-project" style="display: none">
@@ -39,7 +40,7 @@
                         <!--  -->
 
                         <!-- Button profil for desktop, view if user connected -->
-                        <a href="/profils" class="navbar-profil" 
+                        <a href="/profils" class="navbar-profil"
                            style="background-image: url(/assets/images/profil.jpg);display: none"></a>
                         <!--  -->
 
@@ -49,7 +50,7 @@
                                     <a class="nav-link" id="nav-link-white" href="#">Connexion</a>
                                 </li>
                                 <li class="nav-button nav-signup">
-                                    <a class="nav-link" id="nav-link-black" href="#">Inscription</a>
+                                    <a class="nav-link" id="nav-link-black" href="/Auth/signup">Inscription</a>
                                 </li>
                             </ul>
                         </div>
@@ -114,19 +115,21 @@
                 </div>
             </nav>
         </header>
-
+    {% endblock %}
 
 
 
         {% block content %}{% endblock %}
-        {% block javascript %}{% endblock %}
 
 
 
-        <!-- Script Bootstrap -->
+        <!-- Script Bootstrap jQuery -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
                 integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
                 crossorigin="anonymous"></script>
+
+        <!-- Script js et Bootstrap-->
+        {% block javascript %}{% endblock %}
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
                 integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
                 crossorigin="anonymous"></script>

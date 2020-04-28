@@ -48,6 +48,36 @@ class UserManager extends AbstractManager
         )->fetchAll();
     }
 
+    //REQUEST CREATE NEW USER
+    public function create(array $user): void
+    {
+        $createQuery = $this->pdo->prepare(
+            "INSERT INTO " . self::TABLE . "(
+                            first_name, 
+                            last_name, 
+                            email, 
+                            profil_picture,
+                            password, 
+                            zip_code,
+                            created_at
+                            ) VALUES (
+                            :first_name, 
+                            :last_name, 
+                            :email, 
+                            :profil_picture,
+                            :password, 
+                            :zip_code,
+                            NOW()
+                            )"
+        );
+        $createQuery->bindValue(':first_name', $user['first_name']);
+        $createQuery->bindValue(':last_name', $user['last_name']);
+        $createQuery->bindValue(':email', $user['email']);
+        $createQuery->bindValue(':profil_picture', $user['profil_picture']);
+        $createQuery->bindValue(':password', $user['password']);
+        $createQuery->bindValue(':zip_code', $user['zip_code']);
+        $createQuery->execute();
+    }
 
     // REQUEST UPDATE THE USER INFO IN users
     public function setUserInfo(array $profil, int $id) : void
@@ -132,7 +162,7 @@ class UserManager extends AbstractManager
             }
         }
     }
-
+    //REQUEST SELECT USERS BY A KEYWORD (SEARCH)
     public function selectByWord(string $keyword) : array
     {
         $query = "SELECT last_name, first_name, id, email, zip_code FROM users 
