@@ -5,11 +5,11 @@ namespace App\Controller;
 
 use App\Model\CategoryManager;
 use App\Model\ProjectManager;
+use App\Model\UserManager;
 use App\Model\SkillManager;
 
 class ProjectController extends AbstractController
 {
-
     /**
      * Display projects creation page
      *
@@ -67,7 +67,6 @@ class ProjectController extends AbstractController
         return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
     }
 
-
     /**
      * Display project information specified by $id
      *
@@ -87,13 +86,16 @@ class ProjectController extends AbstractController
         $projectSkills = $skillManager->getAllForProject($id);
         $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
         $project['category'] = $category;
+        $currentProject = $projectManager->selectOneById($id);
+        $similarProjects = $projectManager->selectAllExceptCurrent($id);
+        $projectOwner = $projectManager->selectProjectOwner($id);
 
         return $this->twig->render(
             'Project/show.html.twig',
-            ['project' => $project, 'id' => $id]
+            ['project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+             'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner]
         );
     }
-
 
     /**
      * Display project edition page specified by $id
@@ -116,7 +118,6 @@ class ProjectController extends AbstractController
         $skills = $skillManager->selectAll();
         $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
         $project['category'] = $category;
-
 
         $errors = [];
         $title = $description = $zipCode = "";

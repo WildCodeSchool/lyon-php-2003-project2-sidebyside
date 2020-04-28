@@ -24,8 +24,8 @@ class SkillManager extends AbstractManager
     public function getAllForProject($projectId)
     {
         $statement = $this->pdo->prepare("SELECT * FROM $this->table 
-        JOIN project_need_skills AS pns ON skills.id = pns.skill_id
-        WHERE pns.project_id=:project_id");
+                                                        JOIN project_need_skills AS pns ON skills.id = pns.skill_id
+                                                        WHERE pns.project_id=:project_id");
         $statement->bindValue('project_id', $projectId, \PDO::PARAM_INT);
         $statement->execute();
 
@@ -50,7 +50,7 @@ class SkillManager extends AbstractManager
             foreach ($project['skills'] as $skillId) {
                 $insert = $this->pdo->prepare(
                     "INSERT INTO project_need_skills (project_id, skill_id)
-                        VALUES (:project_id, :skillId)"
+                                VALUES (:project_id, :skillId)"
                 );
                 $insert->bindValue('project_id', $projectId, \PDO::PARAM_INT);
                 $insert->bindValue('skillId', $skillId, \PDO::PARAM_INT);

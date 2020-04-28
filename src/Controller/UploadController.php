@@ -5,7 +5,7 @@ namespace App\Controller;
 
 class UploadController extends AbstractController
 {
-    public function uploadProfilImage(array $file)
+    public static function uploadProfilImage(array $file)
     {
         $extensions = ['.png', '.jpg', '.jpeg'];
         $errors = [];
@@ -28,9 +28,9 @@ class UploadController extends AbstractController
                 foreach ($file as $key => $array) {
                     if (!empty($array['name'])) {
                         $ext = pathinfo($array['name'], PATHINFO_EXTENSION);
-                        $filename = uniqid() . '.' . $ext;
-                        move_uploaded_file($array['tmp_name'], $folder . $filename);
-                        $path[$key] = "assets/uploads/profils/$filename";
+                        $fileName = uniqid() . '.' . $ext;
+                        move_uploaded_file($array['tmp_name'], $folder . $fileName);
+                        $path[$key] = "assets/uploads/profils/$fileName";
                     }
                 }
                 return $path;
