@@ -1,0 +1,159 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="container-banner-project">
+        <h1 class="project-title">
+            {{ currentProject.title }}
+        </h1>
+        <img class="banner-project-image" src="/assets/images/project_img.jpg">
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="container-image-button">
+                <div class="container-image-profil">
+                    <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+                </div>
+                <button class="btn participate-project-button" type="button" href="#">
+                    Participer
+                </button>
+            </div>
+            <div class="card col-11 project-description-card ">
+                <h2 class="project-description-title">Description</h2>
+                <div class="container-content-card">
+                    <div class="card-body project-description">
+                        {{ currentProject.description }}
+                    </div>
+                    <img class="project-description-img" src="/assets/images/project.png">
+                </div>
+            </div>
+
+            <div class="card col-11 project-plan-card">
+                <h2 class="project-plan-title">Plan de Projet</h2>
+                <div class="container-content-card">
+                    <div class="card-body project-plan-description">
+                        {{ currentProject.plan }}
+                    </div>
+                    <img class="project-description-img" src="/assets/images/architecture.png">
+                </div>
+            </div>
+
+            <div class="card col-11 search-profil-description-card">
+                <h2 class="search-profil-title">Profils recherchés</h2>
+                <div class="container-content-card">
+                    <div class="card-body search-profil-description">
+                        {{ currentProject.project_need_skills }}
+                    </div>
+                    <img class="project-description-img" src="/assets/images/skills.png">
+                </div>
+            </div>
+            <div class="card col-11 about-team-project-description-card">
+                <h2 class="about-team-project-title">A propos de l'équipe</h2>
+                <div class="container-content-card">
+                    <div class="card-body about-team-project-description">
+                        {{ currentProject.team_description }}
+                    </div>
+                    <img class="project-description-img" src="/assets/images/group.png">
+                </div>
+                <button class="btn see-more-about-team" type="button" href="#">
+                    Voir plus
+                </button>
+
+            </div>
+
+            <div class=" col-11 container-similar-project">
+                <h2 class="similar-project-title">Projets similaires</h2>
+                <div id="project-carousel" class="carousel slide mobile-carousel" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="card similar-project-card" style="width: 18rem;">
+                                <img src="/assets/images/project_img.jpg/"
+                                     class="card-img-top d-block w-100 similar-project-image" alt="image-projet">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ similarProjects[0].title }}</h5>
+                                    <p class="card-text">{{ similarProjects[0].description }}</p>
+                                    <a href="#" class="btn see-more-about-similar-project">En savoir plus</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% for i in 1..similarProjects|length - 1 %}
+                            <div class="carousel-item">
+                                <div class="card similar-project-card" style="width: 18rem;">
+                                    <img src="/assets/images/project_img.jpg/"
+                                         class="card-img-top d-block w-100 similar-project-image" alt="image-projet">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ similarProjects[i].title }}</h5>
+                                        <p class="card-text">{{ similarProjects[i].description }}</p>
+                                        <a href="{{ similarProjects[i].id }}"
+                                           class="btn see-more-about-similar-project">En savoir
+                                            plus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <a class="carousel-control-prev " href="#project-carousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon similar-project-arrow" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </div>
+                    <a class="carousel-control-next " href="#project-carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only similar-project-arrow">Next</span>
+                    </a>
+                </div>
+
+
+                <div id="desktop-project-carousel" class="carousel slide desktop-carousel" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            {% for i in 0..2 %}
+                                <div class="card col-4 similar-project-card" style="width: 18rem;">
+                                    <img src="/assets/images/project_img.jpg/"
+                                         class="card-img-top d-block w-100 similar-project-image" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ similarProjects[i].title }}</h5>
+                                        <p class="card-text">{{ similarProjects[i].description }}</p>
+                                        <a href="{{ similarProjects[i].id }}"
+                                           class="btn see-more-about-similar-project">En savoir plus</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% for i in range(3, similarProjects|length, 3) %}
+                            <div class="carousel-item">
+                                {% for ii in 0..2 %}
+                                    {% if (i+ii) < similarProjects|length %}
+                                        <div class="card col-4 similar-project-card">
+                                            <img src="/assets/images/project_img.jpg/"
+                                                 class="card-img-top d-block w-100 similar-project-image"
+                                                 alt="Photo de projet">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ similarProjects[ii + i].title }}</h5>
+                                                <p class="card-text">
+                                                    {{ similarProjects[ii + i].description }}
+                                                </p>
+                                                <a href="{{ similarProjects[i].id }}"
+                                                   class="btn see-more-about-similar-project">En savoir plus</a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#desktop-project-carousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#desktop-project-carousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Model\ProjectManager;
+use App\Model\UserManager;
 
 class ProjectController extends AbstractController
 {
@@ -62,6 +63,21 @@ class ProjectController extends AbstractController
             }
         }
 
-            return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects'=>$projects]);
+        return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
+    }
+
+
+    public function show($id)
+    {
+        $projectManager = new ProjectManager();
+        $currentProject = $projectManager->selectOneById($id);
+        $similarProjects = $projectManager->selectAllExceptCurrent($id);
+        $projectOwner = $projectManager->selectProjectOwner($id);
+
+        return $this->twig->render(
+            'Project/show.html.twig',
+            ['currentProject' => $currentProject, 'similarProjects' => $similarProjects,
+                'projectOwner' => $projectOwner]
+        );
     }
 }
