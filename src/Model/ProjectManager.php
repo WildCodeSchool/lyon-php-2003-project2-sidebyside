@@ -59,6 +59,5 @@ class ProjectManager extends AbstractManager
         $statement->execute();
 
         return $statement->fetch();
-
     }
 }
