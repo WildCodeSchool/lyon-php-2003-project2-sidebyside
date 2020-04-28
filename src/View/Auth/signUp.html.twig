@@ -43,11 +43,14 @@
                 <label for="profil_picture" class="form-control form-control-sign sign-upload_label">
                     <span id="image_label" class="form-upload-span"></span>
                     <div class="sign-upload_icon">
-                        <img src="/assets/images/icons/upload2.png">
+                        <img src="/assets/images/icons/upload2.png" style="width: 25px">
                     </div>
                 </label>
                 <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
                 <input type="file" id="profil_picture" name="profil_picture" style="display: none">
+                {% if errors.upload is defined %}
+                    <small class="text-danger">{{ errors.upload }}</small>
+                {% endif %}
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-sign" id="password"

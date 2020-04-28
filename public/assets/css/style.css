@@ -42,7 +42,7 @@ h1 {
 }
 
 .form-control::placeholder {
-    color: white !important;
+    color: grey !important;
 }
 
 .form-control-sign,
