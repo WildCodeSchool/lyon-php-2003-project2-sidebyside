@@ -24,8 +24,8 @@ class ProjectManager extends AbstractManager
     public function selectByWord(string $keyword) : array
     {
         $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, u.first_name FROM projects p
-JOIN users u ON p.project_owner_id=u.id WHERE u.first_name LIKE :keyword OR p.title LIKE :keyword 
-OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE :keyword";
+                  JOIN users u ON p.project_owner_id=u.id WHERE u.first_name LIKE :keyword OR p.title LIKE :keyword 
+                  OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE :keyword";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':keyword', "%$keyword%");
         $statement->execute();
@@ -34,24 +34,24 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
     }
 
     /**
-     * @param array $projects
+     * @param array $project
      * @return int
      */
-    public function insert(array $projects): int
+    public function insert(array $project): int
     {
         // prepared request
-        //TODO SESSION CHANGE category and skills
+        //TODO category and skills
         $statement = $this->pdo->prepare(
             "INSERT INTO $this->table
-(`title`, `banner_image`, `description`, `deadline`,`zip_code`, `project_owner_id`, `category_id`, `created_at`)
+(`title`, `description`, `deadline`, `zip_code`, `project_owner_id`, `category_id`, `created_at`)
                         VALUES 
- (:title, :banner_image, :description, :deadline, :zip_code, 1, 1, NOW())"
+ (:title, :description, :deadline, :zip_code, 1, :category_id, NOW())"
         );
-        $statement->bindValue('title', $projects['title'], \PDO::PARAM_STR);
-        $statement->bindValue('banner_image', $projects['banner_image'], \PDO::PARAM_STR);
-        $statement->bindValue('description', $projects['description'], \PDO::PARAM_STR);
-        $statement->bindValue('deadline', $projects['deadline']);
-        $statement->bindValue('zip_code', $projects['zip_code'], \PDO::PARAM_STR);
+        $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
+        $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
+        $statement->bindValue('deadline', $project['deadline']);
+        $statement->bindValue('zip_code', $project['zip_code'], \PDO::PARAM_STR);
+        $statement->bindValue('category_id', $project['category_id'], \PDO::PARAM_INT);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
@@ -111,8 +111,7 @@ OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE 
     {
         if (isset($path['banner_image'])) {
             $update = $this->pdo->prepare("UPDATE projects AS p 
-                                                        SET                              
-                                                            p.banner_image = :banner_image 
+                                                        SET p.banner_image = :banner_image 
                                                         WHERE p.id = :id");
             $update->bindParam('banner_image', $path["banner_image"], \PDO::PARAM_STR);
             $update->bindValue('id', $id, \PDO::PARAM_INT);

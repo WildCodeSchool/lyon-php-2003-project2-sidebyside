@@ -20,8 +20,11 @@ class ProjectController extends AbstractController
      */
     public function new()
     {
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        $projectManager = new ProjectManager();
         $errors = [];
-        $projects = [];
+        $project = [];
         $title = $bannerImage = $description = $deadline = $zipCode = '';
 
         if (!empty($_POST)) {
@@ -30,13 +33,15 @@ class ProjectController extends AbstractController
             $description = trim($_POST['description']);
             $deadline = trim($_POST['deadline']);
             $zipCode = trim($_POST['zip_code']);
+            $categoryId = $_POST['category'];
 
-            $projects = [
+            $project = [
                 'title' => $title,
                 'banner_image' => $bannerImage,
                 'description' => $description,
                 'deadline' => $deadline,
                 'zip_code' => $zipCode,
+                'category_id' => $categoryId,
             ];
 
             if (empty($title)) {
@@ -55,16 +60,31 @@ class ProjectController extends AbstractController
                 $errors['zip_code'] = 'Ce Champ est Requis';
             }
 
+            if (empty($categoryId)) {
+                $errors['category_id'] = 'Ce Champ est Requis';
+            }
+
+            /*if (!empty($_FILES['banner_image']['name'])) {
+                $upload = new UploadController();
+                $path = $upload->uploadProjectImage($_FILES);
+                if ($path != null) {
+                    $project['banner_image'] = $path['banner_image'];
+                } else {
+                    $errors['upload'] = "Taille trop grande ou mauvais format";
+                }
+            }*/
+
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $projectsManager = new ProjectManager();
-                    $projectsManager->insert($projects);
+                    $projectManager->insert($project);
                     header('Location:/Home/index');
                 }
             }
         }
-
-        return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
+        return $this->twig->render(
+            'Project/add.html.twig',
+            ['errors' => $errors, 'project' => $project, 'categories' => $categories]
+        );
     }
 
     /**

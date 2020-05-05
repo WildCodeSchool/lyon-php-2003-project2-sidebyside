@@ -45,7 +45,7 @@ class SkillManager extends AbstractManager
         $delete->bindValue('project_id', $projectId, \PDO::PARAM_INT);
         $delete->execute();
 
-        // REQUEST INSERT THE PROJECT SKILLS IN project_need_skills AFTER DELETE PRECEDE SKILLS IN project_need_skills
+        // REQUEST INSERT THE PROJECT SKILLS IN project_need_skills AFTER DELETE PRECEDED SKILLS IN project_need_skills
         if (isset($project['skills'])) {
             foreach ($project['skills'] as $skillId) {
                 $insert = $this->pdo->prepare(
