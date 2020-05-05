@@ -38,7 +38,7 @@ class UploadController extends AbstractController
         }
     }
 
-    public function uploadProjectImage(array $file)
+    public static function uploadProjectImage(array $file)
     {
         $extensions = ['.png', '.jpg', '.jpeg'];
         $errors = [];

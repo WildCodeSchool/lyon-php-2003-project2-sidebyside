@@ -20,51 +20,60 @@ class ProjectController extends AbstractController
      */
     public function new()
     {
+
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        $projectManager = new ProjectManager();
+        $skillManager = new SkillManager();
+        $skills = $skillManager->selectAll();
         $errors = [];
-        $projects = [];
-        $title = $bannerImage = $description = $deadline = $zipCode = '';
+        $project = [];
+        $title = $bannerImage = $description = $deadline = $zipCode = $categoryId = $skillsId ='';
 
         if (!empty($_POST)) {
             $title = trim($_POST['title']);
-            $bannerImage = trim($_POST['banner_image']);
+            $bannerImage = $_FILES['banner_image'];
             $description = trim($_POST['description']);
             $deadline = trim($_POST['deadline']);
             $zipCode = trim($_POST['zip_code']);
+            $categoryId = $_POST['category'];
+            if (isset($_POST['skills'])) {
+                $skillsId = $_POST['skills'];
+            }
 
-            $projects = [
+            $project = [
                 'title' => $title,
                 'banner_image' => $bannerImage,
                 'description' => $description,
                 'deadline' => $deadline,
                 'zip_code' => $zipCode,
+                'category_id' => $categoryId,
+                'skills' => $skillsId
             ];
 
-            if (empty($title)) {
-                $errors['title'] = 'Ce Champ est Requis';
-            }
+            $errors = $this->postVerify($project);
 
-            if (empty($description)) {
-                $errors['description'] = 'Ce Champ est Requis';
+            if (!empty($_FILES['banner_image']['name'])) {
+                $path = UploadController::uploadProjectImage($_FILES);
+                if ($path != null) {
+                    $project['banner_image'] = $path['banner_image'];
+                } else {
+                    $errors['upload'] = "Taille trop grande ou mauvais format";
+                }
             }
-
-            if (empty($deadline)) {
-                $errors['deadline'] = 'Ce Champ est Requis';
-            }
-
-            if (empty($zipCode)) {
-                $errors['zip_code'] = 'Ce Champ est Requis';
-            }
-
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $projectsManager = new ProjectManager();
-                    $projectsManager->insert($projects);
+                    $projectManager->insert($project);
+                    $lastId = $projectManager->selectLastProject();
+                    $skillManager->insertSkills($project, $lastId['id']);
                     header('Location:/Home/index');
                 }
             }
         }
-
-        return $this->twig->render('Project/add.html.twig', ['errors' => $errors, 'projects' => $projects]);
+        return $this->twig->render(
+            'Project/add.html.twig',
+            ['errors' => $errors, 'project' => $project, 'categories' => $categories, 'skills' => $skills]
+        );
     }
 
     /**
