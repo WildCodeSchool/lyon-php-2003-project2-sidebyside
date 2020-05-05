@@ -198,4 +198,11 @@ class ProjectController extends AbstractController
         }
         return $errors;
     }
+    public function all()
+    {
+        $projectManager = new ProjectManager();
+        $projects = $projectManager->selectAll();
+
+        return $this->twig->render('Project/projects.html.twig', ['projects' => $projects]);
+    }
 }
