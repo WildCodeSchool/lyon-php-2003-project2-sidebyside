@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <h1>Tous les profils</h1>
+    <div class="row">
+
+        {% for project in projects %}
+            <div class="card col-8 col-md-5" style="width: 18rem;">
+                <a href="/Project/show/{{ project.id }}">
+                    <img src="{{ project.banner_image }}" class="card-img-top" alt="project-image">
+                    <div class="card-body">
+                        <h5 class="title">{{ project.title }}</h5>
+                        <div class="collapse" id="collapseDescription{{ project.id }}">
+                            <div class="card card-body">
+                                {{ project.description }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <p>
+                    <button class="btn" type="button" data-toggle="collapse"
+                            data-target="#collapseDescription{{ project.id }}" aria-expanded="false"
+                            aria-controls="collapseDescription">
+                        En savoir plus..
+                    </button>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
