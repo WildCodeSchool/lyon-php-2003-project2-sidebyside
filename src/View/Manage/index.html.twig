@@ -6,9 +6,19 @@
     <main>
         <div class="container-banner-project">
             <h1 class="project-title">
-                {{ project.title }}
+                <a href="/Project/show/{{ project.id }}">{{ project.title }}</a>
             </h1>
             <img class="banner-project-image" src="{{ project.banner_image }}">
+        </div>
+        <div class="container-image-button">
+            <a href="/Profil/user/{{ projectOwner.id }}">
+                <div class="container-image-profil">
+                    <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+                </div>
+            </a>
+            <a class="btn-modify-manage" href="/Project/edit/{{ project.id }}">
+                <button class="btn btn-white-square" type="button">Modifier</button>
+            </a>
         </div>
         <h1>Manage Project</h1>
         {% if requests is defined %}
