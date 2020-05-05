@@ -33,6 +33,23 @@ class SkillManager extends AbstractManager
     }
 
     /**
+     * Get one row from database by ID.
+     *
+     * @param int $userId
+     * @return array
+     */
+    public function getAllForUser($userId)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM $this->table 
+                                                        JOIN user_has_skills AS uhs ON skills.id = uhs.skill_id
+                                                        WHERE uhs.user_id=:user_id");
+        $statement->bindValue('user_id', $userId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    /**
      * @param array $project
      * @param int $projectId
      */

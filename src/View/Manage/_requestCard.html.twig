@@ -2,18 +2,22 @@
     <div class="card-body">
         <div class="card-request-top">
             <div class="container-profil-picture">
-                <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+                <img class="project-owner-profil-image" src="{{ userInfo[i].profil_picture }}">
             </div>
             <div class="card-request-top-info">
-                <h5 class="card-title">Jeanne Bichon</h5>
-                <h6 class="card-subtitle mb-2 text-muted">jeanne@bichon.com</h6>
-                <p>Rhone(69)</p>
-                <p>#Menuisier, #Informaticien, #Aide-Chien</p>
+                <h5 class="card-title">{{ userInfo[i].first_name }} {{ userInfo[i].last_name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ userInfo[i].email }}</h6>
+                <p>{{ userInfo[i].zip_code }}</p>
+                <p>
+                    {% for skill in userInfo[i]['skills'] %}
+                        <span>#{{ skill.name }} </span>
+                    {% endfor %}
+                </p>
             </div>
         </div>
         <div class="card-request-content">
-            <p class="card-text card-text-manage">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="btn-container">
+            <p class="card-text card-text-manage">{{ requests[i].message }}</p>
+            <div class="card-request-btn-container">
                 <button class="btn btn-yellow-round" type="button" href="#">
                     Accepter
                 </button>
