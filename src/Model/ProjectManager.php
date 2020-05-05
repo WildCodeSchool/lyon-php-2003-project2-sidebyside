@@ -43,15 +43,16 @@ class ProjectManager extends AbstractManager
         //TODO category and skills
         $statement = $this->pdo->prepare(
             "INSERT INTO $this->table
-(`title`, `description`, `deadline`, `zip_code`, `project_owner_id`, `category_id`, `created_at`)
+(`title`, `description`, `deadline`, `zip_code`, `project_owner_id`, `category_id`, `banner_image`, `created_at`)
                         VALUES 
- (:title, :description, :deadline, :zip_code, 1, :category_id, NOW())"
+ (:title, :description, :deadline, :zip_code, 1, :category_id, :banner_image, NOW())"
         );
         $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
         $statement->bindValue('deadline', $project['deadline']);
         $statement->bindValue('zip_code', $project['zip_code'], \PDO::PARAM_STR);
         $statement->bindValue('category_id', $project['category_id'], \PDO::PARAM_INT);
+        $statement->bindValue('banner_image', $project['banner_image']);
 
         if ($statement->execute()) {
             return (int)$this->pdo->lastInsertId();
@@ -66,6 +67,11 @@ class ProjectManager extends AbstractManager
         $statement->execute();
 
         return $statement->fetchAll();
+    }
+
+    public function selectLastProject()
+    {
+        return $this->pdo->query('SELECT id FROM ' . $this->table . ' ORDER BY id DESC ')->fetch();
     }
 
     public function selectProjectOwner($id)

@@ -3,7 +3,7 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-12 col-md-10 col-lg-8">
 
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
         <div class="form-group">
             <label for="inputTitle"></label>
             <input type="text" class="form-control" id="inputTitle" name="title"
@@ -30,18 +30,27 @@
             <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
         </div>
         <div class="form-group">
-            <label for="inputCategory"></label>
+            <label for="inputCategory">Choissisez une catégorie</label>
             <select class="form-control" id="inputCategory" name="category" >
-                <option value="">Choissisez votre Catégorie</option>
                 {% for category in categories %}
                     <option value="{{ category.id }}">{{ category.name }}</option>
                 {% endfor %}
             </select>
+            <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
         </div>
         <div class="form-group">
-            <label for="inputSkill"></label>
-            <input type="text" class="form-control" id="inputSkill" name="skills"
-                   placeholder="Compétences Recherché" value="{{project.skills}}">
+            <label for="inputSkill">Compétences recherché</label>
+            <select multiple class="form-control" id="inputSkill" name="skills[]">
+                {% for skill in skills %}
+                    <option value="{{ skill.id }}"
+                            {% for projectSkill in project.skills %}
+                                {% if skill.id == projectSkill.id %}selected{% endif %}
+                            {% endfor %}
+                    >{{ skill.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <small class="text-danger">{% if errors is defined %}{{ errors.skills }}{% endif %}</small>
         </div>
         <div class="form-group">
             <label for="inputAvailable">Disponibilité du Projet</label>
