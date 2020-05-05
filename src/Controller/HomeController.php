@@ -26,14 +26,17 @@ class HomeController extends AbstractController
     {
         $projectManager = new ProjectManager();
         $projects = $projectManager->selectAll();
-
         $userManager = new UserManager();
         $users = $userManager->selectAll();
         $skills = $userManager->getSkills();
+        $isConnected = false;
+        if (isset($_SESSION['id'])) {
+            $isConnected = $_SESSION;
+        }
 
         return $this->twig->render(
             'Home/index.html.twig',
-            ['users' => $users, 'skills' => $skills, 'projects' => $projects]
+            ['users' => $users, 'skills' => $skills, 'projects'=>$projects, 'isConnected' => $isConnected]
         );
     }
 
