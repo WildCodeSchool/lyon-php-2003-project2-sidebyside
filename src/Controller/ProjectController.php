@@ -203,6 +203,7 @@ class ProjectController extends AbstractController
     {
         $projectManager = new ProjectManager();
         $requests = $projectManager->selectRequestForCollaboration($id);
+        $project = $projectManager->selectOneById($id);
         $userManager = new UserManager();
         $skillManager = new SkillManager();
         $userInfo = [];
@@ -214,7 +215,7 @@ class ProjectController extends AbstractController
             }
             return $this->twig->render(
                 'Manage/index.html.twig',
-                ['requests' => $requests, 'userInfo' => $userInfo]
+                ['requests' => $requests, 'userInfo' => $userInfo, 'project' => $project]
             );
         }
         return $this->twig->render('Manage/index.html.twig');
