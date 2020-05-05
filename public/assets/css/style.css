@@ -5,10 +5,418 @@
 /* Navbar StyleSheets */
 @import "navbar.css";
 
-.btn {
+h1 {
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.cgu{
+    text-align: center;
+    margin: 30px 10%;
+}
+.btn{
     background-color: var(--secondary-color);
-    font-weight: 700;
+    font-weight: 900;
     font-family: Roboto, sans-serif;
+}
+.btn-yellow-round {
+    margin-top: 25px;
+    background-color: var(--secondary-color);
+    border-radius: 25px;
+    font-weight: 900;
+}
+.btn-black-square {
+    background-color: var(--primary-color);
+    color: var(--navbar-divider-color);
+    font-weight: 900;
+}
+.btn-black-square:hover {
+    background-color: var(--navbar-divider-color);
+    color: var(--primary-color);
+    border: solid black 1px;
+}
+.btn-return-sign {
+    margin: 15px;
+}
+.information {
+    margin: auto;
+    margin-top: 10px;
+    font-size: 14px;
+    width: 80%;
+    color: grey;
+}
+
+.form-control::placeholder {
+    color: grey !important;
+}
+
+.form-control-sign,
+.form-control-sign:focus{
+    background-color: var(--primary-color);
+    color: var(--navbar-divider-color);
+    padding: 25px;
+    border-radius: 10px;
+    border: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.sign-upload_label{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    color: var(--navbar-divider-color);
+}
+
+.form-upload-span {
+    padding-right: 45px;
+    overflow: hidden;
+    white-space: pre;
+}
+
+.sign-upload_icon {
+    display: flex;
+    width: 80px;
+    background-color: var(--secondary-color);
+    height: 60px;
+    margin: -25px;
+    justify-content: center;
+    align-items: center;
+}
+.sign-upload_icon:hover {
+    cursor: pointer;
+    background-color: #e0a800;
+}
+
+.form-group-submit {
+    text-align: center;
+}
+
+/*___________________PROJECT PAGE_____________________*/
+
+/* MOBILE VIEW _______________*/
+
+
+@media all and (max-width: 374px){
+    .project-title {
+        font-size: 20px;
+        width: 170px;
+    }
+}
+@media all and (max-width: 768px){
+    .desktop-carousel{
+        display: none;
+    }
+    .mobile-carousel{
+        justify-content: center;
+    }
+    .project-description-img{
+        display: none;
+    }
+    .container-banner-project{
+        max-height: 35vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(to top,black, rgba(0,0,0,0));
+    }
+    .banner-project-image{
+        width: 100%;
+        height: auto;
+        z-index: -1;
+        display: flex;
+        align-content: center
+    }
+    .project-title{
+        position: absolute;
+        color: white;
+        right: 15px;
+        align-self: flex-end;
+        font-size: 20px;
+        padding-bottom: 10px;
+        text-align: end;
+    }
+    .container-image-button{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        height: 65px;
+    }
+    .container-image-profil{
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        background: black;
+        z-index: 3;
+        position: relative;
+        top: -50px;
+        left: 20px;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .project-owner-profil-image{
+        max-height: 100%;
+    }
+    .participate-project-button{
+        align-self: flex-end;
+        margin-right: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        font-weight: bold;
+        font-size: 14px;
+        width: 100px;
+    }
+    .project-description-card{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-description-title{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-decoration-line: underline;
+        margin-top: 10px;
+    }
+    .project-plan-card{
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-plan-title{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-decoration-line: underline;
+        margin-top: 10px;
+    }
+    .search-profil-description-card{
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .search-profil-title{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-decoration-line: underline;
+        margin-top: 10px;
+    }
+    .about-team-project-description-card{
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .about-team-project-title{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-decoration-line: underline;
+        margin-top: 10px;
+    }
+    .see-more-about-team{
+        align-self: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+        margin-bottom: 10px ;
+        font-size: 14px;
+        line-height: 16px;
+        width: 100px;
+        font-weight: bold;
+    }
+    .container-similar-project{
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        padding: 0;
+    }
+    .similar-project-title{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-decoration-line: underline;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .see-more-about-similar-project{
+        align-self: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+        margin-bottom: 10px ;
+        font-size: 10px;
+        line-height: 16px;
+        width: 100px;
+        font-weight: bold;
+    }
+    .similar-project-card{
+        margin: auto;
+    }
+    .similar-project-arrow{
+        color: black;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        outline: black;
+        background-color: black;
+        border: 1px solid black;
+    }
+
+}
+
+/* DESKTOP VIEW _________________ */
+@media all and (min-width: 769px){
+    .mobile-carousel{
+        display: none;
+    }
+    .desktop-carousel{
+        display: flex;
+        padding: 0;
+    }
+    .carousel-item.active{
+        display: flex;
+        padding: 0;
+    }
+    .carousel-item{
+        margin-left: 5px;
+        padding:0;
+    }
+    .container-content-card{
+        display: flex;
+    }
+    .project-description-img{
+        margin-bottom: 50px;
+        margin-right: 25px;
+    }
+    .container-banner-project{
+        max-height: 30vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(to top,black, rgba(0,0,0,0));
+    }
+    .banner-project-image{
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    .project-title{
+        position: absolute;
+        color: white;
+    }
+    .container-image-button{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        height: 65px;
+    }
+    .container-image-profil{
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        background: black;
+        z-index: 3;
+        position: relative;
+        top: -50px;
+        left: 20px;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .project-owner-profil-image{
+        max-height: 100%;
+    }
+    .participate-project-button{
+        align-self: flex-end;
+        margin-right: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        font-weight: bold;
+        font-size: 14px;
+        width: 100px;
+    }
+    .project-description-card{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-plan-card{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-description-img{
+        width: 150px;
+        height: 150px;
+    }
+    .search-profil-description-card{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .about-team-project-description-card{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 4vw;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .see-more-about-team{
+        align-self: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 16px;
+        width: 100px;
+        font-weight: bold;
+    }
+    .similar-project-title{
+        margin-bottom: 50px;
+    }
+    .container-similar-project{
+        margin-left: 4vw;
+        margin-bottom: 50px;
+        padding: 0;
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        outline: black;
+        background-color: black;
+        border: 1px solid black;
+    }
+    .carousel-control-next, .carousel-control-prev{
+        width: 8%;
+        height: 30%;
+        margin-top: 15%;
+    }
+    .similar-project-card{
+        padding: 0;
+    }
+    .see-more-about-similar-project{
+        align-self: flex-end;
+        margin-right: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        font-weight: bold;
+        font-size: 14px;
+        width: 120px;
+        z-index: 0;
+    }
 }
 .btn-sign {
     color: var(--primary-color);

@@ -65,4 +65,11 @@ class HomeController extends AbstractController
             );
         }
     }
+
+    public function cgu()
+    {
+        return $this->twig->render(
+            'Home/cgu.html.twig'
+        );
+    }
 }
