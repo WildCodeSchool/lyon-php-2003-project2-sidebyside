@@ -42,7 +42,9 @@
                 <h2 class="search-profil-title">Profils recherchés</h2>
                 <div class="container-content-card">
                     <div class="card-body search-profil-description">
-                        {{ currentProject.project_need_skills }}
+                        {% for skill in project.skills %}
+                            <p class="skill{{ skill.id }}"> {{ skill.name }} </p>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/skills.png">
                 </div>
