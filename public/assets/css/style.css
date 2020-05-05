@@ -13,10 +13,10 @@
 .btn-sign {
     color: var(--primary-color);
     background-color: var(--secondary-color);
-    font-size: 30px;
+    font-size: 25px;
     border-radius: 35px;
-    padding: 5px 60px;
-    width: 280px;
+    padding: 5px 0;
+    width: 250px;
 }
 .btn-back {
     background: var(--primary-color);
@@ -24,11 +24,22 @@
     padding: 4px 25px;
     border-radius: 0;
 }
-.navbar-sign {
-    padding: 0;
-    margin-right: 0;
+
+/*__________________ Header Sign __________________*/
+.header-sign {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.container-header-sign {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 20px;
 }
 
+/*__________________ From Sign In __________________*/
 .form-control-sign, .form-control-sign:focus{
     background-color: var(--primary-color);
     color: var(--navbar-divider-color);
@@ -40,12 +51,16 @@
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
+    width: 100%;
+    max-width: 400px;
 }
-
-::placeholder {
-    color: white !important;
+.form-sign-in div.form-group {
+    margin-bottom: 20px;
+    width: 90%;
 }
-
+.form-sign-in div.form-group:nth-child(2) {
+    margin-bottom: 50px;
+}
 .container.sign-in {
     height: 100vh;
     padding: 20px;
@@ -57,6 +72,7 @@
     flex-direction: column;
     align-items: center;
     margin: auto;
+    width: 100%;
 }
 
 .container.sign-in h1 {
@@ -64,20 +80,6 @@
     font-family: Roboto, sans-serif;
     font-size: 30px;
 }
-
-.header-sign {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.form-sign-in div.form-group {
-    margin-bottom: 30px;
-}
-.form-sign-in div.form-group:nth-child(2) {
-    margin-bottom: 50px;
-}
-
 .forget {
     color: #6c757d!important;
     display: block;
@@ -85,11 +87,28 @@
     font-size: 60%;
     font-weight: 400;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+::placeholder {
+    color: white !important;
+}
 
-.container-header-sign {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    padding: 20px;
+.invalid-auth {
+    display: flex;
+    margin-top: .25rem;
+    align-self: flex-end;
+    font-size: 15px;
+    color: #721c24;
+    background-color: #f8d7da;
+    position: relative;
+    padding: .75rem 1.25rem;
+    border: 1px solid #f5c6cb;
+    border-radius: .25rem;
 }
