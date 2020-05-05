@@ -5,6 +5,7 @@
 /* Navbar StyleSheets */
 @import "navbar.css";
 
+/* GENERAL CSS */
 main {
     margin-top: 62px;
 }
@@ -17,15 +18,30 @@ h1 {
 }
 
 .btn{
-    background-color: var(--secondary-color);
-    font-weight: 900;
+    align-self: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    margin-bottom: 10px ;
+    font-size: 14px;
+    line-height: 16px;
+    width: 100px;
+    font-weight: bold;
 }
 .btn-yellow-round {
-    margin-top: 25px;
     background-color: var(--secondary-color);
+    color: var(--primary-color);
     border-radius: 25px;
-    font-weight: 900;
 }
+.btn-black-round {
+    background-color: var(--primary-color);
+    color: var(--navbar-divider-color);
+    border-radius: 25px;
+}
+.btn-white-round {
+    background-color: var(--navbar-divider-color);
+    color: var(--primary-color);
+    border-radius: 25px;
+}
+
 .btn-black-square {
     background-color: var(--primary-color);
     color: var(--navbar-divider-color);
@@ -102,9 +118,46 @@ select:-webkit-autofill:focus {
     text-align: center;
 }
 
-/*___________________PROJECT PAGE_____________________*/
+.container-profil-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background: black;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.manage-page-content {
+    display: flex;
+    justify-content: center;
+}
+.manage-card {
+    margin: 0 40px;
+}
+.card-request-top {
+    display: flex;
+    justify-content: space-between;
+}
+.card-request-top-info {
+    width: 50%;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+}
+.card-request-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-text-manage {
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
 
-/* MOBILE VIEW _______________*/
+/* MOBILE VIEW */
 
 
 @media all and (max-width: 374px){
