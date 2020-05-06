@@ -86,6 +86,12 @@ class AuthController extends AbstractController
         );
     }
 
+    public function logout()
+    {
+        unset($_SESSION['id']);
+        header('Location: / ');
+    }
+
     public function verifyPassword(string $password, string $passwordHached)
     {
         $passwordCheck = password_verify($password, $passwordHached);

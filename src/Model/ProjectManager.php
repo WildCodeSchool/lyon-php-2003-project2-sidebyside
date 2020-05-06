@@ -23,7 +23,7 @@ class ProjectManager extends AbstractManager
      */
     public function selectByWord(string $keyword) : array
     {
-        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, u.first_name FROM projects p
+        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, u.first_name, p.id FROM projects p
                   JOIN users u ON p.project_owner_id=u.id WHERE u.first_name LIKE :keyword OR p.title LIKE :keyword 
                   OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE :keyword";
         $statement = $this->pdo->prepare($query);
@@ -35,22 +35,24 @@ class ProjectManager extends AbstractManager
 
     /**
      * @param array $project
+     * @param int $sessionId
      * @return int
      */
-    public function insert(array $project): int
+    public function insert(array $project, int $sessionId): int
     {
         // prepared request
-        //TODO category and skills
+
         $statement = $this->pdo->prepare(
             "INSERT INTO $this->table
 (`title`, `description`, `deadline`, `zip_code`, `project_owner_id`, `category_id`, `banner_image`, `created_at`)
                         VALUES 
- (:title, :description, :deadline, :zip_code, 1, :category_id, :banner_image, NOW())"
+ (:title, :description, :deadline, :zip_code, :project_owner_id , :category_id, :banner_image, NOW())"
         );
         $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
         $statement->bindValue('deadline', $project['deadline']);
         $statement->bindValue('zip_code', $project['zip_code'], \PDO::PARAM_STR);
+        $statement->bindValue('project_owner_id', $sessionId, \PDO::PARAM_INT);
         $statement->bindValue('category_id', $project['category_id'], \PDO::PARAM_INT);
         $statement->bindValue('banner_image', $project['banner_image']);
 
