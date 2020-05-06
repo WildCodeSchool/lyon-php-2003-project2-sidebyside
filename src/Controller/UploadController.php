@@ -30,7 +30,7 @@ class UploadController extends AbstractController
                         $ext = pathinfo($array['name'], PATHINFO_EXTENSION);
                         $fileName = uniqid() . '.' . $ext;
                         move_uploaded_file($array['tmp_name'], $folder . $fileName);
-                        $path[$key] = "assets/uploads/profils/$fileName";
+                        $path[$key] = "/assets/uploads/profils/$fileName";
                     }
                 }
                 return $path;
@@ -63,7 +63,7 @@ class UploadController extends AbstractController
                         $ext = pathinfo($array['name'], PATHINFO_EXTENSION);
                         $filename = uniqid() . '.' . $ext;
                         move_uploaded_file($array['tmp_name'], $folder . $filename);
-                        $path[$key] = "$folder/$filename";
+                        $path[$key] ="/assets/uploads/projects/$filename";
                     }
                 }
                 return $path;
