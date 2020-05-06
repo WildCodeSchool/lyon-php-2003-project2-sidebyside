@@ -224,6 +224,25 @@ class ProjectController extends AbstractController
                 ]
             );
         }
-        return $this->twig->render('Manage/index.html.twig');
+        return $this->twig->render(
+            'Manage/index.html.twig',
+            [
+                'userInfo' => $userInfo,
+                'project' => $project,
+                'projectOwner' => $projectOwner
+            ]
+        );
+    }
+
+    public function setCollaborator(int $coId, int $projectId, bool $isValidate)
+    {
+        $projectManager = new ProjectManager();
+        if ($isValidate) {
+            $projectManager->validateRequest($coId, $projectId);
+        } else {
+            $projectManager->ignoreRequest($coId, $projectId);
+        }
+
+        header('Location: /Project/manage/' . $projectId . '/');
     }
 }
