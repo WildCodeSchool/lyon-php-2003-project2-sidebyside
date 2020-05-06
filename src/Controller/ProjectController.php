@@ -214,4 +214,9 @@ class ProjectController extends AbstractController
 
         return $this->twig->render('Project/projects.html.twig', ['projects' => $projects]);
     }
+
+    public function askCollaboration()
+    {
+        return $this->twig->render('Project/ask-collaboration.html.twig');
+    }
 }

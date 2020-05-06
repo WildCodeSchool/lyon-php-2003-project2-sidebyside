@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+ {% block content %}
+     <main style="margin-top: 72px">
+         <div class="container-banner-project">
+             <h1 class="project-title">
+                 Ma maison autonome
+             </h1>
+             <img class="banner-project-image" src="/assets/uploads/projects/5eb17043efa91.jpg">
+         </div>
+
+         <div class="container">
+             <div class="row">
+                 <div class="container-image-button">
+                     <div class="container-image-profil">
+                         <img class="project-owner-profil-image" src="/assets/uploads/profils/Ninja.png">
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <form method="POST" class="ask-form">
+             <h1> Demande de Collaboration</h1>
+             <div class="form-group area-ask">
+                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                           placeholder="Votre message" name="ask-message"></textarea>
+             </div>
+             <h1>Ajoute tes compétences</h1>
+             <div class="container-skills">
+                 <div class="custom-control custom-checkbox">
+                     <input type="checkbox" class="custom-control-input" id="customCheck1" name="menuisier">
+                     <label class="custom-control-label" for="customCheck1">#Menuisier</label>
+                 </div>
+                 <div class="custom-control custom-checkbox">
+                     <input type="checkbox" class="custom-control-input" id="customCheck2" name="macon" value="macon">
+                     <label class="custom-control-label" for="customCheck2">#Macon</label>
+                 </div>
+                 <div class="custom-control custom-checkbox">
+                     <input type="checkbox" class="custom-control-input" id="customCheck3" name="electricien" value="elec">
+                     <label class="custom-control-label" for="customCheck3">#Electricien</label>
+                 </div>
+             </div>
+             <button type="submit" class="btn btn-sign">Envoyer</button>
+             <small id="" class="forget">Votre mail ainsi que votre nom complet seront communiqués au créateur du
+                 projet</small>
+         </form>
+     </main>
+ {% endblock %}
