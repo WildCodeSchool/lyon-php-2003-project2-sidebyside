@@ -3,46 +3,58 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-12 col-md-10 col-lg-8">
 
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
         <div class="form-group">
             <label for="inputTitle"></label>
             <input type="text" class="form-control" id="inputTitle" name="title"
-                   placeholder="Titre" value="{{projects.title }}">
+                   placeholder="Titre" value="{{project.title }}">
             <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
         </div>
-        <div class="form-group">
-            <label for="inputImage"></label>
-            <input type="text" class="form-control" id="inputImage" name="banner_image" placeholder="Upload une image">
+        <div class="input-group mb-3">
+            <div class="custom-file">
+                <label class="custom-file-label" for="banner_image">Image de bannière</label>
+                <input type="hidden" name="MAX_FILE_SIZE" value=" 1000000">
+                <input type="file" class="custom-file-input" id="banner_image" name="banner_image">
+            </div>
         </div>
         <div class="form-group">
             <label for="inputDescribe">Description :</label>
-            <textarea class="form-control" id="inputDescribe" name="description" placeholder="Description" rows="5" >
-                 {{projects.description }}
-            </textarea>
+            <textarea class="form-control" id="inputDescribe" name="description"
+                      placeholder="Description" rows="5" >{{project.description }}</textarea>
             <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
         </div>
         <div class="form-group">
             <label for="inputZipCode"></label>
             <input type="text" class="form-control" id="inputZipCode" name="zip_code"
-                   placeholder="Code Postale" value="{{projects.zip_code }}">
+                   placeholder="Code Postale" value="{{project.zip_code }}">
             <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
         </div>
         <div class="form-group">
-            <label for="inputCategory"></label>
+            <label for="inputCategory">Choissisez une catégorie</label>
             <select class="form-control" id="inputCategory" name="category" >
-                <option value="">Choissisez votre Catégorie</option>
-                <option value="batiment">Batiment</option>
-                <option value="informatique">Informatique</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
             </select>
+            <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
         </div>
         <div class="form-group">
-            <label for="inputSkill"></label>
-            <input type="text" class="form-control" id="inputSkill" name="skills"
-                   placeholder="Compétences Recherché" value="{{projects.skills}}">
+            <label for="inputSkill">Compétences recherché</label>
+            <select multiple class="form-control" id="inputSkill" name="skills[]">
+                {% for skill in skills %}
+                    <option value="{{ skill.id }}"
+                            {% for projectSkill in project.skills %}
+                                {% if skill.id == projectSkill.id %}selected{% endif %}
+                            {% endfor %}
+                    >{{ skill.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <small class="text-danger">{% if errors is defined %}{{ errors.skills }}{% endif %}</small>
         </div>
         <div class="form-group">
             <label for="inputAvailable">Disponibilité du Projet</label>
-            <input type="date" class="form-control" id="inputAvailable" name="deadline" value="{{projects.deadline }}">
+            <input type="date" class="form-control" id="inputAvailable" name="deadline" value="{{project.deadline }}">
             <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
         </div>
 

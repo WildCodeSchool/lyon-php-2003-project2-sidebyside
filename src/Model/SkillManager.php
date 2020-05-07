@@ -36,7 +36,7 @@ class SkillManager extends AbstractManager
      * @param array $project
      * @param int $projectId
      */
-    public function updateForProject(array $project, int $projectId)
+    public function updateSkillsForProject(array $project, int $projectId)
     {
         $delete = $this->pdo->prepare(
             "DELETE FROM project_need_skills  
@@ -45,8 +45,13 @@ class SkillManager extends AbstractManager
         $delete->bindValue('project_id', $projectId, \PDO::PARAM_INT);
         $delete->execute();
 
-        // REQUEST INSERT THE PROJECT SKILLS IN project_need_skills AFTER DELETE PRECEDE SKILLS IN project_need_skills
-        if (isset($project['skills'])) {
+        $this->insertSkills($project, $projectId);
+    }
+
+    public function insertSkills(array $project, int $projectId)
+    {
+        // REQUEST INSERT THE PROJECT SKILLS IN project_need_skills AFTER DELETE PRECEDED SKILLS IN project_need_skills
+        if (!empty($project['skills'])) {
             foreach ($project['skills'] as $skillId) {
                 $insert = $this->pdo->prepare(
                     "INSERT INTO project_need_skills (project_id, skill_id)

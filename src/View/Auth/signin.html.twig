@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block header %}
+    <!----------------- Header Logo + Back Button ----------------->
+    <div class="container-header-sign">
+        <div class="header-sign">
+            <!-- Logo Navbar -->
+            <a class="navbar-sign" href="/">
+                <img src="/assets/images/sbs_black.png" width="50px" alt="">
+            </a>
+            <!-- Button Back to Home -->
+            <a href="" class="link-back">
+                <button type="submit" class="btn btn-back">Retour</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <!-----------------  Form Connexion ----------------->
+
+    <div class="container sign-in">
+        <div class="container-form-sign">
+            <h1>Connexion</h1>
+            <form class="form-sign-in" method="POST" action="" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="email" class="form-control form-control-sign" id="" name="email"
+                           aria-describedby="emailHelp"
+                           placeholder="Email">
+                    {% if error.email is defined %}
+                        <div class="invalid-auth">{{ error.email }}</div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control form-control-sign" id="" name="password"
+                           placeholder="Password">
+                    {% if error.pass is defined %}
+                        <div class="invalid-auth">{{ error.pass }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-sign">Connexion</button>
+                <small id="" class="forget">Vous avez oubliez votre mot de passe ? <a href="/">Cliquez ici</a></small>
+            </form>
+        </div>
+    </div>
+{% endblock %}
