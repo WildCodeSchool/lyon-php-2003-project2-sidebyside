@@ -123,7 +123,7 @@ select:-webkit-autofill:focus {
         display: none;
     }
     .container-banner-project{
-        max-height: 35vh;
+        max-height: 40vh;
         display: flex;
         align-items: center;
         overflow: hidden;
@@ -303,7 +303,7 @@ select:-webkit-autofill:focus {
         margin-right: 25px;
     }
     .container-banner-project{
-        max-height: 30vh;
+        max-height: 40vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -426,12 +426,23 @@ select:-webkit-autofill:focus {
     padding: 5px 0;
     width: 250px;
 }
+.btn-sign:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
 .btn-back {
     background: var(--primary-color);
     color: var(--background-color);
     padding: 4px 25px;
     border-radius: 0;
 }
+.btn-back:hover {
+    background-color: var(--navbar-divider-color);
+    color: var(--primary-color);
+    border: solid black 1px;
+}
+
 
 /*__________________ Header Sign __________________*/
 .header-sign {

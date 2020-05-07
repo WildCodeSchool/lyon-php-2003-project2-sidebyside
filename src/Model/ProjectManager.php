@@ -23,7 +23,7 @@ class ProjectManager extends AbstractManager
      */
     public function selectByWord(string $keyword) : array
     {
-        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, u.first_name FROM projects p
+        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, u.first_name, p.id FROM projects p
                   JOIN users u ON p.project_owner_id=u.id WHERE u.first_name LIKE :keyword OR p.title LIKE :keyword 
                   OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE :keyword";
         $statement = $this->pdo->prepare($query);
@@ -35,9 +35,10 @@ class ProjectManager extends AbstractManager
 
     /**
      * @param array $project
+     * @param int $id
      * @return int
      */
-    public function insert(array $project): int
+    public function insert(array $project, int $id): int
     {
         // prepared request
         //TODO category and skills
@@ -45,7 +46,7 @@ class ProjectManager extends AbstractManager
             "INSERT INTO $this->table
 (`title`, `description`, `deadline`, `zip_code`, `project_owner_id`, `category_id`, `banner_image`, `created_at`)
                         VALUES 
- (:title, :description, :deadline, :zip_code, 1, :category_id, :banner_image, NOW())"
+ (:title, :description, :deadline, :zip_code, $id, :category_id, :banner_image, NOW())"
         );
         $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
@@ -77,7 +78,7 @@ class ProjectManager extends AbstractManager
     public function selectProjectOwner($id)
     {
         $statement = $this->pdo->prepare('SELECT u.profil_picture, u.id FROM users as u
-                JOIN projects as p ON u.id = p.project_owner_id WHERE u.id=:id');
+                JOIN projects as p ON u.id = p.project_owner_id WHERE p.id=:id');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
@@ -123,5 +124,18 @@ class ProjectManager extends AbstractManager
             $update->bindValue('id', $id, \PDO::PARAM_INT);
             $update->execute();
         }
+    }
+
+    // REQUEST TO INSERT ASK COLLABORATION IN user_ask_collaboration_projects
+    public function askCollaboration(array $message, int $id) : void
+    {
+        $insert = $this->pdo->prepare("INSERT INTO user_ask_collaboration_projets 
+                                                    (user_id, project_id, message, created_at) 
+                                                    VALUES (:user_id, :project_id, :message, NOW())");
+        $insert->bindValue('user_id', $message['id'], \PDO::PARAM_INT);
+        $insert->bindValue('project_id', $id, \PDO::PARAM_INT);
+        $insert->bindValue('message', $message['message'], \PDO::PARAM_STR);
+
+        $insert->execute();
     }
 }

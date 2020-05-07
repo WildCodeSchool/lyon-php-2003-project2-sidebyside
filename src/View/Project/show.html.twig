@@ -5,7 +5,7 @@
         <h1 class="project-title">
             {{ currentProject.title }}
         </h1>
-        <img class="banner-project-image" src="/assets/images/project_img.jpg">
+        <img class="banner-project-image" src="{{ currentProject.banner_image }}">
     </div>
 
     <div class="container">
@@ -14,7 +14,8 @@
                 <div class="container-image-profil">
                     <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
                 </div>
-                <button class="btn participate-project-button" type="button" href="#">
+                <button class="btn participate-project-button" type="button"
+                        onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
                     Participer
                 </button>
             </div>

@@ -36,7 +36,7 @@
                             {% if isConnected.id is defined %}
                                 <!-- Button Create Project hidden if user is not connected -->
                                 <!-- (current display:none, delete this attribute for see the button) -->
-                                <a href="#" class="navbar-create-project" style="">
+                                <a href="/project/new" class="navbar-create-project" style="">
                                     <i class="fas fa-plus"></i>
                                 </a>
                                 <!--  -->
@@ -44,7 +44,7 @@
 
                             {% if isConnected.id is defined %}
                                 <!-- Button profil for desktop, view if user connected -->
-                                <a href="/profils" class="navbar-profil"
+                                <a href="/profil/user/{{ isConnected.id }}" class="navbar-profil"
                                    style="background-image: url({{ isConnected.profil_picture }});"></a>
                                 <!--  -->
                             {% endif %}
