@@ -220,26 +220,28 @@ class ProjectController extends AbstractController
     // FUNCTION FOR COLLABORATION
     public function askCollaboration($id)
     {
-        $this->acces($_SESSION);
-        $userId = $_SESSION['id'];
-        $projectManager = new ProjectManager();
-        $userManager = new UserManager();
-        $skillManager = new SkillManager();
-        $project = $projectManager->selectOneById($id);
-        $projectOwner = $project['project_owner_id'];
-        $projectOwner = $projectManager->selectProjectOwner($projectOwner);
-        $currentUserInfo = $userManager->getUserInfo($userId);
-        $skills = $skillManager->selectAll();
+        $acces = $this->acces($_SESSION);
+        if ($acces) {
+            $userId = $_SESSION['id'];
+            $projectManager = new ProjectManager();
+            $userManager = new UserManager();
+            $skillManager = new SkillManager();
+            $project = $projectManager->selectOneById($id);
+            $projectOwner = $project['project_owner_id'];
+            $projectOwner = $projectManager->selectProjectOwner($projectOwner);
+            $currentUserInfo = $userManager->getUserInfo($userId);
+            $skills = $skillManager->selectAll();
 
-        if (!empty($_POST)) {
-            $message['message'] = trim($_POST['ask-message']);
-            $message['id'] = $userId;
-            $projectManager->askCollaboration($message, $id);
-            header("Location: /project/show/$id");
+            if (!empty($_POST)) {
+                $message['message'] = trim($_POST['ask-message']);
+                $message['id'] = $userId;
+                $projectManager->askCollaboration($message, $id);
+                header("Location: /project/show/$id");
+            }
+
+            return $this->twig->render('Project/ask-collaboration.html.twig', ['project' => $project,
+                'projectOwner' => $projectOwner, 'currentUserInfo' => $currentUserInfo,
+                'skills' => $skills]);
         }
-
-        return $this->twig->render('Project/ask-collaboration.html.twig', ['project' => $project,
-                                            'projectOwner' => $projectOwner, 'currentUserInfo' => $currentUserInfo,
-                                            'skills' => $skills]);
     }
 }

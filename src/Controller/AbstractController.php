@@ -41,10 +41,13 @@ abstract class AbstractController
         $this->twig->addGlobal('isConnected', $_SESSION);
     }
 
-    public function acces(array $session) : void
+    public function acces(array $session) : bool
     {
         if (empty($session['id'])) {
             header("Location: /auth/signin ");
+            return false;
+        } else {
+            return true;
         }
     }
 }
