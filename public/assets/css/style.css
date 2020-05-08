@@ -557,9 +557,25 @@ select:-webkit-autofill:focus {
 }
 .form-check {
     width: 50%;
-    padding-left: 100px;
+    padding-left: 10%;
     display: flex;
 }
 .collapsed{
     padding-top: 0;
+}
+.form-control {
+    border: 1px solid #ced4da00;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+input[type="date"]:focus::before {
+    content: ""!important;
+}
+input[type="date"]::before {
+    content: attr(placeholder)" Date souhaité ";
+    white-space: pre;
+}
+.container-form-project {
+    display: flex;
+    flex-direction: column;
 }
