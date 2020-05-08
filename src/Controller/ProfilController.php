@@ -135,4 +135,3 @@ class ProfilController extends AbstractController
         return $errors;
     }
 }
-
