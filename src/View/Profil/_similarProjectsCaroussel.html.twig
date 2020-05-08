@@ -1,9 +1,11 @@
 <div id="carouselExampleIndicators" class="carousel slide col-lg-8" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        {% for project in projects %}
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        {% endfor %}
+        {% if  projects|length > 1%}
+            {% for project in projects %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            {% endfor %}
+        {% endif %}
     </ol>
     <div class="carousel-inner col-11">
         <div class="carousel-item active">
@@ -19,21 +21,23 @@
                 </div>
             </div>
         </div>
-        {% for i in 1..(projects|length - 1) %}
-            <div class="carousel-item">
-                <div class="user-project-card">
-                    <div class="user-project-card-image-container">
-                        <div class="container-banner-project">
-                            <img src="{{ projects[i].banner_image }}" class="banner-project-image" alt="Image du projet">
+        {% if  projects|length > 1%}
+            {% for i in 1..(projects|length - 1) %}
+                <div class="carousel-item">
+                    <div class="user-project-card">
+                        <div class="user-project-card-image-container">
+                            <div class="container-banner-project">
+                                <img src="{{ projects[i].banner_image }}" class="banner-project-image" alt="Image du projet">
+                            </div>
+                            <h4  class="project-title"><strong>{{ projects[i].title|capitalize }}</strong></h4>
                         </div>
-                        <h4  class="project-title"><strong>{{ projects[i].title|capitalize }}</strong></h4>
-                    </div>
-                    <div class="user-project-card-content">
-                        <p>{{ projects[i].description }}</p>
+                        <div class="user-project-card-content">
+                            <p>{{ projects[i].description }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

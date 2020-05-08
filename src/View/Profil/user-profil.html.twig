@@ -50,7 +50,11 @@
         <div class="card col-10 project-description-card ">
             <h2 class="project-description-title">Projets en cours</h2>
             <div class="user-project-carousel">
+                {% if projecs|length == 0 %}
+                    <p>Aucun projets en cours</p>
+                {% else %}
                 {% include 'Profil/_similarProjectsCaroussel.html.twig' %}
+                {% endif %}
             </div>
         </div>
     </div>
