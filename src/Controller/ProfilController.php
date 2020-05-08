@@ -99,19 +99,20 @@ class ProfilController extends AbstractController
             $userId = $id;
             $profil = $this->trimPost($post);
 
-            foreach ($profil as $key => $value) {
-                if ((empty($value) && $key !== "skills")) {
-                    $errors[$key] = "Ce champ est requis";
+            $errors = $this->postVerif($profil);
+
+            $userManager = new UserManager();
+            if (!empty($_FILES['profil_picture']['name'] || $_FILES['banner_image']['name'])) {
+                $upload = new UploadController();
+                $path = $upload->uploadProfilImage($_FILES);
+                if ($path == null) {
+                    $errors['upload'] = 'Taille trop grande ou mauvais format';
+                } else {
+                    $userManager->updateUserImg($path, $userId);
                 }
             }
 
             if (empty($errors)) {
-                $userManager = new UserManager();
-                if (!empty($_FILES['profil_picture']['name'] || $_FILES['banner_image']['name'])) {
-                    $upload = new UploadController();
-                    $path = $upload->uploadProfilImage($_FILES);
-                    $userManager->updateUserImg($path, $userId);
-                }
                 $userManager->setUserInfo($profil, $userId);
                 $userManager->deleteSkillUser($userId);
                 if (!empty($profil['skills'])) {
@@ -119,7 +120,19 @@ class ProfilController extends AbstractController
                 }
                 header("Location: /profil/user/$id");
             }
-            return $errors;
         }
+        return $errors;
+    }
+
+    public function postVerif(array $profil)
+    {
+        $errors = null;
+        foreach ($profil as $key => $value) {
+            if ((empty($value) && $key !== "skills" && $key !== "description")) {
+                $errors[$key] = "Ce champ est requis";
+            }
+        }
+        return $errors;
     }
 }
+

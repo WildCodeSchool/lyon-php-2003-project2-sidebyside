@@ -93,6 +93,9 @@
                         </label>
                         <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
                         <input type="file" id="banner_image" name="banner_image" style="display: none">
+                        {% if errors.upload is defined %}
+                            <small class="invalid-auth">{{ errors.upload }}</small>
+                        {% endif %}
                     </div>
                     <div class="container-btn">
                         <button type="submit" class="btn btn-warning btn-yellow-round col-4"
