@@ -127,6 +127,20 @@ class ProjectManager extends AbstractManager
         }
     }
 
+    // REQUEST USERS WHO ASK FOR COLLABORATION ON PROJECT BY ID
+    public function selectRequestForCollaboration(int $id)
+    {
+        $statement = $this->pdo->prepare("SELECT c.user_id, c.project_id, c.message, c.status, c.created_at
+                                                        FROM user_ask_collaboration_projects c 
+                                                        JOIN " . self::TABLE . " p 
+                                                        ON c.project_id=p.id 
+                                                        WHERE p.id=:id");
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     // REQUEST TO INSERT ASK COLLABORATION IN user_ask_collaboration_projects
     public function askCollaboration(array $message, int $id) : void
     {
