@@ -26,7 +26,6 @@ class HomeController extends AbstractController
     {
         $projectManager = new ProjectManager();
         $projects = $projectManager->selectAll();
-       
         $userManager = new UserManager();
         $users = $userManager->selectAll();
         $skills = $userManager->getSkills();
@@ -36,6 +35,7 @@ class HomeController extends AbstractController
             ['users' => $users, 'skills' => $skills, 'projects'=>$projects]
         );
     }
+
 
     public function search()
     {
@@ -61,5 +61,12 @@ class HomeController extends AbstractController
                 ['users' => $users, 'skills' => $skills, 'isSearched' => $isSearched, 'projects' => $projects]
             );
         }
+    }
+
+    public function cgu()
+    {
+        return $this->twig->render(
+            'Home/cgu.html.twig'
+        );
     }
 }

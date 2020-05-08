@@ -61,15 +61,24 @@ a.navbar-create-project {
     text-decoration: none;
 }
 .navbar-profil{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: black;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
     border-radius: 25px;
     height: 50px;
     width: 50px;
 }
+.navbar-profil-img {
+    width: 50px;
+}
+.dropdown-menu {
+    transform: translateX(-120px);
+}
 .container-right>* {
-    margin-left: 20px;
+    margin: 0 10px;
 }
 
 /*_______________________________________________ Mobile View _______________________________________________*/
@@ -79,14 +88,12 @@ a.navbar-create-project {
         padding: 10px 0 0 0;
     }
 
-    .navbar-profil {
-        display: none;
-    }
-
     .navbar-mobile {
         margin-bottom: 10px;
     }
-
+    .container-right>* {
+        margin: 0 10px 10px;
+    }
     .not-in-desktop {
         display: flex;
     }
