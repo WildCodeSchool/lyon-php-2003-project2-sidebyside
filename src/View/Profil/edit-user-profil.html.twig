@@ -6,92 +6,105 @@
 
 
 {% block content %}
-    <div class="container">
-        <form method="POST" action="/profil/updateuser/{{ info.0.id }}" enctype="multipart/form-data" class="container-form-project">
-            <div class="form-group">
-                <input type="text" class="form-control" id="first_name" placeholder="Prenom" name="first_name"
-                       value="{{ info.0.first_name }}">
-                {% if errors.first_name is defined %}
-                    <small class="invalid-auth">{{ errors.first_name }}</small>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="last_name" placeholder="Nom" name="last_name"
-                       value="{{ info.0.last_name }}">
-                {% if errors.last_name is defined %}
-                    <small class="invalid-auth">{{ errors.last_name }}</small>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email"
-                       value="{{ info.0.email }}">
-                {% if errors.email is defined %}
-                    <small class="invalid-auth">{{ errors.email }}</small>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="zip_code" placeholder="Code Postal" name="zip_code"
-                       value="{{ info.0.zip_code }}">
-                {% if errors.zip_code is defined %}
-                    <small class="invalid-auth">{{ errors.zip_code }}</small>
-                {% endif %}
-            </div>
-            <div class="form-group">
+    <div class="container h-100">
+        <h1 class="text-center">Modifier mon profil</h1>
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form method="POST" action="/profil/updateuser/{{ info.0.id }}" enctype="multipart/form-data"
+                      class="container-form-project">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="first_name" placeholder="Prenom" name="first_name"
+                               value="{{ info.0.first_name }}">
+                        {% if errors.first_name is defined %}
+                            <small class="invalid-auth">{{ errors.first_name }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="last_name" placeholder="Nom" name="last_name"
+                               value="{{ info.0.last_name }}">
+                        {% if errors.last_name is defined %}
+                            <small class="invalid-auth">{{ errors.last_name }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Email" name="email"
+                               value="{{ info.0.email }}">
+                        {% if errors.email is defined %}
+                            <small class="invalid-auth">{{ errors.email }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="zip_code" placeholder="Code Postal" name="zip_code"
+                               value="{{ info.0.zip_code }}">
+                        {% if errors.zip_code is defined %}
+                            <small class="invalid-auth">{{ errors.zip_code }}</small>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
                 <textarea class="form-control" id="description" rows="3" placeholder="Biographie"
                           name="description">{{ info.0.description }}</textarea>
-            </div>
+                    </div>
 
-            <section class="section section-select">
-                <div class="container-select">
-                    <div class="content is-medium">
-                        <div class="box">
-                            <div class="box-header">
-                                <h3>Mes Compétences</h3>
-                                <div class="toggle-icon-container">
-                                    <i class="fas fa-chevron-right" id="fa-project"></i>
+                    <section class="section section-select">
+                        <div class="container-select">
+                            <div class="content is-medium">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3>Mes Compétences</h3>
+                                        <div class="toggle-icon-container">
+                                            <i class="fas fa-chevron-right" id="fa-project"></i>
+                                        </div>
+                                    </div>
+                                    <div class="box-body collapsed">
+                                        {% for skill in allSkillsAvailable %}
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox"
+                                                       value="{{ skill.id }}" id="{{ skill.id }}" name="skills[]"
+                                                        {% for skills in info %}
+                                                            {% if skill.id == skills.skill_id %}checked{% endif %}
+                                                        {% endfor %}
+                                                >
+                                                <label class="custom-control-label" for="{{ skill.id }}">
+                                                    {{ skill.name }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                            <div class="box-body collapsed">
-                                {% for skill in allSkillsAvailable %}
-                                    <div class="custom-control custom-checkbox">
-                                        <input class="custom-control-input" type="checkbox"
-                                               value="{{ skill.id }}" id="{{ skill.id }}" name="skills[]"
-                                                {% for skills in info %}
-                                                    {% if skill.id == skills.skill_id %}checked{% endif %}
-                                                {% endfor %}
-                                        >
-                                        <label class="custom-control-label" for="{{ skill.id }}">
-                                            {{ skill.name }}
-                                        </label>
-                                    </div>
-                                {% endfor %}
-                            </div>
                         </div>
+                    </section>
+                    <div class="form-group">
+                        <label for="profil_picture" class="form-control form-control-create sign-upload_label">
+                            <span id="image_label" class="form-upload-span"></span>
+                            <div class="sign-upload_icon">
+                                <img src="/assets/images/icons/upload2.png" style="width: 25px">
+                            </div>
+                        </label>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                        <input type="file" id="profil_picture" name="profil_picture" style="display: none">
                     </div>
-                </div>
-            </section>
-            <div class="form-group">
-                <label for="profil_picture" class="form-control form-control-create sign-upload_label">
-                    <span id="image_label" class="form-upload-span"></span>
-                    <div class="sign-upload_icon">
-                        <img src="/assets/images/icons/upload2.png" style="width: 25px">
+                    <div class="form-group">
+                        <label for="banner_image" class="form-control form-control-create sign-upload_label">
+                            <span id="image_label2" class="form-upload-span"></span>
+                            <div class="sign-upload_icon">
+                                <img src="/assets/images/icons/upload2.png" style="width: 25px">
+                            </div>
+                        </label>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                        <input type="file" id="banner_image" name="banner_image" style="display: none">
                     </div>
-                </label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-                <input type="file" id="profil_picture" name="profil_picture" style="display: none">
+                    <div class="container-btn">
+                        <button type="submit" class="btn btn-warning btn-yellow-round col-4"
+                                style="align-self: center; margin-bottom: 0">Poster
+                        </button>
+                        <button type="button" class="btn btn-warning btn-white-square btn-form-back col-4"
+                                onclick="window.location.href = '/profil/user/{{ info.0.id }}';">Retour
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="banner_image" class="form-control form-control-create sign-upload_label">
-                    <span id="image_label2" class="form-upload-span"></span>
-                    <div class="sign-upload_icon">
-                        <img src="/assets/images/icons/upload2.png" style="width: 25px">
-                    </div>
-                </label>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
-                <input type="file" id="banner_image" name="banner_image" style="display: none">
-            </div>
-            <button type="submit" class="btn btn-warning btn-yellow-round col-4" style="align-self: center">Poster</button>
-        </form>
+        </div>
     </div>
 {% endblock %}
 
