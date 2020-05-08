@@ -555,7 +555,8 @@ select:-webkit-autofill:focus {
 .section-select {
     margin-bottom: 20px;
 }
-.form-check {
+.custom-checkbox,
+.custom-radio {
     width: 50%;
     padding-left: 10%;
     display: flex;

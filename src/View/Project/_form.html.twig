@@ -46,10 +46,10 @@
                                 </div>
                                 <div class="box-body collapsed">
                                     {% for category in categories %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="category" id="{{ category.id }}" value="{{ category.id }}"
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" name="category" id="radio{{ category.id }}" value="{{ category.id }}"
                                                    {% if category.id == 1 %}checked{% endif %}>
-                                            <label class="form-check-label" for="{{ category.id }}">
+                                            <label class="custom-control-label" for="radio{{ category.id }}">
                                                 {{ category.name }}
                                             </label>
                                         </div>
@@ -73,14 +73,14 @@
                                 </div>
                                 <div class="box-body collapsed">
                                     {% for skill in skills %}
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox"
                                                    value="{{ skill.id }}" id="{{ skill.id }}" name="skills[]"
                                                     {% for projectSkill in project.skills %}
                                                         {% if skill.id == projectSkill.id %}checked{% endif %}
                                                     {% endfor %}
                                             >
-                                            <label class="form-check-label" for="{{ skill.id }}">
+                                            <label class="custom-control-label" for="{{ skill.id }}">
                                                 {{ skill.name }}
                                             </label>
                                         </div>
