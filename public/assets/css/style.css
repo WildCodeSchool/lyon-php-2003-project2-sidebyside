@@ -36,6 +36,7 @@ h1 {
 
 /* BUTTON SECTION */
 .btn{
+    height : 40px;
     align-self: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     margin: 0 15px;

@@ -73,6 +73,7 @@ a.navbar-create-project {
     width: 50px;
 }
 .navbar-profil-img {
+    margin-top: -5px;
     height: 50px;
 }
 .dropdown-menu {
