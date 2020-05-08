@@ -16,7 +16,10 @@ h1 {
     text-align: center;
     margin-bottom: 50px;
 }
-
+h2 {
+    font-weight: 900;
+    padding: 10px;
+}
 .cgu{
     text-align: center;
     margin: 30px 10%;
@@ -206,7 +209,74 @@ select:-webkit-autofill:focus {
     font-size: 42px;
     transition: font-size 1s;
 }
+/* PROFIL PAGE SECTION */
+.user-project-carousel {
+    display: flex;
+    justify-content: center;
+}
+.user-name {
+    margin-right: auto;
+    margin-left: 30px;
+}
+.profil-page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profil-skills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.skill-name {
+    margin: 0 5px;
+    padding: 0 10px;
+    box-shadow: grey 0px 0px 4Px;
+    border-radius: 15px;
+}
+.carousel-inner {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 35px;
+}
+.user-project-card {
+    margin: 10px;
+    box-shadow: grey 0px 0px 4Px;
+    border-radius: 5px;
+}
+.user-project-card-image-container {
+    height: 150px;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.user-project-card-image-container img {
+    width: 100%;
+}
+.user-project-card-image-container h4 {
+    width: 100%;
+}
+.user-project-card-content {
+    padding: 15px;
+}
+.user-project-card h4 {
+    width: 100%;
+    padding: 15px;
+    transform: translateY(-50px);
+    z-index: 3;
+    text-align: center;
+}
+.carousel-indicators li {
+    background-color: var(--primary-color);
+}
 
+/* PROJECT PAGE SECTION */
+.project-page-content {
+    justify-content: center;
+}
 /* MANAGE PAGE SECTION */
 .manage-page-content {
     display: flex;
@@ -258,6 +328,23 @@ select:-webkit-autofill:focus {
 
 /* TABLET VIEW SMALL TO MEDIUM */
 @media all and (max-width: 768px){
+    .container-image-profil{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        background: black;
+        z-index: 3;
+        left: 50px;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        border: solid lightgrey 3px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
     .desktop-carousel{
         display: none;
     }
@@ -299,7 +386,6 @@ select:-webkit-autofill:focus {
     .project-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
-        margin-left: 4vw;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-description-title{
@@ -325,7 +411,6 @@ select:-webkit-autofill:focus {
     }
     .search-profil-description-card{
         margin-bottom: 20px;
-        margin-left: 4vw;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .search-profil-title{
@@ -338,7 +423,6 @@ select:-webkit-autofill:focus {
     }
     .about-team-project-description-card{
         margin-bottom: 20px;
-        margin-left: 4vw;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .about-team-project-title{
@@ -395,7 +479,31 @@ select:-webkit-autofill:focus {
         background-color: black;
         border: 1px solid black;
     }
-
+    .user-project-card {
+        box-shadow: grey 0px 0px 4Px;
+        border-radius: 5px;
+    }
+    .user-project-card-image-container {
+        height: 90px;
+        z-index: 3;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .user-project-card-content {
+        display: none;
+    }
+    .user-project-card h4 {
+        width: 100%;
+        padding: 15px;
+        right: 0;
+        transform: translateY(0px);
+        font-size: 15px;
+        z-index: 3;
+        text-align: center;
+    }
 }
 /* END TABLET VIEW SMALL TO MEDIUM*/
 
@@ -437,6 +545,7 @@ select:-webkit-autofill:focus {
         z-index: -1;
     }
     .project-title{
+        margin-top: 70px;
         position: absolute;
         color: white;
     }
@@ -449,13 +558,11 @@ select:-webkit-autofill:focus {
     .project-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
-        margin-left: 4vw;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-plan-card{
         margin-top: 20px;
         margin-bottom: 20px;
-        margin-left: 4vw;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-description-img{
@@ -465,13 +572,11 @@ select:-webkit-autofill:focus {
     .search-profil-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
-        margin-left: 4vw;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .about-team-project-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
-        margin-left: 4vw;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .see-more-about-team{

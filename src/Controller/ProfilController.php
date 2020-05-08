@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\ProjectManager;
 use App\Model\SkillManager;
 use App\Model\UserManager;
 
@@ -46,11 +47,13 @@ class ProfilController extends AbstractController
     {
         $userManager = new UserManager();
         $currentUser = $userManager->selectOneById($id);
+        $projectManager = new ProjectManager();
+        $userProjects = $projectManager->selectByUserId($id);
         $skills = $userManager->getSkills();
 
         return $this->twig->render(
             'Profil/user-profil.html.twig',
-            ['current_user' => $currentUser, 'skills' => $skills]
+            ['current_user' => $currentUser, 'skills' => $skills, 'projects' => $userProjects]
         );
     }
 

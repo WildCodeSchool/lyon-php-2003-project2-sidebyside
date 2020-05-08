@@ -34,6 +34,22 @@ class ProjectManager extends AbstractManager
     }
 
     /**
+     * @param string $userId
+     * @return array
+     */
+    public function selectByUserId(string $userId) : array
+    {
+        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, p.id, p.project_owner_id 
+                    FROM projects p WHERE p.project_owner_id=:id
+                  ";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':id', $userId);
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    /**
      * @param array $project
      * @param int $sessionId
      * @return int
