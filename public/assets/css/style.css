@@ -226,7 +226,6 @@ select:-webkit-autofill:focus {
 .profil-skills {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 .skill-name {
     margin: 0 5px;
