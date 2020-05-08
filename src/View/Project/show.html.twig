@@ -7,7 +7,6 @@
         </h1>
         <img class="banner-project-image" src="{{ currentProject.banner_image }}">
     </div>
-
     <div class="container">
         <div class="row">
             <div class="container-image-button">
@@ -15,21 +14,21 @@
                     <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
                 </div>
                 <div class="container-button">
-                {% if isConnected.id == projectOwner.id %}
-                    <button class="btn btn-yellow-square" type="button"
-                            onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
-                        Modifier
-                    </button>
-                    <button class="btn btn-yellow-square" type="button"
-                            onclick="window.location.href = '/project/manage/{{ currentProject.id }}';">
-                        Gérer le projet
-                    </button>
-                {% else %}
-                    <button class="btn btn-yellow-square" type="button"
-                            onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
-                        Participer
-                    </button>
-                {% endif %}
+                    {% if isConnected.id == projectOwner.id or isCollaborator %}
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
+                            Modifier
+                        </button>
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/project/manage/{{ currentProject.id }}';">
+                            Gérer le projet
+                        </button>
+                    {% elseif not isCollaborator %}
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
+                            Participer
+                        </button>
+                    {% endif %}
                 </div>
             </div>
             <div class="card col-11 project-description-card ">

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Model\CategoryManager;
+use App\Model\CollabManager;
 use App\Model\ProjectManager;
 use App\Model\RequestManager;
 use App\Model\UserManager;
@@ -103,11 +104,23 @@ class ProjectController extends AbstractController
         $currentProject = $projectManager->selectOneById($id);
         $similarProjects = $projectManager->selectAllExceptCurrent($id);
         $projectOwner = $projectManager->selectProjectOwner($id);
+        $collabManager = new CollabManager();
+        $collaborators = $collabManager->selectOneByProjectId($id);
+        $isCollaborator = false;
+
+        foreach ($collaborators as $collaborator) {
+            if ($collaborator['user_id'] == $_SESSION['id']) {
+                $isCollaborator = true;
+            }
+        }
 
         return $this->twig->render(
             'Project/show.html.twig',
-            ['project' => $project, 'id' => $id, 'currentProject' => $currentProject,
-                'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner]
+            [
+                'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+                'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
+                'isCollaborator' => $isCollaborator
+            ]
         );
     }
 
