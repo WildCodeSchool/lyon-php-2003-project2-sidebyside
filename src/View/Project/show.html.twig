@@ -14,9 +14,18 @@
                 <div class="container-image-profil">
                     <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
                 </div>
-                <button class="btn participate-project-button" type="button" href="#">
+                <div class="container-button">
+                {% if isConnected.id is defined %}
+                    <button class="btn participate-project-button" type="button"
+                            onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
+                        Modifier
+                    </button>
+                {% endif %}
+                <button class="btn participate-project-button" type="button"
+                        onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
                     Participer
                 </button>
+                </div>
             </div>
             <div class="card col-11 project-description-card ">
                 <h2 class="project-description-title">Description</h2>

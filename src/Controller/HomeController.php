@@ -36,6 +36,7 @@ class HomeController extends AbstractController
         );
     }
 
+
     public function search()
     {
         $isSearched = true;

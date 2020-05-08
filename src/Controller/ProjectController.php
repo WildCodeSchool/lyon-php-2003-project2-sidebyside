@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\CategoryManager;
 use App\Model\ProjectManager;
+use App\Model\RequestManager;
 use App\Model\UserManager;
 use App\Model\SkillManager;
 
@@ -28,7 +29,7 @@ class ProjectController extends AbstractController
         $skills = $skillManager->selectAll();
         $errors = [];
         $project = [];
-        $title = $bannerImage = $description = $deadline = $zipCode = $categoryId = $skillsId ='';
+        $title = $bannerImage = $description = $deadline = $zipCode = $categoryId = $skillsId = '';
 
         if (!empty($_POST)) {
             $title = trim($_POST['title']);
@@ -63,9 +64,11 @@ class ProjectController extends AbstractController
             }
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $projectManager->insert($project);
+                    $connectedUser = $_SESSION['id'];
+                    $projectManager->insert($project, $connectedUser);
                     $lastId = $projectManager->selectLastProject();
                     $skillManager->insertSkills($project, $lastId['id']);
+
                     header('Location:/Home/index');
                 }
             }
@@ -102,7 +105,7 @@ class ProjectController extends AbstractController
         return $this->twig->render(
             'Project/show.html.twig',
             ['project' => $project, 'id' => $id, 'currentProject' => $currentProject,
-             'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner]
+                'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner]
         );
     }
 
@@ -207,11 +210,89 @@ class ProjectController extends AbstractController
         }
         return $errors;
     }
+
+    public function manage($id)
+    {
+        $projectManager = new ProjectManager();
+        $requestManager = new RequestManager();
+        $requests = $requestManager->selectRequestForCollaboration($id);
+        $project = $projectManager->selectOneById($id);
+        $userManager = new UserManager();
+        $projectOwner = $userManager->selectOneById($project['project_owner_id']);
+        $userManager = new UserManager();
+        $skillManager = new SkillManager();
+        $userInfo = [];
+
+        if (!empty($requests)) {
+            foreach ($requests as $key => $request) {
+                $userInfo[$key] = $userManager->selectOneById($request['user_id']);
+                $userInfo[$key]['skills'] = $skillManager->getAllForUser($request['user_id']);
+            }
+            return $this->twig->render(
+                'Manage/index.html.twig',
+                [
+                    'requests' => $requests, 'userInfo' => $userInfo,
+                    'project' => $project,
+                    'projectOwner' => $projectOwner
+                ]
+            );
+        }
+        return $this->twig->render(
+            'Manage/index.html.twig',
+            [
+                'userInfo' => $userInfo,
+                'project' => $project,
+                'projectOwner' => $projectOwner
+            ]
+        );
+    }
+
+    public function setCollaborator(int $coId, int $projectId, bool $isValidate)
+    {
+        $requestManager = new RequestManager();
+        if ($isValidate) {
+            $requestManager->validateRequest($coId, $projectId);
+        } else {
+            $requestManager->ignoreRequest($coId, $projectId);
+        }
+
+        header('Location: /Project/manage/' . $projectId . '/');
+    }
+
     public function all()
     {
         $projectManager = new ProjectManager();
         $projects = $projectManager->selectAll();
 
         return $this->twig->render('Project/projects.html.twig', ['projects' => $projects]);
+    }
+
+    // FUNCTION FOR COLLABORATION
+    public function askCollaboration($id)
+    {
+        $acces = $this->acces($_SESSION);
+        if ($acces) {
+            $userId = $_SESSION['id'];
+            $projectManager = new ProjectManager();
+            $requestManager = new RequestManager();
+            $userManager = new UserManager();
+            $skillManager = new SkillManager();
+            $project = $projectManager->selectOneById($id);
+            $projectOwner = $project['project_owner_id'];
+            $projectOwner = $projectManager->selectProjectOwner($projectOwner);
+            $currentUserInfo = $userManager->getUserInfo($userId);
+            $skills = $skillManager->selectAll();
+
+            if (!empty($_POST)) {
+                $message['message'] = trim($_POST['ask-message']);
+                $message['id'] = $userId;
+                $requestManager->askCollaboration($message, $id);
+                header("Location: /project/show/$id");
+            }
+
+            return $this->twig->render('Project/ask-collaboration.html.twig', ['project' => $project,
+                'projectOwner' => $projectOwner, 'currentUserInfo' => $currentUserInfo,
+                'skills' => $skills]);
+        }
     }
 }

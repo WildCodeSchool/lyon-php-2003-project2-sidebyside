@@ -43,11 +43,21 @@
 
                         {% if isConnected.id is defined %}
                             <!-- Button profil for desktop, view if user connected -->
-                            <a href="/profil/user/{{ isConnected.id }}" class="navbar-profil"
-                               style="background-image: url({{ isConnected.profil_picture }});"></a>
+                            <div class="dropdown">
+                                <button class="navbar-profil" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div>
+                                        <img class="navbar-profil-img" src="{{ isConnected.profil_picture }}">
+                                    </div>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="/profil/user/{{ isConnected.id }}">Mon profil</a>
+                                    <a class="dropdown-item" href="/project/new">Créer un projet</a>
+                                    <a class="dropdown-item" href="/profil/updateuser/{{ isConnected.id }}">Modifier mon profil</a>
+                                    <a class="dropdown-item" href="/auth/logout">Déconnexion</a>
+                                </div>
+                            </div>
                             <!--  -->
                         {% endif %}
-
 
                         {% if isConnected == false %}
                             <div class="navbar-button navbar-mobile" style="">
@@ -97,50 +107,72 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">FAQ</a>
                                 </li>
+                                <li class="nav-item not-in-desktop">
+                                    <a class="nav-link" href="/project/new">Créer un projet</a>
+                                    <i class="fas fa-chevron-right"></i>
+                                </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" id="project" href="/project/all"></a>
+                                    <i class="fas fa-chevron-right"></i>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profil" href="/profil/all"></a>
+                                    <i class="fas fa-chevron-right"></i>
+                                </li>
+                                <li class="nav-item not-in-mobile">
                                     <a class="nav-link" href="#">Contact</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">About Us</a>
+                                <li class="nav-item not-in-mobile">
+                                    <a class="nav-link" href="#">FAQ</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Legal Mentions</a>
-                                </li>
-                            </div>
-                            <div class="social">
-                                <li class="nav-item">
-                                    <img height="40" src="/assets/images/social/twitter.png">
-                                </li>
-                                <li class="nav-item">
-                                    <img height="40" src="/assets/images/social/instagram.png">
-                                </li>
-                                <li class="nav-item">
-                                    <img height="40" src="/assets/images/social/facebook.png">
-                                </li>
-                            </div>
-                        </ul>
+                                <div class="footer-menu">
+                                    <div class="divider"></div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">FAQ</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Contact</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Legal Mentions</a>
+                                    </li>
+                                </div>
+                                <div class="social">
+                                    <li class="nav-item">
+                                        <img height="40" src="/assets/images/social/twitter.png">
+                                    </li>
+                                    <li class="nav-item">
+                                        <img height="40" src="/assets/images/social/instagram.png">
+                                    </li>
+                                    <li class="nav-item">
+                                        <img height="40" src="/assets/images/social/facebook.png">
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
-        </header>
-    {% endblock %}
+                </nav>
+            </header>
+        {% endblock %}
 
-
-
+    <main>
         {% block content %}{% endblock %}
-
+    </main>
 
         <!-- Script Bootstrap jQuery -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
                 integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
                 crossorigin="anonymous"></script>
 
         <!-- Script js et Bootstrap-->
         {% block javascript %}{% endblock %}
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
                 integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
                 crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
                 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                 crossorigin="anonymous"></script>
         <script>

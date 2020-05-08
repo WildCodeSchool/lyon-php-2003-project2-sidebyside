@@ -11,7 +11,9 @@
                     <label for="inputTitle"></label>
                     <input type="text" class="form-control" id="inputTitle" name="title"
                            placeholder="Titre" value="{{ project.title }}">
-                    <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
+                    {% if errors.title is defined %}
+                        <small class="invalid-auth">{{ errors.title }}</small>
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="banner_image" class="form-control form-control-create sign-upload_label">
@@ -26,13 +28,17 @@
                 <div class="form-group">
                     <textarea class="form-control" id="inputDescribe" name="description"
                               placeholder="Description" rows="5">{{ project.description }}</textarea>
-                    <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
+                    {% if errors.description is defined %}
+                        <small class="invalid-auth">{{ errors.description }}</small>
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="inputZipCode"></label>
                     <input type="text" class="form-control" id="inputZipCode" name="zip_code"
                            placeholder="Code Postale" value="{{ project.zip_code }}">
-                    <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
+                    {% if errors.zip_code is defined %}
+                        <small class="invalid-auth">{{ errors.zip_code }}</small>
+                    {% endif %}
                 </div>
                 <section class="section section-select">
                     <div class="container-select">
@@ -58,7 +64,9 @@
                             </div>
                         </div>
                     </div>
-                    <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
+                    {% if errors.category is defined %}
+                        <small class="invalid-auth">{{ errors.category }}</small>
+                    {% endif %}
                 </section>
 
                 <section class="section section-select">
@@ -93,7 +101,9 @@
                 <div class="form-group">
                     <input type="date" class="form-control" id="inputAvailable" name="deadline"
                            value="{{ project.deadline }}">
-                    <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
+                    {% if errors.deadline is defined %}
+                        <small class="invalid-auth">{{ errors.deadline }}</small>
+                    {% endif %}
                 </div>
 
                 <button type="submit" class="btn btn-warning btn-yellow-round col-4" style="align-self: center">Poster</button>
