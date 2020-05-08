@@ -57,7 +57,7 @@
                 <div class="container-content-card">
                     <div class="card-body search-profil-description">
                         {% for skill in project.skills %}
-                            <p class="skill{{ skill.id }}"> {{ skill.name }} </p>
+                            <p class="skill{{ skill.id }}"> #{{ skill.name }} </p>
                         {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/skills.png">
@@ -71,10 +71,6 @@
                     </div>
                     <img class="project-description-img" src="/assets/images/group.png">
                 </div>
-                <button class="btn see-more-about-team" type="button" href="#">
-                    Voir plus
-                </button>
-
             </div>
 
             <div class=" col-11 container-similar-project">
