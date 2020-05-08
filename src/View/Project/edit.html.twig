@@ -7,25 +7,27 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-12 col-md-10 col-lg-8">
 
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="" enctype="multipart/form-data" class="container-form-project">
                     <div class="form-group">
                         <label for="inputTitle"></label>
                         <input type="text" class="form-control" id="inputTitle" name="title"
                                placeholder="Titre" value="{{ project.title }}">
                         <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="banner_image">Image de bannière</label>
-                            <input type="hidden" name="MAX_FILE_SIZE" value=" 1000000">
-                            <input type="file" class="custom-file-input" id="banner_image" name="banner_image">
-                        </div>
+                    <div class="form-group">
+                        <label for="banner_image" class="form-control form-control-create sign-upload_label">
+                            <span id="image_label" class="form-upload-span"></span>
+                            <div class="sign-upload_icon">
+                                <img src="/assets/images/icons/upload2.png" style="width: 25px">
+                            </div>
+                        </label>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                        <input type="file" id="banner_image" name="banner_image" style="display: none">
                     </div>
                     <small class="text-danger">{% if errors['upload'] is defined %}{{ errors.upload }}{% endif %}</small>
                     <div class="form-group">
-                        <label for="inputDescribe">Description :</label>
                         <textarea class="form-control" id="inputDescribe" name="description"
-                                  rows="5">{{ project.description }}</textarea>
+                                  rows="5" placeholder="Description">{{ project.description }}</textarea>
                         <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
                     </div>
                     <div class="form-group">
@@ -35,57 +37,92 @@
                         <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
                     </div>
                     <div class="form-group">
-                        <label for="inputPlan">Plan Du Projet : </label>
-                        <textarea class="form-control" id="inputPlan" name="plan" rows="5">{{ project.plan }}</textarea>
+                        <textarea class="form-control" id="inputPlan" name="plan" rows="5" placeholder="Plan Du Projet">{{ project.plan }}</textarea>
                         <small class="text-danger">{% if errors is defined %}{{ errors.plan }}{% endif %}</small>
                     </div>
-                    <div class="form-group">
-                        <label for="inputCategory"></label>
-                        <select class="form-control" id="inputCategory" name="category">
-                            <option value="{{ project.category.id }}" style="font-weight: bold"
-                                    selected>{{ project.category.name }}</option>
-                            {% for category in categories %}
-                                <option value="{{ category.id }}">{{ category.name }}</option>
-                            {% endfor %}
-                        </select>
-                        <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSkill">Compétences recherché</label>
-                        <select multiple class="form-control" id="inputSkill" name="skills[]">
-                            {% for skill in skills %}
-                                <option value="{{ skill.id }}"
-                                        {% for projectSkill in project.skills %}
-                                            {% if skill.id == projectSkill.id %}selected{% endif %}
+                    <section class="section section-select">
+                        <div class="container-select">
+                            <div class="content is-medium">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3>Choissisez une catégorie</h3>
+                                        <div class="toggle-icon-container">
+                                            <i class="fas fa-chevron-right" id="fa-project"></i>
+                                        </div>
+                                    </div>
+                                    <div class="box-body collapsed">
+                                        {% for category in categories %}
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" type="radio" name="category" id="radio{{ category.id }}" value="{{ category.id }}"
+                                                       {% if category.id == project.category.id %}checked{% endif %}>
+                                                <label class="custom-control-label" for="radio{{ category.id }}">
+                                                    {{ category.name }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
-                                >{{ skill.name }}
-                                </option>
-                            {% endfor %}
-                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
+                    </section>
+                    <section class="section section-select">
+                        <div class="container-select">
+                            <div class="content is-medium">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3>Compétences recherché</h3>
+                                        <div class="toggle-icon-container">
+                                            <i class="fas fa-chevron-right" id="fa-project"></i>
+                                        </div>
+                                    </div>
+                                    <div class="box-body collapsed">
+                                        {% for skill in skills %}
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" type="checkbox"
+                                                       value="{{ skill.id }}" id="{{ skill.id }}" name="skills[]"
+                                                        {% for projectSkill in project.skills %}
+                                                            {% if skill.id == projectSkill.id %}checked{% endif %}
+                                                        {% endfor %}
+                                                >
+                                                <label class="custom-control-label" for="{{ skill.id }}">
+                                                    {{ skill.name }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <small class="text-danger">{% if errors is defined %}{{ errors.skills }}{% endif %}</small>
-                    </div>
+                    </section>
                     <div class="form-group">
-                        <label for="inputTeam">A propos de l'équipe :</label>
                         <textarea class="form-control" id="inputTeam" name="team_description"
-                                  rows="5">{{ project.team_description }}</textarea>
+                                  rows="5" placeholder="A propos de l'équipe">{{ project.team_description }}</textarea>
                         <small class="text-danger">
                             {% if errors is defined %}{{ errors.team_description }}{% endif %}
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="inputAvailable">Disponibilité du Projet</label>
                         <input type="date" class="form-control" id="inputAvailable" name="deadline"
                                value="{{ project.deadline }}">
                         <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
                     </div>
+                    <div class="container-btn">
+                        <button type="submit" class="btn btn-warning btn-yellow-round col-4" style="align-self: center">Poster</button>
+                        <button type="button" class="btn btn-warning btn-form-back col-4"
+                                onclick="window.location.href = '/project/show/{{ project.id }}';">Retour</button>
+                    </div>
 
-                    <button type="submit" class="btn btn-warning">Poster</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <button type="button" class="btn btn-info"><a href="/Project/show/{{ id }}">Retour</a></button>
+{% endblock %}
+
+{% block javascript %}
+<script src = "/assets/js/projectAdd.js"></script> <script src = "/assets/js/getImageName_project.js"></script>
 {% endblock %}
 
 

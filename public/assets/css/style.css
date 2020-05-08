@@ -579,4 +579,18 @@ input[type="date"]::before {
 .container-form-project {
     display: flex;
     flex-direction: column;
+    margin-bottom: 100px;
+}
+.btn-form-back{
+    margin-top: 25px;
+    background-color: var(--secondary-color);
+    border-radius: 0px;
+    font-weight: 900;
+    max-width: 96px;
+    position: absolute;
+    right: 0;
+}
+.container-btn {
+    display: flex;
+    justify-content: center;
 }
