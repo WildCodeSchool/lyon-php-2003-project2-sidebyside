@@ -5,25 +5,77 @@
 /* Navbar StyleSheets */
 @import "navbar.css";
 
+/* GENERAL CSS */
+main {
+    margin-top: 62px;
+}
+
 h1 {
+    padding-top: 20px;
     font-weight: 900;
     text-align: center;
     margin-bottom: 50px;
 }
+
 .cgu{
     text-align: center;
     margin: 30px 10%;
 }
+
+.h3-title {
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.aProfilName {
+    color: var(--primary-color);
+}
+.aProfilName:hover {
+    color: var(--primary-color);
+}
+
+/* BUTTON SECTION */
 .btn{
+    align-self: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    margin: 0 15px;
+    margin-bottom: 10px ;
+    font-size: 14px;
+    line-height: 16px;
+    width: 100px;
+    font-weight: bold;
     background-color: var(--secondary-color);
+    color: var(--primary-color);
     font-weight: 900;
     font-family: Roboto, sans-serif;
 }
 .btn-yellow-round {
-    margin-top: 25px;
-    background-color: var(--secondary-color);
     border-radius: 25px;
+}
+.btn-black-round {
+    background-color: var(--primary-color);
+    color: var(--navbar-divider-color);
+    border-radius: 25px;
+}
+.btn-white-round {
+    background-color: var(--navbar-divider-color);
+    color: var(--primary-color);
+    border-radius: 25px;
+}
+.btn-yellow-square {
     font-weight: 900;
+}
+.btn-white-square {
+    background-color: var(--navbar-divider-color);
+    color: var(--primary-color);
+    font-weight: 900;
+    border: solid var(--primary-color) 1px;
+}
+.btn-white-square:hover {
+    background-color: var(--primary-color);
+    color: var(--navbar-divider-color);
+    font-weight: 900;
+    border: solid var(--primary-color) 1px;
 }
 .btn-black-square {
     background-color: var(--primary-color);
@@ -38,6 +90,12 @@ h1 {
 .btn-return-sign {
     margin: 15px;
 }
+.btn-modify-manage {
+    align-self: flex-end;
+    right: 25px;
+}
+/* END BUTTON SECTION */
+
 .information {
     margin: auto;
     margin-top: 10px;
@@ -46,6 +104,7 @@ h1 {
     color: grey;
 }
 
+/* FORM SECTION */
 .form-control::placeholder {
     color: grey !important;
 }
@@ -100,18 +159,81 @@ select:-webkit-autofill:focus {
 .form-group-submit {
     text-align: center;
 }
+/* END FORM SECTION */
 
-/*___________________PROJECT PAGE_____________________*/
+.container-profil-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background: black;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.project-title a {
+    color: var(--navbar-divider-color);
+    transition: font-size 1s;
+}
+.project-title a:hover {
+    color: var(--navbar-divider-color);
+    text-decoration: none;
+    font-size: 42px;
+    transition: font-size 1s;
+}
 
-/* MOBILE VIEW _______________*/
+/* MANAGE PAGE SECTION */
+.manage-page-content {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.manage-info {
+    text-align: center;
+    color: grey;
+}
+.manage-card {
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.card-request-top {
+    display: flex;
+    justify-content: space-between;
+}
+.card-request-top-info {
+    width: 50%;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+}
+.card-request-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-text-manage {
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.card-request-btn-container {
+    margin-top: 20px;
+}
+/* END MANAGE PAGE SECTION */
+/* END GENERAL CSS */
 
-
+/* MOBILE VIEW X-SMALL*/
 @media all and (max-width: 374px){
     .project-title {
         font-size: 20px;
         width: 170px;
     }
 }
+/* END MOBILE VIEW X-SMALL*/
+
+/* TABLET VIEW SMALL TO MEDIUM */
 @media all and (max-width: 768px){
     .desktop-carousel{
         display: none;
@@ -163,6 +285,7 @@ select:-webkit-autofill:focus {
         display: flex;
         justify-content: center;
         overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
 
     .project-owner-profil-image{
@@ -277,8 +400,9 @@ select:-webkit-autofill:focus {
     }
 
 }
+/* END TABLET VIEW SMALL TO MEDIUM*/
 
-/* DESKTOP VIEW _________________ */
+/* DESKTOP VIEW LARGE */
 @media all and (min-width: 769px){
     .mobile-carousel{
         display: none;
@@ -337,6 +461,7 @@ select:-webkit-autofill:focus {
         display: flex;
         justify-content: center;
         overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-owner-profil-image{
         max-height: 100%;
@@ -417,7 +542,11 @@ select:-webkit-autofill:focus {
         width: 120px;
         z-index: 0;
     }
+    .manage-card {
+        margin: 0 40px;
+    }
 }
+/* END DESKTOP VIEW LARGE */
 .btn-sign {
     color: var(--primary-color);
     background-color: var(--secondary-color);

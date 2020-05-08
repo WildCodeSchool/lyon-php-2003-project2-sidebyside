@@ -194,7 +194,7 @@ UNLOCK TABLES;
 -- Table structure for table `user_ask_collaboration_projets`
 --
 
-DROP TABLE IF EXISTS `user_ask_collaboration_projets`;
+DROP TABLE IF EXISTS user_ask_collaboration_projects;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `user_ask_collaboration_projets` (
@@ -215,9 +215,9 @@ CREATE TABLE `user_ask_collaboration_projets` (
 -- Dumping data for table `user_ask_collaboration_projets`
 --
 
-LOCK TABLES `user_ask_collaboration_projets` WRITE;
-/*!40000 ALTER TABLE `user_ask_collaboration_projets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_ask_collaboration_projets` ENABLE KEYS */;
+LOCK TABLES user_ask_collaboration_projects WRITE;
+/*!40000 ALTER TABLE user_ask_collaboration_projects DISABLE KEYS */;
+/*!40000 ALTER TABLE user_ask_collaboration_projects ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

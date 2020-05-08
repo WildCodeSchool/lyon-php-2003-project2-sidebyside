@@ -210,6 +210,34 @@ class ProjectController extends AbstractController
         return $errors;
     }
 
+    public function manage($id)
+    {
+        $projectManager = new ProjectManager();
+        $requests = $projectManager->selectRequestForCollaboration($id);
+        $project = $projectManager->selectOneById($id);
+        $userManager = new UserManager();
+        $projectOwner = $userManager->selectOneById($project['project_owner_id']);
+        $userManager = new UserManager();
+        $skillManager = new SkillManager();
+        $userInfo = [];
+
+        if (!empty($requests)) {
+            foreach ($requests as $key => $request) {
+                $userInfo[$key] = $userManager->selectOneById($request['user_id']);
+                $userInfo[$key]['skills'] = $skillManager->getAllForUser($request['user_id']);
+            }
+            return $this->twig->render(
+                'Manage/index.html.twig',
+                [
+                    'requests' => $requests, 'userInfo' => $userInfo,
+                    'project' => $project,
+                    'projectOwner' => $projectOwner
+                ]
+            );
+        }
+        return $this->twig->render('Manage/index.html.twig');
+    }
+
     public function all()
     {
         $projectManager = new ProjectManager();
