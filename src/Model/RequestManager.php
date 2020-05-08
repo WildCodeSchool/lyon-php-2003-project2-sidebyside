@@ -29,6 +29,19 @@ class RequestManager extends AbstractManager
 
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
+    
+    // REQUEST TO INSERT ASK COLLABORATION IN user_ask_collaboration_projects
+    public function askCollaboration(array $message, int $id) : void
+    {
+        $insert = $this->pdo->prepare("INSERT INTO user_ask_collaboration_projets 
+                                                    (user_id, project_id, message, created_at) 
+                                                    VALUES (:user_id, :project_id, :message, NOW())");
+        $insert->bindValue('user_id', $message['id'], \PDO::PARAM_INT);
+        $insert->bindValue('project_id', $id, \PDO::PARAM_INT);
+        $insert->bindValue('message', $message['message'], \PDO::PARAM_STR);
+
+        $insert->execute();
+    }
 
     public function validateRequest($userId, $projectId)
     {
