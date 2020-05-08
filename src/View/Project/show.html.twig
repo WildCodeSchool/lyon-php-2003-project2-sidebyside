@@ -5,7 +5,7 @@
         <h1 class="project-title">
             {{ currentProject.title }}
         </h1>
-        <img class="banner-project-image" src="/assets/images/project_img.jpg">
+        <img class="banner-project-image" src="{{ currentProject.banner_image }}">
     </div>
 
     <div class="container">
@@ -14,7 +14,8 @@
                 <div class="container-image-profil">
                     <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
                 </div>
-                <button class="btn participate-project-button" type="button" href="#">
+                <button class="btn participate-project-button" type="button"
+                        onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
                     Participer
                 </button>
             </div>
@@ -42,7 +43,9 @@
                 <h2 class="search-profil-title">Profils recherchés</h2>
                 <div class="container-content-card">
                     <div class="card-body search-profil-description">
-                        {{ currentProject.project_need_skills }}
+                        {% for skill in project.skills %}
+                            <p class="skill{{ skill.id }}"> {{ skill.name }} </p>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/skills.png">
                 </div>
