@@ -119,6 +119,7 @@ h1 {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    border: solid lightgrey 3px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
@@ -192,6 +193,7 @@ select:-webkit-autofill:focus {
     display: flex;
     justify-content: center;
     overflow: hidden;
+    border: solid lightgrey 3px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 .project-title a {
