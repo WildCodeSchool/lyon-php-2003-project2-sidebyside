@@ -63,10 +63,11 @@ class ProjectController extends AbstractController
             }
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $id = $_SESSION['id'];
-                    $projectManager->insert($project, $id);
+                    $connectedUser = $_SESSION['id'];
+                    $projectManager->insert($project, $connectedUser);
                     $lastId = $projectManager->selectLastProject();
                     $skillManager->insertSkills($project, $lastId['id']);
+
                     header('Location:/Home/index');
                 }
             }

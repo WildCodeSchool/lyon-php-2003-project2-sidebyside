@@ -35,23 +35,24 @@ class ProjectManager extends AbstractManager
 
     /**
      * @param array $project
-     * @param int $id
+     * @param int $sessionId
      * @return int
      */
-    public function insert(array $project, int $id): int
+    public function insert(array $project, int $sessionId): int
     {
         // prepared request
-        //TODO category and skills
+
         $statement = $this->pdo->prepare(
             "INSERT INTO $this->table
 (`title`, `description`, `deadline`, `zip_code`, `project_owner_id`, `category_id`, `banner_image`, `created_at`)
                         VALUES 
- (:title, :description, :deadline, :zip_code, $id, :category_id, :banner_image, NOW())"
+ (:title, :description, :deadline, :zip_code, :project_owner_id , :category_id, :banner_image, NOW())"
         );
         $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
         $statement->bindValue('deadline', $project['deadline']);
         $statement->bindValue('zip_code', $project['zip_code'], \PDO::PARAM_STR);
+        $statement->bindValue('project_owner_id', $sessionId, \PDO::PARAM_INT);
         $statement->bindValue('category_id', $project['category_id'], \PDO::PARAM_INT);
         $statement->bindValue('banner_image', $project['banner_image']);
 
