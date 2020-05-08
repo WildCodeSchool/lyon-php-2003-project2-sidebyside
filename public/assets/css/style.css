@@ -123,7 +123,7 @@ select:-webkit-autofill:focus {
         display: none;
     }
     .container-banner-project{
-        max-height: 35vh;
+        max-height: 40vh;
         display: flex;
         align-items: center;
         overflow: hidden;
@@ -303,7 +303,7 @@ select:-webkit-autofill:focus {
         margin-right: 25px;
     }
     .container-banner-project{
-        max-height: 30vh;
+        max-height: 40vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -426,12 +426,23 @@ select:-webkit-autofill:focus {
     padding: 5px 0;
     width: 250px;
 }
+.btn-sign:hover {
+    color: #212529;
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
 .btn-back {
     background: var(--primary-color);
     color: var(--background-color);
     padding: 4px 25px;
     border-radius: 0;
 }
+.btn-back:hover {
+    background-color: var(--navbar-divider-color);
+    color: var(--primary-color);
+    border: solid black 1px;
+}
+
 
 /*__________________ Header Sign __________________*/
 .header-sign {
@@ -507,7 +518,6 @@ select:-webkit-autofill:focus {
 ::placeholder {
     color: white !important;
 }
-
 .invalid-auth {
     display: flex;
     margin-top: .25rem;
@@ -519,4 +529,62 @@ select:-webkit-autofill:focus {
     padding: .75rem 1.25rem;
     border: 1px solid #f5c6cb;
     border-radius: .25rem;
+}
+.container-project-ask{
+    height: 50vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+}
+.project-profil {
+    align-self: flex-end;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+.title {
+    align-items: flex-end;
+    display: flex;
+    margin: 0;
+}
+.ask-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+
+.area-ask textarea {
+    min-height: 200px;
+    border: none;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+.area-ask {
+    width: 70%;
+    max-width: 500px;
+    min-height: 200px;
+    margin-bottom: 50px;
+}
+.container-skills {
+    width: 70%;
+    max-width: 500px;
+    border: none;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    background-color: #f2c525;
+}
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: #f2c525;
 }

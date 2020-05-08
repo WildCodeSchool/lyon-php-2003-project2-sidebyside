@@ -79,7 +79,7 @@ class ProjectManager extends AbstractManager
     public function selectProjectOwner($id)
     {
         $statement = $this->pdo->prepare('SELECT u.profil_picture, u.id FROM users as u
-                JOIN projects as p ON u.id = p.project_owner_id WHERE u.id=:id');
+                JOIN projects as p ON u.id = p.project_owner_id WHERE p.id=:id');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
@@ -125,5 +125,18 @@ class ProjectManager extends AbstractManager
             $update->bindValue('id', $id, \PDO::PARAM_INT);
             $update->execute();
         }
+    }
+
+    // REQUEST TO INSERT ASK COLLABORATION IN user_ask_collaboration_projects
+    public function askCollaboration(array $message, int $id) : void
+    {
+        $insert = $this->pdo->prepare("INSERT INTO user_ask_collaboration_projets 
+                                                    (user_id, project_id, message, created_at) 
+                                                    VALUES (:user_id, :project_id, :message, NOW())");
+        $insert->bindValue('user_id', $message['id'], \PDO::PARAM_INT);
+        $insert->bindValue('project_id', $id, \PDO::PARAM_INT);
+        $insert->bindValue('message', $message['message'], \PDO::PARAM_STR);
+
+        $insert->execute();
     }
 }
