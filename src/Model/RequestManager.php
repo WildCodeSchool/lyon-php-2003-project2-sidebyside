@@ -33,7 +33,7 @@ class RequestManager extends AbstractManager
     // REQUEST TO INSERT ASK COLLABORATION IN user_ask_collaboration_projects
     public function askCollaboration(array $message, int $id) : void
     {
-        $insert = $this->pdo->prepare("INSERT INTO user_ask_collaboration_projets 
+        $insert = $this->pdo->prepare("INSERT INTO user_ask_collaboration_projects 
                                                     (user_id, project_id, message, created_at) 
                                                     VALUES (:user_id, :project_id, :message, NOW())");
         $insert->bindValue('user_id', $message['id'], \PDO::PARAM_INT);

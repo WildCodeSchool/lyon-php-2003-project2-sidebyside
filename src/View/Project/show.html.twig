@@ -7,7 +7,6 @@
         </h1>
         <img class="banner-project-image" src="{{ currentProject.banner_image }}">
     </div>
-
     <div class="container">
         <div class="row">
             <div class="container-image-button">
@@ -15,16 +14,21 @@
                     <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
                 </div>
                 <div class="container-button">
-                {% if isConnected.id is defined %}
-                    <button class="btn participate-project-button" type="button"
-                            onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
-                        Modifier
-                    </button>
-                {% endif %}
-                <button class="btn participate-project-button" type="button"
-                        onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
-                    Participer
-                </button>
+                    {% if isConnected.id == projectOwner.id or isCollaborator %}
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
+                            Modifier
+                        </button>
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/project/manage/{{ currentProject.id }}';">
+                            Gérer le projet
+                        </button>
+                    {% elseif not isCollaborator %}
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
+                            Participer
+                        </button>
+                    {% endif %}
                 </div>
             </div>
             <div class="card col-11 project-description-card ">
@@ -52,7 +56,7 @@
                 <div class="container-content-card">
                     <div class="card-body search-profil-description">
                         {% for skill in project.skills %}
-                            <p class="skill{{ skill.id }}"> {{ skill.name }} </p>
+                            <p class="skill{{ skill.id }}"> #{{ skill.name }} </p>
                         {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/skills.png">
@@ -66,10 +70,6 @@
                     </div>
                     <img class="project-description-img" src="/assets/images/group.png">
                 </div>
-                <button class="btn see-more-about-team" type="button" href="#">
-                    Voir plus
-                </button>
-
             </div>
 
             <div class=" col-11 container-similar-project">

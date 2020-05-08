@@ -69,6 +69,8 @@ class AuthController extends AbstractController
                 if ($path == null) {
                     $errorArray['upload'] = 'Taille trop grande ou mauvais format';
                 }
+            } else {
+                $userPostArray['profil_picture'] = '/assets/images/detective840x500.jpg';
             }
 
             if (empty($errorArray)) {
@@ -76,6 +78,9 @@ class AuthController extends AbstractController
                 $userManager = new UserManager();
                 $userManager->create($userPostArray);
 
+                $auth = new AuthManager();
+                $user = $auth->signIn($userPostArray['email']);
+                $this->startSession($user);
                 header('Location: /Home/index');
             }
         }
@@ -89,6 +94,7 @@ class AuthController extends AbstractController
     public function logout()
     {
         unset($_SESSION['id']);
+        session_destroy();
         header('Location: / ');
     }
 
