@@ -39,9 +39,11 @@ class ProjectManager extends AbstractManager
      */
     public function selectByUserId(string $userId) : array
     {
-        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, p.id, p.project_owner_id 
-                    FROM projects p WHERE p.project_owner_id=:id
-                  ";
+        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, p.id, p.project_owner_id, phc.user_id
+                    FROM projects p 
+                    JOIN project_has_collaborators phc
+                    ON phc.project_id=p.id
+                    WHERE p.project_owner_id=:id OR phc.user_id=:id";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':id', $userId);
         $statement->execute();
