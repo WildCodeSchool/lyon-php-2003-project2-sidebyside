@@ -1,66 +1,108 @@
+{% block stylesheet %}
+{% endblock %}
+
 <div class="container h-100">
-        <h1 class="text-center">Créer Un Projet</h1>
-        <div class="row h-100 justify-content-center align-items-center">
-            <div class="col-12 col-md-10 col-lg-8">
+    <h1 class="text-center">Créer Un Projet</h1>
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-12 col-md-10 col-lg-8">
 
-    <form method="POST" action="" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="inputTitle"></label>
-            <input type="text" class="form-control" id="inputTitle" name="title"
-                   placeholder="Titre" value="{{project.title }}">
-            <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
-        </div>
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <label class="custom-file-label" for="banner_image">Image de bannière</label>
-                <input type="hidden" name="MAX_FILE_SIZE" value=" 1000000">
-                <input type="file" class="custom-file-input" id="banner_image" name="banner_image">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputDescribe">Description :</label>
-            <textarea class="form-control" id="inputDescribe" name="description"
-                      placeholder="Description" rows="5" >{{project.description }}</textarea>
-            <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
-        </div>
-        <div class="form-group">
-            <label for="inputZipCode"></label>
-            <input type="text" class="form-control" id="inputZipCode" name="zip_code"
-                   placeholder="Code Postale" value="{{project.zip_code }}">
-            <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
-        </div>
-        <div class="form-group">
-            <label for="inputCategory">Choissisez une catégorie</label>
-            <select class="form-control" id="inputCategory" name="category" >
-                {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.name }}</option>
-                {% endfor %}
-            </select>
-            <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
-        </div>
-        <div class="form-group">
-            <label for="inputSkill">Compétences recherché</label>
-            <select multiple class="form-control" id="inputSkill" name="skills[]">
-                {% for skill in skills %}
-                    <option value="{{ skill.id }}"
-                            {% for projectSkill in project.skills %}
-                                {% if skill.id == projectSkill.id %}selected{% endif %}
-                            {% endfor %}
-                    >{{ skill.name }}
-                    </option>
-                {% endfor %}
-            </select>
-            <small class="text-danger">{% if errors is defined %}{{ errors.skills }}{% endif %}</small>
-        </div>
-        <div class="form-group">
-            <label for="inputAvailable">Disponibilité du Projet</label>
-            <input type="date" class="form-control" id="inputAvailable" name="deadline" value="{{project.deadline }}">
-            <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
-        </div>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="inputTitle"></label>
+                    <input type="text" class="form-control" id="inputTitle" name="title"
+                           placeholder="Titre" value="{{ project.title }}">
+                    <small class="text-danger">{% if errors is defined %}{{ errors.title }}{% endif %}</small>
+                </div>
+                <div class="form-group">
+                    <label for="banner_image" class="form-control form-control-create sign-upload_label">
+                        Image de bannière
+                        <span id="image_label" class="form-upload-span"></span>
+                        <div class="sign-upload_icon">
+                            <img src="/assets/images/icons/upload2.png" style="width: 25px">
+                        </div>
+                    </label>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+                    <input type="file" id="banner_image" name="banner_image" style="display: none">
+                </div>
+                <div class="form-group">
+                    <label for="inputDescribe">Description :</label>
+                    <textarea class="form-control" id="inputDescribe" name="description"
+                              placeholder="Description" rows="5">{{ project.description }}</textarea>
+                    <small class="text-danger">{% if errors is defined %}{{ errors.description }}{% endif %}</small>
+                </div>
+                <div class="form-group">
+                    <label for="inputZipCode"></label>
+                    <input type="text" class="form-control" id="inputZipCode" name="zip_code"
+                           placeholder="Code Postale" value="{{ project.zip_code }}">
+                    <small class="text-danger">{% if errors is defined %}{{ errors.zip_code }}{% endif %}</small>
+                </div>
+                <section class="section section-select">
+                    <div class="container-select">
+                        <div class="content is-medium">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3>Choissisez une catégorie</h3>
+                                    <div class="toggle-icon-container">
+                                        <i class="fas fa-chevron-right" id="fa-project"></i>
+                                    </div>
+                                </div>
+                                <div class="box-body collapsed">
+                                    {% for category in categories %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                   value="{{ category.id }}" id="{{ category.id }}" name="category">
+                                            <label class="form-check-label" for="{{ category.id }}">
+                                                {{ category.name }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-danger">{% if errors is defined %}{{ errors.category }}{% endif %}</small>
+                </section>
 
-        <button type="submit" class="btn btn-warning">Créer</button>
-    </form>
+                <section class="section section-select">
+                    <div class="container-select">
+                        <div class="content is-medium">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3>Compétences recherché</h3>
+                                    <div class="toggle-icon-container">
+                                        <i class="fas fa-chevron-right" id="fa-project"></i>
+                                    </div>
+                                </div>
+                                <div class="box-body collapsed">
+                                    {% for skill in skills %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                   value="{{ skill.id }}" id="{{ skill.id }}" name="skills[]"
+                                                    {% for projectSkill in project.skills %}
+                                                        {% if skill.id == projectSkill.id %}checked{% endif %}
+                                                    {% endfor %}
+                                            >
+                                            <label class="form-check-label" for="{{ skill.id }}">
+                                                {{ skill.name }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="form-group">
+                    <label for="inputAvailable">Disponibilité du Projet</label>
+                    <input type="date" class="form-control" id="inputAvailable" name="deadline"
+                           value="{{ project.deadline }}">
+                    <small class="text-danger">{% if errors is defined %}{{ errors.deadline }}{% endif %}</small>
+                </div>
+
+                <button type="submit" class="btn btn-warning">Créer</button>
+            </form>
+        </div>
     </div>
-        </div>
-            </div>
+</div>
+
 
