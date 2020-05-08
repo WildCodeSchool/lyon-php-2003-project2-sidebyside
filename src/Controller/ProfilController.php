@@ -56,15 +56,21 @@ class ProfilController extends AbstractController
 
     public function updateUser($id)
     {
-        $errors = [];
-        if (!empty($_POST)) {
-            $errors = $this->setUser($id, $_POST);
-        }
         $userManager = new UserManager();
         $skillManager = new SkillManager();
         $skills = $skillManager->getAllSkills();
         $info = $userManager->getUserInfo($id);
         $skillsUser = $skillManager->getAllUserSkills();
+        $errors = [];
+
+        if (!empty($_POST)) {
+            $errors = $this->setUser($id, $_POST);
+            if (isset($_SESSION['id'])) {
+                $connectedUser = $userManager->selectOneById($_SESSION['id']);
+                $_SESSION['profil_picture'] = $connectedUser['profil_picture'];
+            }
+        }
+
         return $this->twig->render(
             'Profil/edit-user-profil.html.twig',
             ['info' => $info, 'allSkillsAvailable' => $skills, 'skillsUser' => $skillsUser, 'errors' => $errors]
@@ -111,6 +117,7 @@ class ProfilController extends AbstractController
                 if (!empty($profil['skills'])) {
                     $userManager->insertSkillUser($profil, $userId);
                 }
+                header("Location: /profil/user/$id");
             }
             return $errors;
         }

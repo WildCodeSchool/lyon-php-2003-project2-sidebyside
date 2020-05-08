@@ -33,11 +33,11 @@ class ProjectController extends AbstractController
 
         if (!empty($_POST)) {
             $title = trim($_POST['title']);
-            $bannerImage = $_FILES['banner_image'];
             $description = trim($_POST['description']);
             $deadline = trim($_POST['deadline']);
             $zipCode = trim($_POST['zip_code']);
             $categoryId = $_POST['category'];
+            $bannerImage = $_FILES['banner_image'];
             if (isset($_POST['skills'])) {
                 $skillsId = $_POST['skills'];
             }
@@ -61,6 +61,8 @@ class ProjectController extends AbstractController
                 } else {
                     $errors['upload'] = "Taille trop grande ou mauvais format";
                 }
+            } else {
+                $project['banner_image'] = '/assets/images/project_img.jpg';
             }
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

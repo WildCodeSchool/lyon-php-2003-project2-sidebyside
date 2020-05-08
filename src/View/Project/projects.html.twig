@@ -1,6 +1,9 @@
 {% extends 'layout.html.twig' %}
+
+{% block title %}Projets{% endblock %}
+
 {% block content %}
-    <h1>Tous les profils</h1>
+    <h1>Projets</h1>
     <div class="row">
 
         {% for project in projects %}
@@ -17,7 +20,7 @@
                     </div>
                 </a>
                 <p>
-                    <button class="btn" type="button" data-toggle="collapse"
+                    <button class="btn btn-yellow-round" type="button" data-toggle="collapse"
                             data-target="#collapseDescription{{ project.id }}" aria-expanded="false"
                             aria-controls="collapseDescription">
                         En savoir plus..

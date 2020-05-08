@@ -42,12 +42,15 @@ h1 {
     margin-bottom: 10px ;
     font-size: 14px;
     line-height: 16px;
-    width: 100px;
     font-weight: bold;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     font-weight: 900;
     font-family: Roboto, sans-serif;
+}
+.container-button {
+    display: flex;
+    flex-direction: row;
 }
 .btn-yellow-round {
     border-radius: 25px;
@@ -103,7 +106,24 @@ h1 {
     width: 80%;
     color: grey;
 }
-
+.container-image-profil{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background: black;
+    z-index: 3;
+    position: relative;
+    top: -50px;
+    left: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.project-owner-profil-image {
+    height: 110px;
+}
 /* FORM SECTION */
 .form-control::placeholder {
     color: grey !important;
@@ -273,32 +293,6 @@ select:-webkit-autofill:focus {
         justify-content: space-between;
         height: 65px;
     }
-    .container-image-profil{
-        width: 100px;
-        height: 100px;
-        border-radius: 50px;
-        background: black;
-        z-index: 3;
-        position: relative;
-        top: -50px;
-        left: 20px;
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    }
-
-    .project-owner-profil-image{
-        max-height: 100%;
-    }
-    .participate-project-button{
-        align-self: flex-end;
-        margin-right: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-        font-weight: bold;
-        font-size: 14px;
-        width: 100px;
-    }
     .project-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
@@ -448,31 +442,6 @@ select:-webkit-autofill:focus {
         display: flex;
         justify-content: space-between;
         height: 65px;
-    }
-    .container-image-profil{
-        width: 100px;
-        height: 100px;
-        border-radius: 50px;
-        background: black;
-        z-index: 3;
-        position: relative;
-        top: -50px;
-        left: 20px;
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    }
-    .project-owner-profil-image{
-        max-height: 100%;
-    }
-    .participate-project-button{
-        align-self: flex-end;
-        margin-right: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-        font-weight: bold;
-        font-size: 14px;
-        width: 100px;
     }
     .project-description-card{
         margin-top: 20px;
@@ -718,8 +687,4 @@ select:-webkit-autofill:focus {
     border-color: #f2c525;
 }
 
-.container-button {
-    display: flex;
-    flex-direction: row;
-}
 

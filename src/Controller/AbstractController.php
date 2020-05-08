@@ -9,6 +9,7 @@
 
 namespace App\Controller;
 
+use App\Model\UserManager;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;

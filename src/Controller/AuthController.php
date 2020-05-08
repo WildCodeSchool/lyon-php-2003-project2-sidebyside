@@ -89,6 +89,7 @@ class AuthController extends AbstractController
     public function logout()
     {
         unset($_SESSION['id']);
+        session_destroy();
         header('Location: / ');
     }
 
