@@ -53,7 +53,7 @@ class RequestManager extends AbstractManager
         $statement->bindValue(':projectId', $projectId, \PDO::PARAM_INT);
         $statement->execute();
 
-        $statement = $this->pdo->prepare("INSERT INTO project_has_collaborators (projet_id, user_id, join_at) 
+        $statement = $this->pdo->prepare("INSERT INTO project_has_collaborators (project_id, user_id, join_at) 
                                                         VALUES (:projectId, :userId, NOW())");
         $statement->bindValue(':userId', $userId, \PDO::PARAM_INT);
         $statement->bindValue(':projectId', $projectId, \PDO::PARAM_INT);
