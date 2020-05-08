@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\CategoryManager;
 use App\Model\ProjectManager;
+use App\Model\RequestManager;
 use App\Model\UserManager;
 use App\Model\SkillManager;
 
@@ -202,7 +203,8 @@ class ProjectController extends AbstractController
     public function manage($id)
     {
         $projectManager = new ProjectManager();
-        $requests = $projectManager->selectRequestForCollaboration($id);
+        $requestManager = new RequestManager();
+        $requests = $requestManager->selectRequestForCollaboration($id);
         $project = $projectManager->selectOneById($id);
         $userManager = new UserManager();
         $projectOwner = $userManager->selectOneById($project['project_owner_id']);
@@ -236,11 +238,11 @@ class ProjectController extends AbstractController
 
     public function setCollaborator(int $coId, int $projectId, bool $isValidate)
     {
-        $projectManager = new ProjectManager();
+        $requestManager = new RequestManager();
         if ($isValidate) {
-            $projectManager->validateRequest($coId, $projectId);
+            $requestManager->validateRequest($coId, $projectId);
         } else {
-            $projectManager->ignoreRequest($coId, $projectId);
+            $requestManager->ignoreRequest($coId, $projectId);
         }
 
         header('Location: /Project/manage/' . $projectId . '/');
