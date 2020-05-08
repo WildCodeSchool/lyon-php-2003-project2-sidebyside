@@ -5,9 +5,6 @@
 /* Navbar StyleSheets */
 @import "navbar.css";
 
-/* Navbar StyleSheets */
-@import "faq.css";
-
 h1 {
     font-weight: 900;
     text-align: center;
@@ -546,11 +543,13 @@ select:-webkit-autofill:focus {
     padding: 10px;
 }
 .box-body {
-    padding-top: 0;
     height: auto;
     display: flex;
     flex-wrap: wrap;
     padding-top: 20px;
+    overflow: hidden;
+    transition: height 1s;
+    text-align: center;
 }
 .section-select {
     margin-bottom: 20px;
@@ -594,3 +593,19 @@ input[type="date"]::before {
     display: flex;
     justify-content: center;
 }
+.box-header {
+    cursor: pointer;
+    display: flex;
+}
+.box {
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
+}
+.box-header .toggle-icon-container {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.box-body.collapsed {
+    height: 0;
+}
+
