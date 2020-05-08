@@ -274,6 +274,7 @@ class ProjectController extends AbstractController
         if ($acces) {
             $userId = $_SESSION['id'];
             $projectManager = new ProjectManager();
+            $requestManager = new RequestManager();
             $userManager = new UserManager();
             $skillManager = new SkillManager();
             $project = $projectManager->selectOneById($id);
@@ -285,7 +286,7 @@ class ProjectController extends AbstractController
             if (!empty($_POST)) {
                 $message['message'] = trim($_POST['ask-message']);
                 $message['id'] = $userId;
-                $projectManager->askCollaboration($message, $id);
+                $requestManager->askCollaboration($message, $id);
                 header("Location: /project/show/$id");
             }
 
