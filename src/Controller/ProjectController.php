@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\CategoryManager;
 use App\Model\ProjectManager;
+use App\Model\RequestManager;
 use App\Model\UserManager;
 use App\Model\SkillManager;
 
@@ -213,7 +214,8 @@ class ProjectController extends AbstractController
     public function manage($id)
     {
         $projectManager = new ProjectManager();
-        $requests = $projectManager->selectRequestForCollaboration($id);
+        $requestManager = new RequestManager();
+        $requests = $requestManager->selectRequestForCollaboration($id);
         $project = $projectManager->selectOneById($id);
         $userManager = new UserManager();
         $projectOwner = $userManager->selectOneById($project['project_owner_id']);
@@ -235,7 +237,26 @@ class ProjectController extends AbstractController
                 ]
             );
         }
-        return $this->twig->render('Manage/index.html.twig');
+        return $this->twig->render(
+            'Manage/index.html.twig',
+            [
+                'userInfo' => $userInfo,
+                'project' => $project,
+                'projectOwner' => $projectOwner
+            ]
+        );
+    }
+
+    public function setCollaborator(int $coId, int $projectId, bool $isValidate)
+    {
+        $requestManager = new RequestManager();
+        if ($isValidate) {
+            $requestManager->validateRequest($coId, $projectId);
+        } else {
+            $requestManager->ignoreRequest($coId, $projectId);
+        }
+
+        header('Location: /Project/manage/' . $projectId . '/');
     }
 
     public function all()
@@ -253,6 +274,7 @@ class ProjectController extends AbstractController
         if ($acces) {
             $userId = $_SESSION['id'];
             $projectManager = new ProjectManager();
+            $requestManager = new RequestManager();
             $userManager = new UserManager();
             $skillManager = new SkillManager();
             $project = $projectManager->selectOneById($id);
@@ -264,7 +286,7 @@ class ProjectController extends AbstractController
             if (!empty($_POST)) {
                 $message['message'] = trim($_POST['ask-message']);
                 $message['id'] = $userId;
-                $projectManager->askCollaboration($message, $id);
+                $requestManager->askCollaboration($message, $id);
                 header("Location: /project/show/$id");
             }
 
