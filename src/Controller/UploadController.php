@@ -63,7 +63,7 @@ class UploadController extends AbstractController
                         $ext = pathinfo($array['name'], PATHINFO_EXTENSION);
                         $filename = uniqid() . '.' . $ext;
                         move_uploaded_file($array['tmp_name'], $folder . $filename);
-                        $path[$key] ="/assets/uploads/projects/$filename";
+                        $path[$key] = "/assets/uploads/projects/$filename";
                     }
                 }
                 return $path;
