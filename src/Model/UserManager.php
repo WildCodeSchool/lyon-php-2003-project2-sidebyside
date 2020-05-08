@@ -140,8 +140,8 @@ class UserManager extends AbstractManager
     public function deleteSkillUser(int $id)
     {
         $delete = $this->pdo->prepare(
-            "DELETE FROM user_has_skills uhs 
-                        WHERE uhs.user_id=:id"
+            "DELETE FROM user_has_skills
+                        WHERE user_id=:id"
         );
         $delete->bindValue('id', $id, \PDO::PARAM_INT);
         $delete->execute();

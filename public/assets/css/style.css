@@ -717,3 +717,9 @@ select:-webkit-autofill:focus {
 .custom-control-input:checked~.custom-control-label::before {
     border-color: #f2c525;
 }
+
+.container-button {
+    display: flex;
+    flex-direction: row;
+}
+
