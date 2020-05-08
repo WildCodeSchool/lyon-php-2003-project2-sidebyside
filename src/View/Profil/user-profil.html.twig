@@ -27,15 +27,17 @@
         </div>
     </div>
     <div class="profil-page-content">
-        <div class="card col-10 project-description-card ">
+        <div class="card col-10 project-description-card profil">
             <h2 class="project-description-title">Biographie</h2>
             <div class="container-content-card">
                 <div class="card-body project-description">
-                    {{ current_user.description }}
+                    {% for line in current_user.description  %}
+                        <div>{{ line }}</div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="card col-10 project-description-card ">
+        <div class="card col-10 project-description-card">
             <h2 class="project-description-title">Compétences</h2>
             <div class="container-content-card">
                 <div class="card-body project-description profil-skills">
@@ -47,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="card col-10 project-description-card ">
+        <div class="card col-10 project-description-card profil">
             <h2 class="project-description-title">Projets en cours</h2>
             <div class="user-project-carousel">
                 {% if projects|length == 0 %}
