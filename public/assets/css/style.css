@@ -209,6 +209,23 @@ select:-webkit-autofill:focus {
     font-size: 42px;
     transition: font-size 1s;
 }
+/* ALL PROFILS PAGE SECTION */
+.profils-page {
+    display: flex;
+    justify-content: center;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+.profil-card {
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.profil-card .container-profil-picture{
+    margin: 10px auto auto auto;
+}
 /* PROFIL PAGE SECTION */
 .user-project-carousel {
     display: flex;
@@ -237,12 +254,10 @@ select:-webkit-autofill:focus {
     border-radius: 15px;
 }
 .carousel-inner {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 35px;
+    padding: 10px;
+    margin: 0px auto 30px auto;
 }
 .user-project-card {
-    margin: 10px;
     box-shadow: grey 0px 0px 4Px;
     border-radius: 5px;
 }
@@ -254,9 +269,24 @@ select:-webkit-autofill:focus {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-radius: 5px;
 }
-.user-project-card-image-container img {
+.user-project-card-image-container .banner-project-image {
     width: 100%;
+}
+.banner-project-crown {
+    height: 70px;
+    width: 50px;
+    padding-bottom: 20px;
+    position: absolute;
+    opacity: 60%;
+}
+.banner-project-sbs {
+    height: 60px;
+    width: 45px;
+    padding-bottom: 20px;
+    position: absolute;
+    opacity: 60%;
 }
 .user-project-card-image-container h4 {
     width: 100%;
@@ -363,6 +393,7 @@ select:-webkit-autofill:focus {
         max-height: 40vh;
         display: flex;
         align-items: center;
+        justify-content: center;
         overflow: hidden;
         background: linear-gradient(to top,black, rgba(0,0,0,0));
     }
@@ -425,6 +456,12 @@ select:-webkit-autofill:focus {
         line-height: 21px;
         text-decoration-line: underline;
         margin-top: 10px;
+    }
+    .profils-page {
+        display: flex;
+        justify-content: center;
+        margin-right: 0px;
+        margin-left: 0px;
     }
     .about-team-project-description-card{
         margin-bottom: 20px;

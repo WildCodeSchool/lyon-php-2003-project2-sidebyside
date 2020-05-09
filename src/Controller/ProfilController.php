@@ -48,9 +48,13 @@ class ProfilController extends AbstractController
         $userManager = new UserManager();
         $currentUser = $userManager->selectOneById($id);
         $projectManager = new ProjectManager();
-        $userProjects = $projectManager->selectByUserId($id);
+        $userProjects = [
+            $projectManager->selectByOwnerId($id),
+            $projectManager->selectIWorkOnByUserId($id)
+        ];
         $skills = $userManager->getSkills();
         $currentUser['description'] = explode("\n", $currentUser['description']);
+
         return $this->twig->render(
             'Profil/user-profil.html.twig',
             ['current_user' => $currentUser, 'skills' => $skills, 'projects' => $userProjects]
