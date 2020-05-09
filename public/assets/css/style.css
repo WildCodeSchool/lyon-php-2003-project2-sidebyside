@@ -394,7 +394,30 @@ select:-webkit-autofill:focus {
         background-color: black;
         border: 1px solid black;
     }
-
+    .image-profil-all-project {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: black;
+        z-index: 3;
+        position: relative;
+        top: -25px;
+        left: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-owner-profil-image-all-project {
+        height: 50px;
+    }
+    .body-all-project {
+        justify-content: center;
+        display: flex;
+        color: #000;
+        margin-top: -50px;
+    }
 }
 /* END TABLET VIEW SMALL TO MEDIUM*/
 
@@ -516,8 +539,33 @@ select:-webkit-autofill:focus {
     .manage-card {
         margin: 0 40px;
     }
+    .image-profil-all-project {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        background: black;
+        z-index: 3;
+        position: relative;
+        top: -50px;
+        left: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-owner-profil-image-all-project {
+        height: 100px;
+    }
+    .body-all-project {
+        justify-content: center;
+        display: flex;
+        color: #000;
+        margin-top: -100px;
+    }
 }
 /* END DESKTOP VIEW LARGE */
+
 .btn-sign {
     color: var(--primary-color);
     background-color: var(--secondary-color);
@@ -816,4 +864,36 @@ div.carousel-similar h5 {
     border-radius: 3px;
     padding: 5px 20px;
     display: inline-block;
+}
+.container-all-profils {
+    display: flex;
+    justify-content: center;
+}
+.card-all-profil {
+    padding: 10px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.card-image-all-profil {
+    max-height: 400px;
+    min-height: 400px;
+    object-fit: cover;
+}
+a:hover {
+    text-decoration: none;
+}
+.all-project-title {
+    font-weight: bold;
+}
+.form-all-project {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.form-all-project input {
+    width: 300px;
+}
+.row{
+    margin-left: 0;
+    margin-right: 0;
 }

@@ -277,9 +277,16 @@ class ProjectController extends AbstractController
     public function all()
     {
         $projectManager = new ProjectManager();
+        $userManager = new UserManager();
+        $users = $userManager->selectAll();
         $projects = $projectManager->selectAll();
+        if (!empty($_POST['search-project'])) {
+            $keyword = trim($_POST['search-project']);
+            $searchResult = $projectManager->selectByWord($keyword);
+            return $this->twig->render('Project/projects.html.twig', ['projects' => $searchResult, 'users' => $users]);
+        }
 
-        return $this->twig->render('Project/projects.html.twig', ['projects' => $projects]);
+        return $this->twig->render('Project/projects.html.twig', ['projects' => $projects, 'users' => $users]);
     }
 
     // FUNCTION FOR COLLABORATION
