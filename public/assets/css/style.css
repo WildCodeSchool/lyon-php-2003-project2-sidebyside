@@ -797,10 +797,23 @@ div.search-profil-description p {
     display: flex;
 }
 #carouselExampleIndicators {
-    width: 92%;
-    margin-bottom: 100px;
-    margin-top: 30px;
+    width: 95%;
+    margin: auto;
 }
 .d-block {
     object-fit: cover;
+}
+.d-none-mobile {
+    display: block!important;
+}
+div.carousel-similar h5 {
+    font-weight: bold;
+    font-size: 30px;
+    background: #fff;
+    color: #000;
+    justify-content: center;
+    margin: auto;
+    border-radius: 3px;
+    padding: 5px 20px;
+    display: inline-block;
 }
