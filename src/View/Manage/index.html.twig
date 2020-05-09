@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Side-by-Side{% endblock %}
+
+{% block content %}
+    <div class="container-banner-project">
+        <h1 class="project-title">
+            <a href="/Project/show/{{ project.id }}">{{ project.title }}</a>
+        </h1>
+        <a class="project-title btn-modify-manage" href="/Project/edit/{{ project.id }}">
+            <button class="btn btn-yellow-square" type="button">Modifier</button>
+        </a>
+        <img class="banner-project-image" src="{{ project.banner_image }}">
+    </div>
+    <div class="container-image-button">
+        <a href="/Profil/user/{{ projectOwner.id }}">
+            <div class="container-image-profil">
+                <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+            </div>
+        </a>
+    </div>
+    <h1>Gestion du Projet</h1>
+    <h3 class="h3-title">Demandes de collaboration</h3>
+    {% if requests is defined %}
+        {% include 'Manage/_requestCarousel.html.twig' %}
+    {% else %}
+        <div class="manage-info">
+            <p>Aucune demande de collaboration</p>
+        </div>
+    {% endif %}
+    {% include 'Manage/_formMessage.html.twig' %}
+    {% for message in messages %}
+        {% if message.author == isConnected.id %}
+            <div class="message-container-myMsg col-11 col-md-7 col-lg-5">
+                <div class="message-card">
+                    <div><strong>{{ message.first_name }} {{ message.last_name }}</strong></div>
+                    <p><small>{{ message.created_at }}</small></p>
+                </div>
+                <p>{{ message.message }}</p>
+            </div>
+        {% else %}
+            <div class="message-container-users col-11 col-md-7 col-lg-5">
+                <div class="message-card">
+                    <div><strong>{{ message.first_name }} {{ message.last_name }}</strong></div>
+                    <p><small>{{ message.created_at }}</small></p>
+                </div>
+                <p>{{ message.message }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

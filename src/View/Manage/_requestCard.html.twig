@@ -14,7 +14,7 @@
                 <p>dép. ({{ userInfo[i].zip_code|slice(0, 2) }})</p>
                 <p>
                     {% for skill in userInfo[i]['skills'] %}
-                        <span>#{{ skill.name }} </span>
+                        <span class="skill-name">#{{ skill.name }} </span>
                     {% endfor %}
                 </p>
             </div>
