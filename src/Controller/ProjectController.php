@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\CategoryManager;
 use App\Model\CollabManager;
+use App\Model\MessageManager;
 use App\Model\ProjectManager;
 use App\Model\RequestManager;
 use App\Model\UserManager;
@@ -259,7 +260,27 @@ class ProjectController extends AbstractController
         $projectOwner = $userManager->selectOneById($project['project_owner_id']);
         $userManager = new UserManager();
         $skillManager = new SkillManager();
+        $messageMagager = new MessageManager();
+        $messages = $messageMagager->selectByProject($id);
         $userInfo = [];
+        $errorsArray = [];
+
+        if (!empty($_POST)) {
+            $postedMessage = [
+                'author' => $_POST['author'],
+                'to_project' => $_POST['to_project'],
+                'message' => trim($_POST['message'])
+            ];
+
+            if (empty($postedMessage['message'])) {
+                $errorsArray['empty'] = 'Champ requis';
+            }
+
+            if (empty($errorsArray)) {
+                $messageMagager->createToProject($postedMessage);
+                header("Location: /Project/manage/$id");
+            }
+        }
 
         if (!empty($requests)) {
             foreach ($requests as $key => $request) {
@@ -271,16 +292,20 @@ class ProjectController extends AbstractController
                 [
                     'requests' => $requests, 'userInfo' => $userInfo,
                     'project' => $project,
-                    'projectOwner' => $projectOwner
+                    'projectOwner' => $projectOwner,
+                    'messages' => $messages,
+                    'errors' => $errorsArray
                 ]
             );
         }
+
         return $this->twig->render(
             'Manage/index.html.twig',
             [
                 'userInfo' => $userInfo,
                 'project' => $project,
-                'projectOwner' => $projectOwner
+                'projectOwner' => $projectOwner,
+                'messages' => $messages
             ]
         );
     }

@@ -1,0 +1,18 @@
+<h3 class="text-center">Laisser un message</h3>
+<div class="row h-100 justify-content-center align-items-center">
+    <div class="col-11 col-md-7 col-lg-5">
+        <form method="POST" action="" class="container-form">
+            <div class="form-group">
+                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Votre message"></textarea>
+                {% if errors.plan is defined %}
+                    <small class="invalid-auth">{{ errors.plan }}</small>
+                {% endif %}
+                <input type="hidden" id="author" name="author" value="{{ isConnected.id }}">
+                <input type="hidden" id="to_project" name="to_project" value="{{ project.id }}">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-yellow-square" type="submit">Poster</button>
+            </div>
+        </form>
+    </div>
+</div>
