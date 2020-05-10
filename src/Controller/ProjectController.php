@@ -68,11 +68,11 @@ class ProjectController extends AbstractController
             if (empty($errors)) {
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $connectedUser = $_SESSION['id'];
-                    $projectManager->insert($project, $connectedUser);
+                    $insertId = $projectManager->insert($project, $connectedUser);
                     $lastId = $projectManager->selectLastProject();
                     $skillManager->insertSkills($project, $lastId['id']);
 
-                    header('Location:/Home/index');
+                    header("Location:/Project/show/$insertId");
                 }
             }
         }
@@ -300,9 +300,16 @@ class ProjectController extends AbstractController
     public function all()
     {
         $projectManager = new ProjectManager();
+        $userManager = new UserManager();
+        $users = $userManager->selectAll();
         $projects = $projectManager->selectAll();
+        if (!empty($_POST['search-project'])) {
+            $keyword = trim($_POST['search-project']);
+            $searchResult = $projectManager->selectByWord($keyword);
+            return $this->twig->render('Project/projects.html.twig', ['projects' => $searchResult, 'users' => $users]);
+        }
 
-        return $this->twig->render('Project/projects.html.twig', ['projects' => $projects]);
+        return $this->twig->render('Project/projects.html.twig', ['projects' => $projects, 'users' => $users]);
     }
 
     // FUNCTION FOR COLLABORATION

@@ -122,7 +122,6 @@ h2 {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    border: solid lightgrey 3px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
@@ -491,7 +490,7 @@ select:-webkit-autofill:focus {
     }
     .project-plan-card{
         margin-bottom: 20px;
-        margin-left: 4vw;
+        /*margin-left: 4vw;*/
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-plan-title{
@@ -544,7 +543,7 @@ select:-webkit-autofill:focus {
     }
     .container-similar-project{
         margin-bottom: 20px;
-        margin-left: 4vw;
+        /*margin-left: 4vw;*/
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
         padding: 0;
     }
@@ -577,6 +576,30 @@ select:-webkit-autofill:focus {
         outline: black;
         background-color: black;
         border: 1px solid black;
+    }
+    .image-profil-all-project {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: black;
+        z-index: 3;
+        position: relative;
+        top: -25px;
+        left: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-owner-profil-image-all-project {
+        height: 50px;
+    }
+    .body-all-project {
+        justify-content: center;
+        display: flex;
+        color: #000;
+        margin-top: -50px;
     }
     .user-project-card {
         box-shadow: grey 0px 0px 4Px;
@@ -657,11 +680,13 @@ select:-webkit-autofill:focus {
     .project-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
+        margin-left: 0;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-plan-card{
         margin-top: 20px;
         margin-bottom: 20px;
+        margin-left: 0;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-description-img{
@@ -671,11 +696,13 @@ select:-webkit-autofill:focus {
     .search-profil-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
+        margin-left: 0;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .about-team-project-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
+        margin-left: 0;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .see-more-about-team{
@@ -692,7 +719,7 @@ select:-webkit-autofill:focus {
         margin-bottom: 50px;
     }
     .container-similar-project{
-        margin-left: 4vw;
+        margin-left: 0;
         margin-bottom: 50px;
         padding: 0;
     }
@@ -721,8 +748,33 @@ select:-webkit-autofill:focus {
     .manage-card {
         margin: 0 40px;
     }
+    .image-profil-all-project {
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        background: black;
+        z-index: 3;
+        position: relative;
+        top: -50px;
+        left: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .project-owner-profil-image-all-project {
+        height: 100px;
+    }
+    .body-all-project {
+        justify-content: center;
+        display: flex;
+        color: #000;
+        margin-top: -100px;
+    }
 }
 /* END DESKTOP VIEW LARGE */
+
 .btn-sign {
     color: var(--primary-color);
     background-color: var(--secondary-color);
@@ -979,5 +1031,78 @@ input[type="date"]::before {
 .custom-control-input:checked~.custom-control-label::before {
     border-color: #f2c525;
 }
-
-
+div.search-profil-description p {
+    width: 50%;
+}
+.search-profil-description {
+    display: flex;
+    flex-wrap: wrap;
+}
+.card-project {
+    padding: 20px;
+}
+.container-detail-project {
+    justify-content: center;
+    display: flex;
+}
+.carrousel-item-all{
+    height: 500px;
+}
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+    display: flex;
+}
+#carouselExampleIndicators {
+    width: 95%;
+    margin: auto;
+}
+.d-block {
+    object-fit: cover;
+}
+.d-none-mobile {
+    display: block!important;
+}
+div.carousel-similar h5 {
+    font-weight: bold;
+    font-size: 30px;
+    background: #fff;
+    color: #000;
+    justify-content: center;
+    margin: auto;
+    border-radius: 3px;
+    padding: 5px 20px;
+    display: inline-block;
+}
+.container-all-profils {
+    display: flex;
+    justify-content: center;
+}
+.card-all-profil {
+    padding: 10px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.card-image-all-profil {
+    max-height: 400px;
+    min-height: 400px;
+    object-fit: cover;
+}
+a:hover {
+    text-decoration: none;
+}
+.all-project-title {
+    font-weight: bold;
+}
+.form-all-project {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.form-all-project input {
+    width: 300px;
+}
+.row{
+    margin-left: 0;
+    margin-right: 0;
+}
