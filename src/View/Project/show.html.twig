@@ -10,9 +10,11 @@
     <div class="container">
         <div class="row container-detail-project">
             <div class="container-image-button">
-                <div class="container-image-profil">
-                    <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
-                </div>
+                <a href="/Profil/user/{{ current_user.id }}">
+                    <div class="container-image-profil">
+                        <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+                    </div>
+                </a>
                 <div class="container-button">
                     {% if isConnected.id == projectOwner.id or isCollaborator %}
                         <button class="btn btn-yellow-square" type="button"
@@ -34,6 +36,42 @@
                 </div>
             </div>
             <div class="card col-11 project-description-card card-project">
+            {% if isConnected.id == projectOwner['id'] %}
+                <div class="requests-popup">
+                    {% if userInfo|length == 1 %}
+                        <img src="/assets/images/icons/miscellaneous.png">
+                        <p class="requests-popup-p">
+                            <a href="/Project/manage/{{ userInfo[1]['project_id'] }}" class="aProfilName">
+                                <strong>
+                                    {{ userInfo[0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
+                                    veut collaborer
+                                </strong>
+                            </a>
+                        </p>
+                    {% elseif userInfo|length == 2 %}
+                        <img src="/assets/images/icons/miscellaneous.png">
+                        <p class="requests-popup-p">
+                            <a href="/Project/manage/{{ userInfo[1]['project_id'] }}" class="aProfilName">
+                                <strong>{{ userInfo[0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
+                                    et {{ userInfo[1][0]['first_name'] }} {{ userInfo[1][0]['last_name'] }}
+                                    veulent collaborer
+                                </strong>
+                            </a>
+                        </p>
+                    {% elseif userInfo|length > 2 %}
+                        <img src="/assets/images/icons/miscellaneous.png">
+                        <p class="requests-popup-p">
+                            <a href="/Project/manage/{{ userInfo[1]['project_id'] }}" class="aProfilName">
+                                <strong>{{ userInfo [0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
+                                    et {{ userInfo|length - 1 }}
+                                    veulent collaborer
+                                </strong>
+                            </a>
+                        </p>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div class="card col-11 project-description-card ">
                 <h2 class="project-description-title">Description</h2>
                 <div class="container-content-card">
                     <div class="card-body project-description">

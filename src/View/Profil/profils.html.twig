@@ -5,18 +5,17 @@
 {% block content %}
     <h1>Profils</h1>
     {% include 'Profil/_search.html.twig' %}
-    <div class="row">
+    <div class="row profils-page">
         {% for user in users %}
-            <div class="card profil-card col-6">
-                <a href="/Profil/user/{{ user.id }}">
-                    <div class="profil-img-container">
-                        <img src="/assets/images/detective840x500.jpg"
-                             class="card-img-top profil-img"
-                             alt="Photo de profile">
+            <div class="card profil-card">
+                <a href="/Profil/user/{{ user.id }}" class="aProfilName">
+                    <div class="container-profil-picture">
+                        <img class="project-owner-profil-image profil-image"
+                             src="{{ user.profil_picture }}" alt="Photo de profile">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ user.first_name ~ ' ' ~ user.last_name }}</h5>
-                        <p class="card-zip-code">{{ user.zip_code }}</p>
+                        <h5 class="card-title"><strong>{{ user.first_name ~ ' ' ~ user.last_name }}</strong></h5>
+                        <p class="card-zip-code">dép. ({{ user.zip_code|slice(0, 2) }})</p>
                         <p class="card-text">
                             {% for skill in skills %}
                                 {% if skill.user_id == user.id %}

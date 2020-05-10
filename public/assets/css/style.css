@@ -16,7 +16,10 @@ h1 {
     text-align: center;
     margin-bottom: 50px;
 }
-
+h2 {
+    font-weight: 900;
+    padding: 10px;
+}
 .cgu{
     text-align: center;
     margin: 30px 10%;
@@ -205,7 +208,152 @@ select:-webkit-autofill:focus {
     font-size: 42px;
     transition: font-size 1s;
 }
+/* ALL PROFILS PAGE SECTION */
+.profils-page {
+    display: flex;
+    justify-content: center;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+.profil-card {
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.profil-card .container-profil-picture{
+    margin: 10px auto auto auto;
+}
+/* PROFIL PAGE SECTION */
+.user-project-carousel {
+    display: flex;
+    justify-content: center;
+}
+.user-name {
+    margin-right: auto;
+    margin-left: 30px;
+}
+.profil-page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profil .container-content-card {
+    width: 70%;
+}
+.profil-skills {
+    display: flex;
+    flex-wrap: wrap;
+}
+.skill-name {
+    margin: 0 5px;
+    padding: 0 10px;
+    box-shadow: grey 0px 0px 4Px;
+    border-radius: 15px;
+}
+.carousel-inner {
+    padding: 10px;
+    margin: 0px auto 30px auto;
+}
+.user-project-card {
+    box-shadow: grey 0px 0px 4Px;
+    border-radius: 5px;
+}
+.user-project-card-image-container {
+    height: 150px;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.user-project-card-image-container .banner-project-image {
+    width: 100%;
+}
+.banner-project-crown {
+    height: 70px;
+    width: 50px;
+    padding-bottom: 20px;
+    position: absolute;
+    opacity: 60%;
+}
+.banner-project-sbs {
+    height: 60px;
+    width: 45px;
+    padding-bottom: 20px;
+    position: absolute;
+    opacity: 60%;
+}
+.user-project-card-image-container h4 {
+    width: 100%;
+}
+.user-project-card-content {
+    padding: 15px;
+}
+.user-project-card h4 {
+    width: 100%;
+    padding: 15px;
+    transform: translateY(-50px);
+    z-index: 3;
+    text-align: center;
+}
+.carousel-indicators li {
+    background-color: var(--primary-color);
+}
 
+/* PROJECT PAGE SECTION */
+@keyframes requestPopupAnim {
+    0% {
+        transform: translateY(70px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+.project-page-content {
+    justify-content: center;
+}
+.requests-popup {
+    box-shadow: grey 0px 0px 4Px;
+    padding: 20px;
+    padding-bottom: 60px;
+    width: 300px;
+    display: flex;
+    margin: 0 auto -77px auto;
+    border-radius: 5px;
+    animation: requestPopupAnim 2s;
+    font-variant: all-small-caps;
+}
+.requests-popup-profil {
+    box-shadow: grey 0px 0px 4Px;
+    padding: 20px;
+    padding-bottom: 60px;
+    width: 300px;
+    display: flex;
+    margin: 0 auto -77px auto;
+    border-radius: 5px;
+    animation: requestPopupAnim 2s;
+    font-variant: all-small-caps;
+}
+.requests-popup img {
+    position: absolute;
+    width: 45px;
+    margin: 22px 0px 0px 0px;
+}
+
+.requests-popup-profil img {
+    position: absolute;
+    width: 45px;
+    margin: 22px 0px 0px 0px;
+}
+.requests-popup-p {
+    width: 100%;
+    height: 48px;
+    text-align: right;
+}
 /* MANAGE PAGE SECTION */
 .manage-page-content {
     display: flex;
@@ -252,11 +400,42 @@ select:-webkit-autofill:focus {
         font-size: 20px;
         width: 170px;
     }
+    .requests-popup-profil {
+        width: 230px;
+    }
+    .requests-popup-p {
+        width: 100%;
+        height: 48px;
+        text-align: center;
+    }
+    .requests-popup img, .requests-popup-profil img {
+        display: none;
+    }
 }
 /* END MOBILE VIEW X-SMALL*/
 
 /* TABLET VIEW SMALL TO MEDIUM */
 @media all and (max-width: 768px){
+    .profil .container-content-card {
+        width: 100%;
+    }
+    .container-image-profil{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100px;
+        height: 100px;
+        border-radius: 50px;
+        background: black;
+        z-index: 3;
+        left: 50px;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        border: solid lightgrey 3px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
     .desktop-carousel{
         display: none;
     }
@@ -270,6 +449,7 @@ select:-webkit-autofill:focus {
         max-height: 40vh;
         display: flex;
         align-items: center;
+        justify-content: center;
         overflow: hidden;
         background: linear-gradient(to top,black, rgba(0,0,0,0));
     }
@@ -298,7 +478,6 @@ select:-webkit-autofill:focus {
     .project-description-card{
         margin-top: 20px;
         margin-bottom: 20px;
-        /*margin-left: 4vw;*/
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .project-description-title{
@@ -324,7 +503,6 @@ select:-webkit-autofill:focus {
     }
     .search-profil-description-card{
         margin-bottom: 20px;
-        /*margin-left: 4vw;*/
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .search-profil-title{
@@ -335,9 +513,14 @@ select:-webkit-autofill:focus {
         text-decoration-line: underline;
         margin-top: 10px;
     }
+    .profils-page {
+        display: flex;
+        justify-content: center;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
     .about-team-project-description-card{
         margin-bottom: 20px;
-        /*margin-left: 4vw;*/
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     }
     .about-team-project-title{
@@ -418,6 +601,31 @@ select:-webkit-autofill:focus {
         color: #000;
         margin-top: -50px;
     }
+    .user-project-card {
+        box-shadow: grey 0px 0px 4Px;
+        border-radius: 5px;
+    }
+    .user-project-card-image-container {
+        height: 90px;
+        z-index: 3;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .user-project-card-content {
+        display: none;
+    }
+    .user-project-card h4 {
+        width: 100%;
+        padding: 15px;
+        right: 0;
+        transform: translateY(0px);
+        font-size: 15px;
+        z-index: 3;
+        text-align: center;
+    }
 }
 /* END TABLET VIEW SMALL TO MEDIUM*/
 
@@ -459,6 +667,7 @@ select:-webkit-autofill:focus {
         z-index: -1;
     }
     .project-title{
+        margin-top: 70px;
         position: absolute;
         color: white;
     }

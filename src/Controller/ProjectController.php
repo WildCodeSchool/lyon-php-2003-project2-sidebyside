@@ -107,11 +107,34 @@ class ProjectController extends AbstractController
         $collabManager = new CollabManager();
         $collaborators = $collabManager->selectOneByProjectId($id);
         $isCollaborator = false;
+        $userInfo = [];
+        $userManager = new UserManager();
+        $projectOwner = $userManager->selectOneById($projectOwner['id']);
+        $requestManager = new RequestManager();
+        $requests = $requestManager->selectRequestForCollaboration($id);
 
         foreach ($collaborators as $collaborator) {
             if ($collaborator['user_id'] == $_SESSION['id']) {
                 $isCollaborator = true;
             }
+        }
+
+        if (!empty($requests)) {
+            foreach ($requests as $key => $request) {
+                $userInfo[$key] = [
+                    $userManager->selectOneById($request['user_id']),
+                    $request
+                ];
+            }
+
+            return $this->twig->render(
+                'Project/show.html.twig',
+                [
+                    'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+                    'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
+                    'isCollaborator' => $isCollaborator, 'userInfo' => $userInfo
+                ]
+            );
         }
 
         return $this->twig->render(

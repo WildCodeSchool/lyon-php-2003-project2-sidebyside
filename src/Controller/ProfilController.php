@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\ProjectManager;
+use App\Model\RequestManager;
 use App\Model\SkillManager;
 use App\Model\UserManager;
 
@@ -46,11 +48,49 @@ class ProfilController extends AbstractController
     {
         $userManager = new UserManager();
         $currentUser = $userManager->selectOneById($id);
+        $projectManager = new ProjectManager();
+        $userProjects = [
+            $projectManager->selectByOwnerId($id),
+            $projectManager->selectIWorkOnByUserId($id)
+        ];
         $skills = $userManager->getSkills();
+        $userManager = new UserManager();
+        $requestManager = new RequestManager();
+        $userInfo = [];
+        $currentUser['description'] = explode("\n", $currentUser['description']);
+
+        if (isset($userProjects[0])) {
+            foreach ($userProjects[0] as $key => $myProject) {
+                if (!empty($myProject['id'])) {
+                    $requests[$key] = $requestManager->selectRequestForCollaboration($myProject['id']);
+                }
+            }
+        }
+
+        if (!empty($requests)) {
+            $index = 0;
+            foreach ($requests as $key => $request) {
+                if (!empty($request[0]['user_id'])) {
+                    $userInfo[$index] = [
+                        $userManager->selectOneById($request[0]['user_id']),
+                        $request[0]
+                    ];
+                    $index++;
+                }
+            }
+
+            return $this->twig->render(
+                'Profil/user-profil.html.twig',
+                [
+                    'current_user' => $currentUser, 'skills' => $skills,
+                    'projects' => $userProjects, 'userInfo' => $userInfo
+                ]
+            );
+        }
 
         return $this->twig->render(
             'Profil/user-profil.html.twig',
-            ['current_user' => $currentUser, 'skills' => $skills]
+            ['current_user' => $currentUser, 'skills' => $skills, 'projects' => $userProjects]
         );
     }
 
