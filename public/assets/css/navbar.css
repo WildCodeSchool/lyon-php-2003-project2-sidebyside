@@ -62,7 +62,7 @@ a.navbar-create-project {
     border-radius: 5px;
 }
 .navbar-profil{
-    background: #fff;
+    background: #000;
     z-index: 3;
     position: relative;
     display: flex;
@@ -72,6 +72,7 @@ a.navbar-create-project {
     height: 50px;
     width: 50px;
     border: none;
+    padding: 0;
 }
 .navbar-profil-img {
     /*margin-top: -5px;*/
