@@ -57,6 +57,7 @@ class UserManager extends AbstractManager
                             last_name, 
                             email, 
                             profil_picture,
+                            banner_image,
                             password, 
                             zip_code,
                             created_at
@@ -65,6 +66,7 @@ class UserManager extends AbstractManager
                             :last_name, 
                             :email, 
                             :profil_picture,
+                            :banner_image,
                             :password, 
                             :zip_code,
                             NOW()
@@ -76,6 +78,7 @@ class UserManager extends AbstractManager
         $createQuery->bindValue(':profil_picture', $user['profil_picture']);
         $createQuery->bindValue(':password', $user['password']);
         $createQuery->bindValue(':zip_code', $user['zip_code']);
+        $createQuery->bindValue('banner_image', '/assets/images/placeholder.png');
         $createQuery->execute();
     }
 
