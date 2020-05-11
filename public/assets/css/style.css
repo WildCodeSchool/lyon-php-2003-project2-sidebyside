@@ -411,6 +411,7 @@ select:-webkit-autofill:focus {
     .requests-popup img, .requests-popup-profil img {
         display: none;
     }
+
 }
 /* END MOBILE VIEW X-SMALL*/
 
@@ -427,7 +428,7 @@ select:-webkit-autofill:focus {
         border-radius: 50px;
         background: black;
         z-index: 3;
-        left: 50px;
+        left: 5px;
         position: relative;
         display: flex;
         align-items: flex-start;
@@ -435,6 +436,10 @@ select:-webkit-autofill:focus {
         border: solid lightgrey 3px;
         overflow: hidden;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+    .fas.fa-edit,
+    .fas.fa-cog {
+        display: none;
     }
     .desktop-carousel{
         display: none;
@@ -1082,6 +1087,7 @@ div.carousel-similar h5 {
     padding: 10px;
     margin: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    display: table;
 }
 .card-image-all-profil {
     max-height: 400px;
@@ -1105,4 +1111,9 @@ a:hover {
 .row{
     margin-left: 0;
     margin-right: 0;
+}
+.col-11 {
+    -ms-flex: 0 0 91.666667%;
+    flex: none;
+    max-width: none;
 }

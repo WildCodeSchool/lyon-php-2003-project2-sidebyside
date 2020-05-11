@@ -71,7 +71,7 @@
                     {% endif %}
                 </div>
             {% endif %}
-            <div class="card col-11 project-description-card ">
+            <div class="card col-11 project-description-card card-project">
                 <h2 class="project-description-title">Description</h2>
                 <div class="container-content-card">
                     <div class="card-body project-description">
@@ -96,7 +96,7 @@
                 <div class="container-content-card">
                     <div class="card-body search-profil-description">
                         {% for skill in project.skills %}
-                            <p class="skill{{ skill.id }}"> #{{ skill.name }} </p>
+                            <p class="skill{{ skill.id }}">#{{ skill.name }}</p>
                         {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/skills.png">
