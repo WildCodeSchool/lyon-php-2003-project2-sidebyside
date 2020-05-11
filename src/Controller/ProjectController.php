@@ -108,6 +108,7 @@ class ProjectController extends AbstractController
         $collabManager = new CollabManager();
         $collaborators = $collabManager->selectOneByProjectId($id);
         $isCollaborator = false;
+        $isRequest = false;
         $userInfo = [];
         $userManager = new UserManager();
         $projectOwner = $userManager->selectOneById($projectOwner['id']);
@@ -117,6 +118,12 @@ class ProjectController extends AbstractController
         foreach ($collaborators as $collaborator) {
             if ($collaborator['user_id'] == $_SESSION['id']) {
                 $isCollaborator = true;
+            }
+        }
+
+        foreach ($requests as $request) {
+            if ($request['user_id'] == $_SESSION['id']) {
+                $isRequest = true;
             }
         }
 
@@ -133,7 +140,8 @@ class ProjectController extends AbstractController
                 [
                     'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
                     'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
-                    'isCollaborator' => $isCollaborator, 'userInfo' => $userInfo
+                    'isCollaborator' => $isCollaborator, 'userInfo' => $userInfo,
+                    'isRequest' => $isRequest
                 ]
             );
         }
@@ -143,7 +151,7 @@ class ProjectController extends AbstractController
             [
                 'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
                 'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
-                'isCollaborator' => $isCollaborator
+                'isCollaborator' => $isCollaborator, 'isRequest' => $isRequest
             ]
         );
     }
@@ -310,13 +318,20 @@ class ProjectController extends AbstractController
         );
     }
 
-    public function setCollaborator(int $coId, int $projectId, bool $isValidate)
+    public function setCollaborator(int $collaboratorId, int $projectId, string $projectTitle, bool $isValidate)
     {
         $requestManager = new RequestManager();
+        $messageManager = new MessageManager();
         if ($isValidate) {
-            $requestManager->validateRequest($coId, $projectId);
+            $requestManager->validateRequest($collaboratorId, $projectId);
+            $message = [
+                'author' => 1,
+                'to_user' => $collaboratorId,
+                'message' => 'Vous avez été accepté sur le projet #' . urldecode($projectTitle)
+            ];
+            $messageManager->createToUser($message);
         } else {
-            $requestManager->ignoreRequest($coId, $projectId);
+            $requestManager->ignoreRequest($collaboratorId, $projectId);
         }
 
         header('Location: /Project/manage/' . $projectId . '/');
@@ -345,17 +360,33 @@ class ProjectController extends AbstractController
             $projectOwner = $projectManager->selectProjectOwner($projectOwner);
             $currentUserInfo = $userManager->getUserInfo($userId);
             $skills = $skillManager->selectAll();
+            $errorsArray = [];
 
             if (!empty($_POST)) {
-                $message['message'] = trim($_POST['ask-message']);
-                $message['id'] = $userId;
-                $requestManager->askCollaboration($message, $id);
-                header("Location: /project/show/$id");
+                if (empty($_POST['ask-message'])) {
+                    $errorsArray['empty'] = "Champ requis";
+                } else {
+                    $message['message'] = trim($_POST['ask-message']);
+                    $message['id'] = $userId;
+                    $requestManager->askCollaboration($message, $id);
+                    $messageManager = new MessageManager();
+                    $message = [
+                        'author' => 1,
+                        'to_user' => $project['project_owner_id'],
+                        'message' => $currentUserInfo[0]['first_name'] . ' ' .
+                            $currentUserInfo[0]['last_name'] .
+                            " souhaite collaborer sur le projet #" .
+                            $project['title']
+                    ];
+                    $messageManager->createToUser($message);
+
+                    header("Location: /project/show/$id");
+                }
             }
 
             return $this->twig->render('Project/ask-collaboration.html.twig', ['project' => $project,
                 'projectOwner' => $projectOwner, 'currentUserInfo' => $currentUserInfo,
-                'skills' => $skills]);
+                'skills' => $skills, 'errors' => $errorsArray]);
         }
     }
 }

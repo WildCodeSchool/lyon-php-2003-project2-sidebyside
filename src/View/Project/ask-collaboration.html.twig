@@ -23,6 +23,9 @@
              <div class="form-group area-ask">
                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                            placeholder="Votre message" name="ask-message"></textarea>
+                 {% if errors.empty is defined %}
+                     <small class="invalid-auth">{{ errors.empty }}</small>
+                 {% endif %}
              </div>
              <button type="submit" class="btn btn-sign">Envoyer</button>
              <small id="" class="forget">Votre mail ainsi que votre nom complet seront communiqués au créateur du

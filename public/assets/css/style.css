@@ -90,6 +90,12 @@ h2 {
     color: var(--navbar-divider-color);
     font-weight: 900;
 }
+.btn-inactive-square {
+    background-color: lightgrey;
+    color: var(--primary-color);
+    font-weight: 900;
+    opacity: 80%;
+}
 .btn-black-square:hover {
     background-color: var(--navbar-divider-color);
     color: var(--primary-color);

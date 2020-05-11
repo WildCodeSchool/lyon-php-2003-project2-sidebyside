@@ -22,12 +22,12 @@
         <div class="card-request-content">
             <p class="card-text card-text-manage">{{ requests[i].message }}</p>
             <div class="card-request-btn-container">
-                <a href="/project/setCollaborator/{{ userInfo[i].id }}/{{ project.id }}/1">
+                <a href="/project/setCollaborator/{{ userInfo[i].id }}/{{ project.id }}/{{ project.title }}/1">
                     <button class="btn btn-yellow-round" type="button">
                         Accepter
                     </button>
                 </a>
-                <a href="/project/setCollaborator/{{ userInfo[i].id }}/{{ project.id }}/0">
+                <a href="/project/setCollaborator/{{ userInfo[i].id }}/{{ project.id }}/{{ project.title }}/0">
                     <button class="btn btn-white-round" type="button">
                         Ignorer
                     </button>
