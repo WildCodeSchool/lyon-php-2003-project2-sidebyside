@@ -327,7 +327,7 @@ class ProjectController extends AbstractController
             $message = [
                 'author' => 1,
                 'to_user' => $collaboratorId,
-                'message' => 'Vous avez été accepté sur le projet #' . urldecode($projectTitle)
+                'message' => 'Vous avez été accepté(e) sur le projet #' . urldecode($projectTitle)
             ];
             $messageManager->createToUser($message);
         } else {
