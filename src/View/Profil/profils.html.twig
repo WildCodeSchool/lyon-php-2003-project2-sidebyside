@@ -19,7 +19,7 @@
                         <p class="card-text">
                             {% for skill in skills %}
                                 {% if skill.user_id == user.id %}
-                                    #{{ skill.name }}
+                                    <span class="skill-name">#{{ skill.name }}</span>
                                 {% endif %}
                             {% endfor %}
                         </p>

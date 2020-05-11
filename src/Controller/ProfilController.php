@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\MessageManager;
 use App\Model\ProjectManager;
 use App\Model\RequestManager;
 use App\Model\SkillManager;
@@ -173,5 +174,37 @@ class ProfilController extends AbstractController
             }
         }
         return $errors;
+    }
+
+    public function messages($id)
+    {
+        $messageManager = new MessageManager();
+        $messages = $messageManager->selectByUser($id);
+        $errorsArray = [];
+
+        if (!empty($_POST)) {
+            $postedMessage = [
+                'author' => $_POST['author'],
+                'to_user' => $_POST['to_user'],
+                'message' => trim($_POST['message'])
+            ];
+
+            if (empty($postedMessage['message'])) {
+                $errorsArray['empty'] = 'Champ requis';
+            }
+
+            if (empty($errorsArray)) {
+                $messageManager->createToUser($postedMessage);
+                header("Location: /Profil/messages/$id");
+            }
+        }
+
+        return $this->twig->render(
+            'Profil/messages.html.twig',
+            [
+                'messages' => $messages,
+                'userId' => $id
+            ]
+        );
     }
 }

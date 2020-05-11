@@ -43,7 +43,7 @@
             </div>
         {% endif %}
         {% if projects[0]|length > 1 %}
-            {% for i in 1 .. projects[0]|length %}
+            {% for i in 1 .. projects[0]|length -1 %}
                 <div class="carousel-item">
                     <a href="/Project/show/{{ projects[0][i].id }}" class="user-project-card aProfilName">
                         <div class="user-project-card-image-container">
