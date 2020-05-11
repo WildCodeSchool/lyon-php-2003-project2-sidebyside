@@ -17,11 +17,12 @@
                 </a>
                 <div class="container-button">
                     {% if isConnected.id == projectOwner.id or isCollaborator %}
-                        <button class="btn btn-yellow-square" type="button"
-                                onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
-                            <i class="fas fa-edit"></i>
-                            Modifier
-                        </button>
+                        {% if not isCollaborator %}
+                            <button class="btn btn-yellow-square" type="button"
+                                    onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
+                                Modifier
+                            </button>
+                        {% endif %}
                         <button class="btn btn-yellow-square" type="button"
                                 onclick="window.location.href = '/project/manage/{{ currentProject.id }}';">
                             <i class="fas fa-cog"></i>
