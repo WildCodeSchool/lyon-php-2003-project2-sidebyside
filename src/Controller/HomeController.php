@@ -58,7 +58,10 @@ class HomeController extends AbstractController
 
             return $this->twig->render(
                 'Home/index.html.twig',
-                ['users' => $users, 'skills' => $skills, 'isSearched' => $isSearched, 'projects' => $projects]
+                [
+                    'users' => $users, 'skills' => $skills, 'isSearched' => $isSearched,
+                    'projects' => $projects, 'keyword' => $keyword
+                ]
             );
         }
     }

@@ -5,20 +5,77 @@
 {% block content %}
 
     <main>
-        <h1>Side by Side</h1>
-        {% if isConnected.id is defined %}
-        <a href="/Project/new/"><button type="button" class="btn btn-warning btn-yellow-square">Lancez Votre Projet !</button></a>
+        <div class="container-banner-project">
+            <h1 class="project-title app-title">
+                Side by Side
+            </h1>
+            {% if isConnected.id is defined %}
+                <a href="/Project/new/">
+                    <button type="button" class="btn btn-warning btn-yellow-square btn-home-create">Lancez Votre Projet
+                        !
+                    </button>
+                </a>
+            {% endif %}
+            <img class="banner-project-image" src="/assets/images/startup-594090_1280.jpg">
+        </div>
+        {% if keyword is defined %}
+            <div class="filter-home-search">
+                <a href="#search-profils" class="aProfilName search-info">#profils</a>
+                <a href="#search-projects" class="aProfilName search-info">#projets</a>
+            </div>
+            <h4 class="search-info">Recherche: {{ keyword }}</h4>
         {% endif %}
-        <div>
-            <hr>
-            <h2>Projets</h2>
-            {% include 'Home/_projectCard.html.twig' %}
-            <hr>
+        <h2 id="search-projects">Projets <a href="/project/all"><small style="color: #495057">(Tout voir)</small></a>
+        </h2>
+        {% if not isSearched %}
+            <div class="main-container">
+                <div id="carouselExampleIndicators" class="carousel slide home-project-slide" data-ride="carousel"
+                     data-interval="50000">
+                    <ol class="carousel-indicators">
+                        {% for i in range(0 , (projects|length - 1)) %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}"
+                                    {% if i == 0 %}
+                                        class="active"
+                                    {% endif %}
+                            ></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% set a = 0 %}
+                        {% for project in projects %}
+                            {% set a = a + 1 %}
+                            <div class="carousel-item carrousel-item-all {% if a == 1 %}active{% endif %}">
+                                <img src="{{ project.banner_image }}" class="d-block w-100"
+                                     alt="{{ project.title }}">
+                                <div class="carousel-caption d-none-mobile d-md-block project-title-home">
+                                    <a href="/Project/show/{{ project.id }}">
+                                        <h5>{{ project.title }}</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="message-container col-11">
+                {% include 'Home/_projectCard.html.twig' %}
+            </div>
+        {% endif %}
+        <h2 id="search-profils">Profils <a href="/profil/all"><small style="color: #495057">(Tout voir)</small></a></h2>
+        <div class="message-container profil-container-home col-11">
             {% if isSearched and users[0] is defined %}
-                <h2>Profils</h2>
-                {%  include 'Home/_profilCards.html.twig' %}
+                {% include 'Home/_profilCards.html.twig' %}
             {% elseif not isSearched %}
-                {%  include 'Home/_profilsCarousel.html.twig' %}
+                {% include 'Home/_profilsCarousel.html.twig' %}
             {% endif %}
         </div>
     </main>
