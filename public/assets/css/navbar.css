@@ -71,6 +71,7 @@ a.navbar-create-project {
     border-radius: 25px;
     height: 50px;
     width: 50px;
+    border: none;
 }
 .navbar-profil-img {
     margin-top: -5px;

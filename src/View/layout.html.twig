@@ -1,175 +1,161 @@
 <!doctype html>
 <html lang="fr">
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{% block title %}{% endblock %}</title>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="/assets/css/style.css">
-        {% block stylesheet %}{% endblock %}
-        <link rel="icon" href="/assets/images/favicon.png">
-        <!-- Icon Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    </head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    {% block stylesheet %}{% endblock %}
+    <link rel="icon" href="/assets/images/favicon.png">
+    <!-- Icon Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+</head>
 
-    <body>
-    {% block header %}
-        <header>
-            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-navbar">
-                <!-- Logo Navbar -->
-                <a class="navbar-brand navbar-mobile" href="/">
-                    <img src="/assets/images/sbs_white.png" width="50px" alt="">
-                </a>
-                <!--  -->
+<body>
+{% block header %}
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-navbar">
+            <!-- Logo Navbar -->
+            <a class="navbar-brand navbar-mobile" href="/">
+                <img src="/assets/images/sbs_white.png" width="50px" alt="">
+            </a>
+            <!--  -->
 
-                <div class="general-navabar-link">
-                    <div class="container-right">
-                        {%  include '_search.html.twig' %}
+            <div class="general-navabar-link">
+                <div class="container-right">
+                    {% include '_search.html.twig' %}
 
-                        {% if isConnected.id is defined %}
-                            <!-- Button Create Project hidden if user is not connected -->
-                            <!-- (current display:none, delete this attribute for see the button) -->
-                            <a href="/project/new" class="navbar-create-project" style="">
-                                <i class="fas fa-plus"></i>
-                            </a>
-                            <!--  -->
-                        {% endif %}
+                    {% if isConnected.id is defined %}
+                        <!-- Button Create Project hidden if user is not connected -->
+                        <!-- (current display:none, delete this attribute for see the button) -->
+                        <a href="/project/new" class="navbar-create-project" style="">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        <!--  -->
+                    {% endif %}
 
-                        {% if isConnected.id is defined %}
-                            <!-- Button profil for desktop, view if user connected -->
-                            <div class="dropdown">
-                                <button class="navbar-profil" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <div>
-                                        <img class="navbar-profil-img" src="{{ isConnected.profil_picture }}">
-                                    </div>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="/profil/messages/{{ isConnected.id }}">Messages</a>
-                                    <a class="dropdown-item" href="/profil/user/{{ isConnected.id }}">Profil</a>
-                                    <a class="dropdown-item" href="/project/new">Créer un projet</a>
-                                    <a class="dropdown-item" href="/profil/updateuser/{{ isConnected.id }}">Modifier mon profil</a>
-                                    <a class="dropdown-item" href="/auth/logout">Déconnexion</a>
+                    {% if isConnected.id is defined %}
+                        <!-- Button profil for desktop, view if user connected -->
+                        <div class="dropdown">
+                            <button class="navbar-profil" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div>
+                                    <img class="navbar-profil-img" src="{{ isConnected.profil_picture }}">
                                 </div>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/profil/messages/{{ isConnected.id }}">Messages</a>
+                                <a class="dropdown-item" href="/profil/user/{{ isConnected.id }}">Profil</a>
+                                <a class="dropdown-item" href="/project/new">Créer un projet</a>
+                                <a class="dropdown-item" href="/profil/updateuser/{{ isConnected.id }}">Modifier mon profil</a>
+                                <a class="dropdown-item" href="/auth/logout">Déconnexion</a>
                             </div>
-                            <!--  -->
-                        {% endif %}
+                        </div>
+                        <!--  -->
+                    {% endif %}
 
-                        {% if isConnected == false %}
-                            <div class="navbar-button navbar-mobile" style="">
-                                <ul class="navbar-nav">
-                                    <li class="nav-button nav-login">
-                                        <a class="nav-link" id="nav-link-white" href="/Auth/signin">Connexion</a>
-                                    </li>
-                                    <li class="nav-button nav-signup">
-                                        <a class="nav-link" id="nav-link-black" href="/Auth/signup">Inscription</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        {% endif %}
-
-                    </div>
-                    <button class="navbar-toggler navbar-mobile" type="button" data-toggle="collapse"
-                            data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <i class="fas fa-bars burger-icon"></i>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <div class="head-collapse"></div>
-                        <ul class="navbar-nav burger">
-                            <li class="nav-item not-in-desktop">
-                                <a class="nav-link" href="/">Accueil</a>
-                            </li>
-                            <li class="nav-item not-in-desktop">
-                                <a class="nav-link" href="/project/new">Créer un projet</a>
-                                <i class="fas fa-chevron-right"></i>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="project" href="/project/all"></a>
-                                <i class="fas fa-chevron-right"></i>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="profil" href="/profil/all"></a>
-                                <i class="fas fa-chevron-right"></i>
-                            </li>
-                            <div class="footer-menu">
-                                <div class="divider"></div>
-                                <li class="nav-item not-in-desktop">
-                                    <a class="nav-link" href="/project/new">Créer un projet</a>
-                                    <i class="fas fa-chevron-right"></i>
+                    {% if isConnected == false %}
+                        <div class="navbar-button navbar-mobile" style="">
+                            <ul class="navbar-nav">
+                                <li class="nav-button nav-login">
+                                    <a class="nav-link" id="nav-link-white" href="/Auth/signin">Connexion</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="project" href="/project/all"></a>
-                                    <i class="fas fa-chevron-right"></i>
+                                <li class="nav-button nav-signup">
+                                    <a class="nav-link" id="nav-link-black" href="/Auth/signup">Inscription</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profil" href="/profil/all"></a>
-                                    <i class="fas fa-chevron-right"></i>
-                                </li>
-                                <div class="footer-menu">
-                                    <div class="divider"></div>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Contact</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">About Us</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Conditions générales d'utilisation</a>
-                                    </li>
-                                </div>
-                                <div class="social">
-                                    <li class="nav-item">
-                                        <img height="40" src="/assets/images/social/twitter.png">
-                                    </li>
-                                    <li class="nav-item">
-                                        <img height="40" src="/assets/images/social/instagram.png">
-                                    </li>
-                                    <li class="nav-item">
-                                        <img height="40" src="/assets/images/social/facebook.png">
-                                    </li>
-                                </div>
                             </ul>
                         </div>
-                    </div>
-                </nav>
-            </header>
-        {% endblock %}
+                    {% endif %}
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+                </div>
+                <button class="navbar-toggler navbar-mobile" type="button" data-toggle="collapse"
+                        data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars burger-icon"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="head-collapse"></div>
+                    <ul class="navbar-nav burger">
+                        <li class="nav-item not-in-desktop">
+                            <a class="nav-link" href="/">Accueil</a>
+                        </li>
+                        <li class="nav-item not-in-desktop">
+                            <a class="nav-link" href="/project/new">Créer un projet</a>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="project" href="/project/all"></a>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profil" href="/profil/all"></a>
+                            <i class="fas fa-chevron-right"></i>
+                        </li>
+                        <div class="footer-menu">
+                            <div class="divider"></div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">CGU</a>
+                            </li>
+                        </div>
+                        <div class="social">
+                            <li class="nav-item">
+                                <img height="40" src="/assets/images/social/twitter.png">
+                            </li>
+                            <li class="nav-item">
+                                <img height="40" src="/assets/images/social/instagram.png">
+                            </li>
+                            <li class="nav-item">
+                                <img height="40" src="/assets/images/social/facebook.png">
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+{% endblock %}
 
-        <!-- Script Bootstrap jQuery -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-                crossorigin="anonymous"></script>
+<main>
+    {% block content %}{% endblock %}
+</main>
 
-        <!-- Script js et Bootstrap-->
-        {% block javascript %}{% endblock %}
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-                crossorigin="anonymous"></script>
-        <script>
-            $( document ).ready(function() {
-                    if ($(window).width() < 992) {
-                        $('#project').text("Tous les projets");
-                        $('#profil').text("Tous les profils");
-                    } else {
-                        $('#project').text("Projets");
-                        $('#profil').text("Profils");
-                    }
-            });
-        </script>
-    </body>
+<!-- Script Bootstrap jQuery -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+
+<!-- Script js et Bootstrap-->
+{% block javascript %}{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        if ($(window).width() < 992) {
+            $('#project').text("Tous les projets");
+            $('#profil').text("Tous les profils");
+        } else {
+            $('#project').text("Projets");
+            $('#profil').text("Profils");
+        }
+    });
+</script>
+</body>
 </html>
 
 
