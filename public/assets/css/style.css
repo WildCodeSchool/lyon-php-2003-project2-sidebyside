@@ -44,6 +44,7 @@ h2 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     margin: 0 15px;
     margin-bottom: 10px ;
+    min-width: 120px;
     font-size: 14px;
     line-height: 16px;
     font-weight: bold;
@@ -88,6 +89,12 @@ h2 {
     background-color: var(--primary-color);
     color: var(--navbar-divider-color);
     font-weight: 900;
+}
+.btn-inactive-square {
+    background-color: lightgrey;
+    color: var(--primary-color);
+    font-weight: 900;
+    opacity: 80%;
 }
 .btn-black-square:hover {
     background-color: var(--navbar-divider-color);
@@ -354,6 +361,27 @@ select:-webkit-autofill:focus {
     height: 48px;
     text-align: right;
 }
+
+/* MESSAGES SECTION */
+.message-container {
+    max-width: 950px;
+}
+.message-container-myMsg {
+    margin-left: 50px;
+    text-align-last: left;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 70, 100, 0.15);
+}
+.message-container-users {
+    margin: 30px 50px 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.message-container .row {
+    text-align: center;
+}
+
 /* MANAGE PAGE SECTION */
 .manage-page-content {
     display: flex;
@@ -390,6 +418,14 @@ select:-webkit-autofill:focus {
 }
 .card-request-btn-container {
     margin-top: 20px;
+}
+.message-container {
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+.message-card {
+    text-align: end;
 }
 /* END MANAGE PAGE SECTION */
 /* END GENERAL CSS */

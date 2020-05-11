@@ -44,17 +44,16 @@
                     {% if isConnected.id is defined %}
                         <!-- Button profil for desktop, view if user connected -->
                         <div class="dropdown">
-                            <button class="navbar-profil" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
+                            <button class="navbar-profil" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div>
                                     <img class="navbar-profil-img" src="{{ isConnected.profil_picture }}">
                                 </div>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="/profil/user/{{ isConnected.id }}">Mon profil</a>
+                                <a class="dropdown-item" href="/profil/messages/{{ isConnected.id }}">Messages</a>
+                                <a class="dropdown-item" href="/profil/user/{{ isConnected.id }}">Profil</a>
                                 <a class="dropdown-item" href="/project/new">Créer un projet</a>
-                                <a class="dropdown-item" href="/profil/updateuser/{{ isConnected.id }}">Modifier mon
-                                    profil</a>
+                                <a class="dropdown-item" href="/profil/updateuser/{{ isConnected.id }}">Modifier mon profil</a>
                                 <a class="dropdown-item" href="/auth/logout">Déconnexion</a>
                             </div>
                         </div>

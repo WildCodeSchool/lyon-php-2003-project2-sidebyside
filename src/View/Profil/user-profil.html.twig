@@ -28,41 +28,6 @@
             </div>
         </div>
     </div>
-    {% if isConnected.id == current_user['id'] %}
-        <div class="requests-popup-profil">
-            {% if userInfo|length == 1 %}
-                <img src="/assets/images/icons/miscellaneous.png">
-                <p class="requests-popup-p">
-                    <a href="/Project/manage/{{ userInfo[0][1]['project_id'] }}" class="aProfilName">
-                        <strong>
-                            {{ userInfo[0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
-                            veut collaborer
-                        </strong>
-                    </a>
-                </p>
-            {% elseif userInfo|length == 2 %}
-                <img src="/assets/images/icons/miscellaneous.png">
-                <p class="requests-popup-p">
-                    <a href="/Project/manage/{{ userInfo[0][1]['project_id'] }}" class="aProfilName">
-                        <strong>{{ userInfo[0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
-                            et {{ userInfo[1][0]['first_name'] }} {{ userInfo[1][0]['last_name'] }}
-                            veulent collaborer
-                        </strong>
-                    </a>
-                </p>
-            {% elseif userInfo|length > 2 %}
-                <img src="/assets/images/icons/miscellaneous.png">
-                <p class="requests-popup-p">
-                    <a href="/Project/manage/{{ userInfo[0][1]['project_id'] }}" class="aProfilName">
-                        <strong>{{ userInfo[0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
-                            et {{ userInfo|length - 1 }}
-                            veulent collaborer
-                        </strong>
-                    </a>
-                </p>
-            {% endif %}
-        </div>
-    {% endif %}
     <div class="profil-page-content">
         <div class="card col-8 project-description-card profil">
             <h2 class="project-description-title">Biographie</h2>
