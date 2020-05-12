@@ -24,14 +24,14 @@
                 <input type="text" class="form-control form-control-sign" id="first_name"
                        placeholder="Prenom*" name="first_name" value="{{ user.first_name }}">
                 {% if errors.post['first_name'] is defined %}
-                    <small class="text-danger">{{ errors.post['first_name'] }}</small>
+                    <small class="invalid-auth"">{{ errors.post['first_name'] }}</small>
                 {% endif %}
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-sign" id="last_name"
                        placeholder="Nom*" name="last_name" value="{{ user.last_name }}">
                 {% if errors.post['last_name'] is defined %}
-                    <small class="text-danger">{{ errors.post['last_name'] }}</small>
+                    <small class="invalid-auth"">{{ errors.post['last_name'] }}</small>
                 {% endif %}
             </div>
             <div class="form-group">
@@ -65,7 +65,7 @@
                 <input type="password" class="form-control form-control-sign" id="password_check"
                        placeholder="Répétez votre Mot de passe*" name="password_check" value="">
                 {% if errors.post['pwd'] is defined %}
-                    <small class="text-danger">{{ errors.post['pwd'] }}</small>
+                    <small class="invalid-auth"">{{ errors.post['pwd'] }}</small>
                 {% elseif errors.post['password_check'] is defined %}
                     <div><small class="invalid-auth">{{ errors.post['password_check'] }}</small></div>
                 {% endif %}

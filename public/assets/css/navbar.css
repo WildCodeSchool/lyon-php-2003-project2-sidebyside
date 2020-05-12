@@ -62,19 +62,20 @@ a.navbar-create-project {
     border-radius: 5px;
 }
 .navbar-profil{
-    background: black;
+    background: #000;
     z-index: 3;
     position: relative;
     display: flex;
     justify-content: center;
     overflow: hidden;
-    border-radius: 25px;
+    border-radius: 50%;
     height: 50px;
     width: 50px;
     border: none;
+    padding: 0;
 }
 .navbar-profil-img {
-    margin-top: -5px;
+    /*margin-top: -5px;*/
     height: 50px;
 }
 .dropdown-menu {
