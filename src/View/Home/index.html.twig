@@ -29,7 +29,13 @@
                 <a href="#search-profils" class="aProfilName search-info">#profils</a>
                 <a href="#search-projects" class="aProfilName search-info">#projets</a>
             </div>
-            <h4 class="search-info">Recherche: {{ keyword }}</h4>
+            <div class="research-div">
+                <h4 class="search-info">Recherche:</h4>
+                <form class="form-inline" action="/Home/search/" method="POST">
+                    <input class="form-control mr-sm-2" name="search" type="search"
+                           placeholder="Recherche" aria-label="Search" value="{{ keyword }}">
+                </form>
+            </div>
         {% endif %}
         <h2 id="search-projects">Projets <a href="/project/all"><small style="color: #495057">(Tout voir)</small></a>
         </h2>

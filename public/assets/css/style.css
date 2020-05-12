@@ -197,6 +197,12 @@ h2 {
     margin: -45px auto 0 auto;
     width: 80%;
 }
+.research-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 /* FORM SECTION */
 .form-control::placeholder {
     color: grey !important;
