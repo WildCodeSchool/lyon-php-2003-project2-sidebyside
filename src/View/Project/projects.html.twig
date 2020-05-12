@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Projets</h1>
     <form class="form-inline form-all-project" action="" method="POST">
-        <input class="form-control mr-sm-2" name="search-project" type="search"
+        <input class="form-control mr-sm-2 col-10 col-sm-6 col-lg-4" name="search-project" type="search"
                placeholder="Recherche de projets" aria-label="Search">
     </form>
     <div class="row container-all-profils">
@@ -15,7 +15,9 @@
         {% for project in projects %}
             <div class="card col-8 col-md-5 card-all-profil" style="">
                 <a href="/Project/show/{{ project.id }}">
-                    <img src="{{ project.banner_image }}" class="card-img-top card-image-all-profil" alt="project-image">
+                    <div class="project-card-banner-image">
+                        <img src="{{ project.banner_image }}" class="card-img-top card-image-all-profil" alt="project-image">
+                    </div>
                     <div class="image-profil-all-project">
                         <img class="project-owner-profil-image-all-project"
                             {% for user in users %}

@@ -23,9 +23,14 @@ class ProjectManager extends AbstractManager
      */
     public function selectByWord(string $keyword) : array
     {
-        $query = "SELECT * FROM projects 
+        $query = "SELECT p.id, p.title, p.description, p.zip_code, p.banner_image, p.created_at,
+                    u.first_name,  u.last_name, u.profil_picture
+                    FROM projects p 
+                    JOIN users u ON p.project_owner_id=u.id  
                     WHERE title LIKE :keyword 
-                    OR zip_code LIKE :keyword";
+                    OR p.zip_code LIKE :keyword
+                    OR u.first_name LIKE :keyword
+                    OR u.last_name LIKE :keyword";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':keyword', "%$keyword%");
         $statement->execute();
