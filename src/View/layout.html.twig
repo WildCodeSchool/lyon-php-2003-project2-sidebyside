@@ -12,6 +12,8 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+
     {% block stylesheet %}{% endblock %}
     <link rel="icon" href="/assets/images/sbs_black.png">
     <!-- Icon Font Awesome -->
@@ -130,6 +132,20 @@
 <main>
     {% block content %}{% endblock %}
 </main>
+
+<footer>
+    {% block footer %}
+    <div class="footer-container">
+        <a href="/project/all" class="footer-projects">Projets</a>
+        <a href="/profil/all" class="footer-profils">Profils</a>
+        <a href="/">
+        <img class="footer-logo" src="/assets/images/sbs_white.png">
+        </a>
+        <a href="/Home/cgu" class="footer-cgu-desktop">Conditions générales d'utilisation</a>
+        <a href="/Home/cgu" class="footer-cgu-mobile">C.G.U</a>
+    </div>
+    {% endblock %}
+</footer>
 
 <!-- Script Bootstrap jQuery -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
