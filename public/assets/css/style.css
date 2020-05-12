@@ -790,7 +790,7 @@ select:-webkit-autofill:focus {
         margin-right: 25px;
     }
     .container-banner-project{
-        max-height: 60vh;
+        max-height: 50vh;
         display: flex;
         justify-content: center;
         align-items: center;
