@@ -17,7 +17,7 @@ class MessageManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-    public function selectByUser($userId)
+    public function selectByUserReturnAuthor($userId)
     {
         // prepared request
         $statement = $this->pdo->prepare("SELECT m.id, m.author, m.to_user, 
@@ -26,14 +26,33 @@ class MessageManager extends AbstractManager
                                                         u.profil_picture, u.email 
                                                         FROM $this->table m 
                                                         JOIN users u 
-                                                        ON m.author=u.id 
-                                                        WHERE to_user=:id 
+                                                        ON m.author=u.id
+                                                        WHERE m.to_user=:id 
+                                                        OR m.author=:id
                                                         ORDER BY m.id DESC");
         $statement->bindValue('id', $userId, \PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll();
     }
+
+    public function selectByUserReturnDest($userId)
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("SELECT m.id, m.author, m.to_user,
+                                                        u.first_name, u.last_name, 
+                                                        u.profil_picture, u.email 
+                                                        FROM $this->table m 
+                                                        JOIN users u 
+                                                        ON m.to_user=u.id
+                                                        WHERE m.to_user=:id 
+                                                        ORDER BY m.id DESC");
+        $statement->bindValue('id', $userId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
 
     public function selectByProject(int $projectId)
     {

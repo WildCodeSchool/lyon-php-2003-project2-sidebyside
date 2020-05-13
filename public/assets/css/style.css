@@ -448,6 +448,7 @@ select:-webkit-autofill:focus {
     max-width: 950px;
 }
 .message-container-myMsg {
+    width: 90%;
     margin-left: 50px;
     text-align-last: left;
     padding: 20px;
@@ -514,6 +515,10 @@ select:-webkit-autofill:focus {
 
 /* MOBILE VIEW X-SMALL*/
 @media all and (max-width: 374px){
+    .message-container-myMsg {
+        width: 100%;
+        margin-left: 0px;
+    }
     .profil-home-carousel-small {
         display: block;
     }
@@ -548,12 +553,15 @@ select:-webkit-autofill:focus {
 
 /* TABLET VIEW SMALL TO MEDIUM */
 @media all and (max-width: 768px){
-
     .container-button {
         display: flex;
         align-items: center;
         flex-direction: column;
         z-index: 3;
+    }
+    .message-container-myMsg {
+        width: 100%;
+        margin-left: 0px;
     }
     .profil-home-carousel-small {
         display: block;
