@@ -23,7 +23,7 @@ class ProjectManager extends AbstractManager
      */
     public function selectByWord(string $keyword): array
     {
-        $query = "SELECT p.id, p.title, p.description, p.zip_code, p.banner_image, p.created_at,
+        $query = "SELECT p.id, p.title, p.description, p.zip_code, p.banner_image, p.created_at, p.project_owner_id,
                     u.first_name,  u.last_name, u.profil_picture
                     FROM projects p 
                     JOIN users u ON p.project_owner_id=u.id  

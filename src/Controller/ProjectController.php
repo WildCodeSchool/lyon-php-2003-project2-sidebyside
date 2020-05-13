@@ -24,7 +24,6 @@ class ProjectController extends AbstractController
      */
     public function new()
     {
-
         $categoryManager = new CategoryManager();
         $categories = $categoryManager->selectAll();
         $projectManager = new ProjectManager();
@@ -80,7 +79,7 @@ class ProjectController extends AbstractController
         }
         return $this->twig->render(
             'Project/add.html.twig',
-            ['errors' => $errors, 'project' => $project, 'categories' => $categories, 'skills' => $skills]
+            ['errors' => $errors, 'project' => $project, 'categories' => $categories, 'skills' => $skills,]
         );
     }
 
