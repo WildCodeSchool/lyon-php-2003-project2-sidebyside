@@ -72,4 +72,11 @@ class HomeController extends AbstractController
             'Home/cgu.html.twig'
         );
     }
+
+    public function notFound()
+    {
+        return $this->twig->render(
+            'Home/404.html.twig'
+        );
+    }
 }

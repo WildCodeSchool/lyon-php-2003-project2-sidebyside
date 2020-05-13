@@ -5,7 +5,8 @@
 {% block content %}
 
     <main>
-        <div class="container-banner-project">
+        {% if isSearched is not defined %}
+        <div class="container-banner-project container-home">
             <h1 class="project-title app-title">
                 Side by Side
             </h1>
@@ -22,8 +23,16 @@
                     </button>
                 </a>
             {% endif %}
-            <img class="banner-project-image" src="/assets/images/startup-594090_1280.jpg">
+            <img class="banner-project-image banner-image-home" src="/assets/images/startup-594090_1280.jpg">
+            <a href="#search-projects" class="container-arrow">
+                <div class="arrow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </a>
         </div>
+        {% endif %}
         {% if keyword is defined %}
             <div class="filter-home-search">
                 <a href="#search-profils" class="aProfilName search-info">#profils</a>
@@ -84,16 +93,18 @@
         {% endif %}
         <h2 id="search-profils">Profils <a href="/profil/all"><small style="color: #495057">(Tout voir)</small></a></h2>
         <div class="message-container profil-container-home col-11">
-            {% if isSearched and users[0] is defined %}
+            {% if isSearched is defined %}
                 {% include 'Home/_profilCards.html.twig' %}
             {% elseif not isSearched %}
                 {% include 'Home/_profilsCarousel.html.twig' %}
             {% endif %}
         </div>
     </main>
-
 {% endblock %}
 
 {% block javascript %}
-<script src = "/assets/js/projectAdd.js"></script>
+    {% if isSearched is not defined %}
+        <script src = "/assets/js/navbar_home.js"></script>
+    {% endif %}
+    <script src = "/assets/js/projectAdd.js"></script>
 {% endblock %}

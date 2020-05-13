@@ -112,8 +112,9 @@ h2 {
     right: 25px;
 }
 .btn-home-create {
-    width: 255px;
-    font-size: 20px;
+    height: 56px;
+    width: 350px;
+    font-size: 30px;
 }
 
 .profil-home-carousel-small {
@@ -298,6 +299,7 @@ select:-webkit-autofill:focus {
     text-align: center;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-top: var(--secondary-color) solid 10px;
 }
 .profil-card .container-profil-picture{
     margin: 10px auto auto auto;
@@ -595,6 +597,9 @@ select:-webkit-autofill:focus {
         display: flex;
         align-content: center
     }
+    .banner-image-home{
+        width: auto;
+    }
     .project-title{
         position: absolute;
         color: white;
@@ -606,10 +611,10 @@ select:-webkit-autofill:focus {
     }
     .app-title {
         font-size: 42px;
-        top: 100px;
         min-width: 235px;
         right: auto;
-        text-shadow: black 1px 1px 1px;
+        top: 150px;
+        text-shadow: #ffc107 3px 3px 0px;
     }
     .container-image-button{
         width: 100%;
@@ -820,8 +825,8 @@ select:-webkit-autofill:focus {
     }
     .app-title {
         font-size: 62px;
-        top: 30px;
-        text-shadow: black 1px 1px 1px;
+        top: 150px;
+        text-shadow: #ffc107 3px 3px 0px;
     }
     .container-image-button{
         width: 100%;
@@ -1056,6 +1061,9 @@ select:-webkit-autofill:focus {
 .container-select{
     padding: 0;
 }
+.container-search-project {
+    background: var(--secondary-color);
+}
 .content h3 {
     font-size: 15px;
     font-weight: 500;
@@ -1263,4 +1271,69 @@ a:hover {
 .col-11 {
     flex: none;
     max-width: none;
+}
+.container-home {
+    height: 100vh;
+    max-height: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(to top,black, rgba(0,0,0,0));
+}
+.arrow{
+    transform: translate(-50%,-50%);
+}
+.container-arrow {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 30px;
+}
+.arrow span{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-bottom: 5px solid var(--secondary-color);
+    border-right: 5px solid var(--secondary-color);
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: animate 2s infinite;
+}
+.arrow span:nth-child(2){
+    animation-delay: -0.2s;
+}
+.arrow span:nth-child(3){
+    animation-delay: -0.4s;
+}
+@keyframes animate {
+    0%{
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px,-20px);
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        transform: rotate(45deg) translate(20px,20px);
+    }
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: var(--secondary-color);
 }

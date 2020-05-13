@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}404{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/404.css">
+    <style>
+        main{
+            margin-top: 0;
+        }
+    </style>
+{% endblock %}
+
+
+{% block header %}
+    <!----------------- Header Logo + Back Button ----------------->
+    <div class="container-header-sign">
+        <div class="header-sign" style="justify-content: flex-end;">
+            <!-- Button Back to Home -->
+            <a href="/" class="link-back">
+                <button type="submit" class="btn btn-back">Retour</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="not-found" title="404">
+        404
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function RedirectionJavascript(){
+        document.location.href="/";
+    }
+    setTimeout(RedirectionJavascript, 4000);
+</script>
+
+{% endblock %}
+

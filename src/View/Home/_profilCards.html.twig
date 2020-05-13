@@ -1,4 +1,7 @@
 <div class="row profils-page">
+    {% if users is empty %}
+        <div class="invalid-auth">Aucun profils n'a été trouvé !</div>
+    {% endif %}
     {% for user in users %}
         <div class="card profil-card">
             <a href="/Profil/user/{{ user.id }}" class="aProfilName">
