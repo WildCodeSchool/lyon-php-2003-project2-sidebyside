@@ -8,39 +8,74 @@
         <img class="banner-project-image" src="{{ currentProject.banner_image }}">
     </div>
     <div class="container">
-        <div class="row container-detail-project">
-            <div class="container-image-button">
-                <a href="/Profil/user/{{ current_user.id }}">
-                    <div class="container-image-profil">
-                        <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
-                    </div>
-                </a>
-                <div class="container-button">
-                    {% if isConnected.id == projectOwner.id or isCollaborator %}
-                        {% if not isCollaborator %}
-                            <button class="btn btn-yellow-square" type="button"
-                                    onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
-                                Modifier
-                            </button>
+    <div class="row container-detail-project">
+        <div class="container-image-button">
+            <a href="/Profil/user/{{ projectOwner.id }}">
+                <div class="container-image-profil">
+                    <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+                </div>
+            </a>
+            <div class="container-button">
+                {% if isConnected.id %}
+                    {% if likes|length == 0 %}
+                        <strong>Soyez le premier à aimer ce projet !</strong>
+                    {% elseif likes|length == 1 %}
+                        <strong>1 personne aime ce projet</strong>
+                    {% elseif likes|length > 1 %}
+                        <strong>{{ likes|length }} personnes aiment ce projet</strong>
+                    {% endif %}
+                {% endif %}
+                {% if isConnected.id %}
+                    {% set haveLiked = false %}
+                    {% for like in likes %}
+                        {% if isConnected.id == like.user_id %}
+                            {% set haveLiked = true %}
+                            <form method="POST">
+                                <input type="hidden" name="user_id" id="user_id" value="{{ isConnected.id }}">
+                                <input type="hidden" name="project_id" id="project_id" value="{{ currentProject.id }}">
+                                <input type="hidden" name="isLiked" id="isLiked" value="1">
+                                <button class="btn btn-white-square" type="submit">
+                                    Je n'aime plus
+                                </button>
+                            </form>
                         {% endif %}
+                    {% endfor %}
+                    {% if isConnected.id != like.user_id and not haveLiked %}
+                        <form method="POST">
+                            <input type="hidden" name="user_id" id="user_id" value="{{ isConnected.id }}">
+                            <input type="hidden" name="project_id" id="project_id" value="{{ currentProject.id }}">
+                            <input type="hidden" name="isLiked" id="isLiked" value="0">
+                            <button class="btn btn-white-square" type="submit">
+                                J'aime
+                            </button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+                {% if isConnected.id == projectOwner.id or isCollaborator %}
+                    {% if not isCollaborator %}
                         <button class="btn btn-yellow-square" type="button"
-                                onclick="window.location.href = '/project/manage/{{ currentProject.id }}';">
-                            <i class="fas fa-cog"></i>
-                            Gérer le projet
-                        </button>
-                    {% elseif not isCollaborator and not isRequest %}
-                        <button class="btn btn-yellow-square" type="button"
-                                onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
-                            Participer
-                        </button>
-                    {% else %}
-                        <button class="btn btn-inactive-square" type="button">
-                            En attente
+                                onclick="window.location.href = '/project/edit/{{ currentProject.id }}';">
+                            Modifier
                         </button>
                     {% endif %}
-                </div>
+                    <button class="btn btn-yellow-square" type="button"
+                            onclick="window.location.href = '/project/manage/{{ currentProject.id }}';">
+                        <i class="fas fa-cog"></i>
+                        Gérer le projet
+                    </button>
+                {% elseif not isCollaborator and not isRequest %}
+                    <button class="btn btn-yellow-square" type="button"
+                            onclick="window.location.href = '/project/askcollaboration/{{ currentProject.id }}';">
+                        Participer
+                    </button>
+                {% else %}
+                    <button class="btn btn-inactive-square" type="button">
+                        En attente
+                    </button>
+                {% endif %}
             </div>
-            <div class="card col-11 project-description-card card-project">
+        </div>
+        <div class="card col-11 project-description-card card-project">
             {% if isConnected.id == projectOwner['id'] %}
                 <div class="requests-popup">
                     {% if userInfo|length == 1 %}
