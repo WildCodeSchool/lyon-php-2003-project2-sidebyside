@@ -1,28 +1,62 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Messages{% endblock %}
+{% block title %}Messages: {{ user.first_name|capitalize }} {{ user.last_name|capitalize }}{% endblock %}
 
 {% block content %}
+    <div class="container-banner-project">
+        <h1 class="project-title">
+            {{ user.first_name|capitalize }} {{ user.last_name|capitalize }}
+        </h1>
+        <img class="banner-project-image" src="{{ user.banner_image }}">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="container-image-button">
+                <a href="/Profil/user/{{ user.id }}">
+                    <div class="container-image-profil">
+                        <img class="project-owner-profil-image" src="{{ user.profil_picture }}">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
     <div class="message-container">
         <h1>Messages</h1>
-        {% include 'Profil/_formMessage.html.twig' %}
+
+        {% if isConnected.id != userId %}
+            {% include 'Profil/_formMessage.html.twig' %}
+        {% endif %}
         {% for message in messages %}
             {% if message.author == isConnected.id %}
-                <div class="message-container-myMsg col-11 col-md-7 col-lg-5">
-                    <div class="message-card">
-                        <div><strong>{{ message.first_name }} {{ message.last_name }}</strong></div>
-                        <p><small>{{ message.created_at }}</small></p>
+                <a href="/Profil/messages/{{ message.to_user }}" class="aProfilName">
+                    <div class="message-container-myMsg col-11 col-md-7 col-lg-5">
+                        <div class="message-card">
+                            <div>
+                                <strong>
+                                    De {{ message.first_name }} {{ message.last_name }}
+                                    à {{ message.dest_info[0].first_name }} {{ message.dest_info[0].last_name }}
+                                </strong>
+                            </div>
+                            <p><small>{{ message.created_at }}</small></p>
+                        </div>
+                        <p>{{ message.message }}</p>
                     </div>
-                    <p>{{ message.message }}</p>
-                </div>
+                </a>
             {% else %}
-                <div class="message-container-users col-11 col-md-7 col-lg-5">
-                    <div class="message-card">
-                        <div><strong>{{ message.first_name }} {{ message.last_name }}</strong></div>
-                        <p><small>{{ message.created_at }}</small></p>
+                <a href="/Profil/messages/{{ message.author }}" class="aProfilName">
+                    <div class="message-container-users col-11 col-md-7 col-lg-5">
+                        <div class="message-card">
+                            <div>
+                                <strong>
+                                    De {{ message.first_name }} {{ message.last_name }}
+                                    à {{ message.dest_info[0].first_name }} {{ message.dest_info[0].last_name }}
+                                </strong>
+                            </div>
+                            <p><small>{{ message.created_at }}</small></p>
+                        </div>
+                        <p>{{ message.message }}</p>
                     </div>
-                    <p>{{ message.message }}</p>
-                </div>
+                </a>
             {% endif %}
         {% endfor %}
     </div>

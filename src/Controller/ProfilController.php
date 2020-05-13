@@ -179,9 +179,15 @@ class ProfilController extends AbstractController
     public function messages($id)
     {
         $messageManager = new MessageManager();
-        $messages = $messageManager->selectByUser($id);
-        $errorsArray = [];
+        $userManager = new UserManager();
+        $messages = $messageManager->selectByUserReturnAuthor($id);
+        $user = $userManager->selectOneById($id);
 
+        foreach ($messages as $key => $message) {
+            $messages[$key]['dest_info'] = $messageManager->selectByUserReturnDest($message['to_user']);
+        }
+
+        $errorsArray = [];
         if (!empty($_POST)) {
             $postedMessage = [
                 'author' => $_POST['author'],
@@ -203,7 +209,8 @@ class ProfilController extends AbstractController
             'Profil/messages.html.twig',
             [
                 'messages' => $messages,
-                'userId' => $id
+                'userId' => $id,
+                'user' => $user
             ]
         );
     }
