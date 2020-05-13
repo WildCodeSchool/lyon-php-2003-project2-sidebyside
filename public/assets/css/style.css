@@ -59,6 +59,7 @@ h2 {
 .container-button {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .btn-yellow-round {
     border-radius: 25px;
@@ -540,12 +541,24 @@ select:-webkit-autofill:focus {
     .requests-popup img, .requests-popup-profil img {
         display: none;
     }
+    .container-button {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        z-index: 3;
+    }
 
 }
 /* END MOBILE VIEW X-SMALL*/
 
 /* TABLET VIEW SMALL TO MEDIUM */
 @media all and (max-width: 768px){
+    .container-button {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        z-index: 3;
+    }
     .message-container-myMsg {
         width: 100%;
         margin-left: 0px;

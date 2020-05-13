@@ -11,7 +11,7 @@ class ProjectManager extends AbstractManager
     /**
      *  Initializes this class.
      */
-  
+
     public function __construct()
     {
         parent::__construct(self::TABLE);
@@ -21,7 +21,7 @@ class ProjectManager extends AbstractManager
      * @param string $keyword
      * @return array
      */
-    public function selectByWord(string $keyword) : array
+    public function selectByWord(string $keyword): array
     {
         $query = "SELECT p.id, p.title, p.description, p.zip_code, p.banner_image, p.created_at,
                     u.first_name,  u.last_name, u.profil_picture
@@ -42,7 +42,7 @@ class ProjectManager extends AbstractManager
      * @param string $userId
      * @return array
      */
-    public function selectIWorkOnByUserId(string $userId) : array
+    public function selectIWorkOnByUserId(string $userId): array
     {
         $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, p.id, p.project_owner_id, phc.user_id
                     FROM projects p 
@@ -61,7 +61,7 @@ class ProjectManager extends AbstractManager
      * @param string $userId
      * @return array
      */
-    public function selectByOwnerId(string $userId) : array
+    public function selectByOwnerId(string $userId): array
     {
         $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, p.id, p.project_owner_id
                     FROM projects p
@@ -127,6 +127,7 @@ class ProjectManager extends AbstractManager
     }
 
     // REQUEST TO UPDATE PROJECT INFOS
+
     /**
      * @param array $project
      * @return bool

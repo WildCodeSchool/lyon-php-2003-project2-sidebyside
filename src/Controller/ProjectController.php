@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\CategoryManager;
 use App\Model\CollabManager;
+use App\Model\LikeManager;
 use App\Model\MessageManager;
 use App\Model\ProjectManager;
 use App\Model\RequestManager;
@@ -95,6 +96,8 @@ class ProjectController extends AbstractController
     public function show($id)
     {
         $projectManager = new ProjectManager();
+        $likeManager = new LikeManager();
+        $likes = $likeManager->selectAllById($id);
         $project = $projectManager->selectOneById($id);
         $categoryManager = new CategoryManager();
         $category = $categoryManager->getCategory($project['category_id']);
@@ -127,6 +130,15 @@ class ProjectController extends AbstractController
             }
         }
 
+        if (!empty($_POST)) {
+            if ($_POST['isLiked'] == 0) {
+                $likeManager->like($_POST);
+            } else {
+                $likeManager->delete($_POST);
+            }
+            header('Location: /project/show/' . $id);
+        }
+
         if (!empty($requests)) {
             foreach ($requests as $key => $request) {
                 $userInfo[$key] = [
@@ -141,7 +153,7 @@ class ProjectController extends AbstractController
                     'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
                     'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
                     'isCollaborator' => $isCollaborator, 'userInfo' => $userInfo,
-                    'isRequest' => $isRequest
+                    'isRequest' => $isRequest, 'likes' => $likes
                 ]
             );
         }
@@ -151,7 +163,7 @@ class ProjectController extends AbstractController
             [
                 'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
                 'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
-                'isCollaborator' => $isCollaborator, 'isRequest' => $isRequest
+                'isCollaborator' => $isCollaborator, 'isRequest' => $isRequest, 'likes' => $likes
             ]
         );
     }
