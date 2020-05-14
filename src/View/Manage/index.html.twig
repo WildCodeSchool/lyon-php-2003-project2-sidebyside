@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container-banner-project">
         <h1 class="project-title manage-project-title">
-            <a href="/Project/show/{{ project.id }}">{{ project.title }}</a>
+            <a class="title-manage-project" href="/Project/show/{{ project.id }}">{{ project.title }}</a>
         </h1>
         {% if projectOwner.id == isConnected.id %}
             <a class="project-title btn-modify-manage" href="/Project/edit/{{ project.id }}">

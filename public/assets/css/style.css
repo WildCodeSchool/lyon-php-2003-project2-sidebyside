@@ -1018,6 +1018,9 @@ select:-webkit-autofill:focus {
         right: 25px;
         justify-content: flex-end;
     }
+    a.title-manage-project{
+        margin-top: 0;
+    }
 }
 /* END DESKTOP VIEW LARGE */
 
