@@ -427,7 +427,7 @@ INSERT INTO skills (id, name) VALUES (3, 'Charpente');
 INSERT INTO skills (id, name) VALUES (4, 'Couvreur');
 INSERT INTO skills (id, name) VALUES (5, 'Électricité');
 INSERT INTO skills (id, name) VALUES (6, 'Géométrie');
-INSERT INTO skills (id, name) VALUES (7, 'Maconnerie');
+INSERT INTO skills (id, name) VALUES (7, 'Maçonnerie');
 INSERT INTO skills (id, name) VALUES (8, 'Mécanique auto');
 INSERT INTO skills (id, name) VALUES (9, 'Peinture');
 INSERT INTO skills (id, name) VALUES (10, 'Plomberie');
@@ -510,6 +510,9 @@ INSERT INTO user_has_skills (user_id, skill_id) VALUES (15, 19);
 INSERT INTO user_has_skills (user_id, skill_id) VALUES (1, 20);
 INSERT INTO user_has_skills (user_id, skill_id) VALUES (2, 20);
 INSERT INTO user_has_skills (user_id, skill_id) VALUES (26, 20);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (32, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (32, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (32, 20);
 INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (1, 'Siders', 'Bot', 'Bot@gmail.com', '$2y$10$JxL743/w0pp23xeDyTa7OOAwrCZcSKItyFh6O8ABIBX1VdEiL3Aq6', '73000', '/assets/uploads/profils/5eb91e2a8c8a8.gif', '/assets/uploads/profils/5eb91fc607c62.jpg', 'Bonjour,
 Mon petit prénom pour les intimes c''est Side
 C''es moi le Bot du site, qui m''occupe d''envoyer vos petit messages avec amour.', null, '2020-05-11 10:58:25');
@@ -585,8 +588,7 @@ INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_
 Moi c''est Sophia, Fan de bricolage depuis petite.
 J''ai hâte de participer à vos projets.', null, '2020-05-11 11:06:26');
 INSERT INTO sidebyside.users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (32, 'Martinot', 'Matthieu', 'Matthieu@gmail.com', '$2y$10$FmFicDredTYzh4.23Yakl.07aBHSiSpLcJELjodpzMMjXoAtgcutG', '69005', '/assets/uploads/profils/5ebbff86a420d.png', '/assets/uploads/profils/5eb92db93e0a5.jpg', 'Zen comme Zen
-Hub comme Hub
-Soumissez', null, '2020-05-13 16:09:10');
+Hub comme Hub', null, '2020-05-13 16:09:10');
 
 
 
