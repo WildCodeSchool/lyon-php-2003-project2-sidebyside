@@ -104,18 +104,20 @@ class ProjectController extends AbstractController
         $projectSkills = $skillManager->getAllForProject($id);
         $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
         $project['category'] = $category;
-        $currentProject = $projectManager->selectOneById($id);
         $similarProjects = $projectManager->selectAllExceptCurrent($id);
-        $projectOwner = $projectManager->selectProjectOwner($id);
         $collabManager = new CollabManager();
         $collaborators = $collabManager->selectOneByProjectId($id);
         $isCollaborator = false;
         $isRequest = false;
         $userInfo = [];
         $userManager = new UserManager();
-        $projectOwner = $userManager->selectOneById($projectOwner['id']);
+        $projectOwner = $userManager->selectOneById($project['project_owner_id']);
         $requestManager = new RequestManager();
         $requests = $requestManager->selectRequestForCollaboration($id);
+        $project['description'] = explode("\n", $project['description']);
+        $project['plan'] = explode("\n", $project['plan']);
+        $project['team_description'] = explode("\n", $project['team_description']);
+
 
         foreach ($collaborators as $collaborator) {
             if ($collaborator['user_id'] == $_SESSION['id']) {
@@ -129,14 +131,7 @@ class ProjectController extends AbstractController
             }
         }
 
-        if (!empty($_POST)) {
-            if ($_POST['isLiked'] == 0) {
-                $likeManager->like($_POST);
-            } else {
-                $likeManager->delete($_POST);
-            }
-            header('Location: /project/show/' . $id);
-        }
+
 
         if (!empty($requests)) {
             foreach ($requests as $key => $request) {
@@ -149,7 +144,7 @@ class ProjectController extends AbstractController
             return $this->twig->render(
                 'Project/show.html.twig',
                 [
-                    'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+                    'project' => $project, 'id' => $id, 'currentProject' => $project,
                     'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
                     'isCollaborator' => $isCollaborator, 'userInfo' => $userInfo,
                     'isRequest' => $isRequest, 'likes' => $likes
@@ -160,7 +155,7 @@ class ProjectController extends AbstractController
         return $this->twig->render(
             'Project/show.html.twig',
             [
-                'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+                'project' => $project, 'id' => $id, 'currentProject' => $project,
                 'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
                 'isCollaborator' => $isCollaborator, 'isRequest' => $isRequest, 'likes' => $likes
             ]
@@ -354,9 +349,11 @@ class ProjectController extends AbstractController
         $userManager = new UserManager();
         $users = $userManager->selectAll();
         $projects = $projectManager->selectAll();
+
         if (!empty($_POST['search-project'])) {
             $keyword = trim($_POST['search-project']);
             $searchResult = $projectManager->selectByWord($keyword);
+
             return $this->twig->render('Project/projects.html.twig', ['projects' => $searchResult, 'users' => $users]);
         }
 
@@ -375,7 +372,7 @@ class ProjectController extends AbstractController
             $skillManager = new SkillManager();
             $project = $projectManager->selectOneById($id);
             $projectOwner = $project['project_owner_id'];
-            $projectOwner = $projectManager->selectProjectOwner($projectOwner);
+            $projectOwner = $projectManager->askProjectOwner($projectOwner);
             $currentUserInfo = $userManager->getUserInfo($userId);
             $skills = $skillManager->selectAll();
             $errorsArray = [];

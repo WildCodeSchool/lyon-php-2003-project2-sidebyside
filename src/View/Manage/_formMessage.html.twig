@@ -1,4 +1,4 @@
-<div class="message-container col-11">
+<div class="message-container col-md-7 col-lg-5">
     <h3 class="text-center">Laisser un message</h3>
     <div class="row h-100 justify-content-center align-items-center">
         <div class="col-11 col-md-7 col-lg-5">
@@ -18,4 +18,23 @@
             </form>
         </div>
     </div>
+    {% for message in messages %}
+        {% if message.author == isConnected.id %}
+            <div class="message-container-myMsg col-11 col-md-7 col-lg-5">
+                <div class="message-card">
+                    <div><strong>{{ message.first_name }} {{ message.last_name }}</strong></div>
+                    <p><small>{{ message.created_at }}</small></p>
+                </div>
+                <p>{{ message.message }}</p>
+            </div>
+        {% else %}
+            <div class="message-container-users col-11 col-md-7 col-lg-5">
+                <div class="message-card">
+                    <div><strong>{{ message.first_name }} {{ message.last_name }}</strong></div>
+                    <p><small>{{ message.created_at }}</small></p>
+                </div>
+                <p>{{ message.message }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
 </div>

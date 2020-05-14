@@ -26,38 +26,21 @@
         {% if isConnected.id != userId %}
             {% include 'Profil/_formMessage.html.twig' %}
         {% endif %}
-        {% for message in messages %}
-            {% if message.author == isConnected.id %}
-                <a href="/Profil/messages/{{ message.to_user }}" class="aProfilName">
-                    <div class="message-container-myMsg col-11 col-md-7 col-lg-5">
-                        <div class="message-card">
-                            <div>
-                                <strong>
-                                    De {{ message.first_name }} {{ message.last_name }}
-                                    à {{ message.dest_info[0].first_name }} {{ message.dest_info[0].last_name }}
-                                </strong>
-                            </div>
-                            <p><small>{{ message.created_at }}</small></p>
-                        </div>
-                        <p>{{ message.message }}</p>
-                    </div>
-                </a>
-            {% else %}
-                <a href="/Profil/messages/{{ message.author }}" class="aProfilName">
-                    <div class="message-container-users col-11 col-md-7 col-lg-5">
-                        <div class="message-card">
-                            <div>
-                                <strong>
-                                    De {{ message.first_name }} {{ message.last_name }}
-                                    à {{ message.dest_info[0].first_name }} {{ message.dest_info[0].last_name }}
-                                </strong>
-                            </div>
-                            <p><small>{{ message.created_at }}</small></p>
-                        </div>
-                        <p>{{ message.message }}</p>
-                    </div>
-                </a>
-            {% endif %}
-        {% endfor %}
+        {% if messages is empty %}
+            <small class="invalid-auth invalid-message">Aucun message !</small>
+        {% endif %}
+        {% if isConnected.id != userId %}
+            {% for message in messages %}
+                {% if message.to_user is not empty and message.author != 1 %}
+                    {% include 'Profil/_messagesList.html.twig' %}
+                {% endif %}
+            {% endfor %}
+        {% else%}
+            {% for message in messages %}
+                {% if message.to_user is not empty %}
+                    {% include 'Profil/_messagesList.html.twig' %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}

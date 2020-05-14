@@ -116,10 +116,10 @@ class ProjectManager extends AbstractManager
         return $this->pdo->query('SELECT id FROM ' . $this->table . ' ORDER BY id DESC ')->fetch();
     }
 
-    public function selectProjectOwner($id)
+    public function askProjectOwner($id)
     {
         $statement = $this->pdo->prepare('SELECT u.profil_picture, u.id FROM users as u
-                JOIN projects as p ON u.id = p.project_owner_id WHERE p.id=:id');
+                JOIN projects as p ON u.id = p.project_owner_id WHERE p.project_owner_id=:id');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
 

@@ -62,10 +62,9 @@ class RequestManager extends AbstractManager
 
     public function ignoreRequest($userId, $projectId)
     {
-        $statement = $this->pdo->prepare("UPDATE user_ask_collaboration_projects uc 
-                                                        SET status='ignore' 
-                                                        WHERE uc.user_id=:userId 
-                                                        AND uc.project_id=:projectId");
+        $statement = $this->pdo->prepare("DELETE FROM user_ask_collaboration_projects 
+                                                        WHERE user_id=:userId 
+                                                        AND project_id=:projectId");
         $statement->bindValue(':userId', $userId, \PDO::PARAM_INT);
         $statement->bindValue(':projectId', $projectId, \PDO::PARAM_INT);
         $statement->execute();

@@ -2,6 +2,15 @@
 
 {% block title %}Side-by-Side{% endblock %}
 
+{% block stylesheet %}
+    <style>
+        .btn{
+            margin:0;
+        }
+    </style>
+{% endblock %}
+
+
 {% block content %}
 
     <main>
@@ -11,17 +20,17 @@
                 Side by Side
             </h1>
             {% if isConnected.id is defined %}
-                <a href="/Project/new/">
-                    <button type="button" class="btn btn-warning btn-yellow-square btn-home-create">Lancez Votre Projet
+                    <button type="button" class="btn btn-warning btn-yellow-square btn-home-create"
+                            onclick="window.location.href = '/Project/new/';"
+                    >Lancez Votre Projet
                         !
                     </button>
-                </a>
             {% else %}
-                <a href="/Auth/signIn/">
-                    <button type="button" class="btn btn-warning btn-yellow-square btn-home-create">Lancez Votre Projet
+                    <button type="button" class="btn btn-warning btn-yellow-square btn-home-create"
+                            onclick="window.location.href = '/Auth/signIn/';"
+                    >Lancez Votre Projet
                         !
                     </button>
-                </a>
             {% endif %}
             <img class="banner-project-image banner-image-home" src="/assets/images/startup-594090_1280.jpg">
             <a href="#search-projects" class="container-arrow">
@@ -34,16 +43,16 @@
         </div>
         {% endif %}
         {% if keyword is defined %}
-            <div class="filter-home-search">
-                <a href="#search-profils" class="aProfilName search-info">#profils</a>
-                <a href="#search-projects" class="aProfilName search-info">#projets</a>
-            </div>
             <div class="research-div">
                 <h4 class="search-info">Recherche:</h4>
-                <form class="form-inline" action="/Home/search/" method="POST">
-                    <input class="form-control mr-sm-2" name="search" type="search"
+                <form class="form-inline" action="/Home/search/" method="GET">
+                    <input class="form-control mr-sm-2" name="search" id="search" type="search"
                            placeholder="Recherche" aria-label="Search" value="{{ keyword }}">
                 </form>
+            </div>
+            <div class="filter-home-search sticky-top anchor-search">
+                <a href="#search-profils" class="aProfilName search-info btn-search-filter">#profils</a>
+                <a href="#search-projects" class="aProfilName search-info btn-search-filter">#projets</a>
             </div>
         {% endif %}
         <h2 id="search-projects">Projets <a href="/project/all"><small style="color: #495057">(Tout voir)</small></a>
