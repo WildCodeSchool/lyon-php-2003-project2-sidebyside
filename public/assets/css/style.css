@@ -7,7 +7,7 @@
 
 /* GENERAL CSS */
 main {
-    margin-top: 72px;
+    margin-top: 70px;
     min-height: 100vh;
 }
 h1 {
@@ -382,6 +382,7 @@ select:-webkit-autofill:focus {
     transform: translateY(-50px);
     z-index: 3;
     text-align: center;
+    display: block;
 }
 .carousel-indicators li {
     background-color: var(--primary-color);
@@ -506,6 +507,7 @@ select:-webkit-autofill:focus {
 }
 .card-request-btn-container {
     margin-top: 20px;
+    display: flex;
 }
 .message-container {
     margin: 20px auto;
@@ -523,6 +525,9 @@ select:-webkit-autofill:focus {
     .message-container-myMsg {
         width: 100%;
         margin-left: 0px;
+    }
+    .project-title.project-show-title{
+        display: flex;
     }
     .profil-home-carousel-small {
         display: block;
@@ -559,7 +564,19 @@ select:-webkit-autofill:focus {
         flex-direction: column;
         z-index: 3;
     }
-
+    .container-button-mobile{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .container-image-button-mobile{
+        height: auto;
+        flex-direction: column;
+    }
+    .profil-image-mobile{
+        align-self: flex-start;
+    }
 }
 /* END MOBILE VIEW X-SMALL*/
 
@@ -570,6 +587,9 @@ select:-webkit-autofill:focus {
         align-items: center;
         flex-direction: column;
         z-index: 3;
+    }
+    .project-title.project-show-title{
+        display: flex;
     }
     .manage-project-title a{
         padding-right: 20px;
@@ -660,6 +680,7 @@ select:-webkit-autofill:focus {
         display: flex;
         justify-content: space-between;
         height: 65px;
+        align-items: center;
     }
     .project-description-card{
         margin-top: 20px;
@@ -816,6 +837,23 @@ select:-webkit-autofill:focus {
         font-size: 15px;
         z-index: 3;
         text-align: center;
+        display: block;
+    }
+    .container-button-mobile{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .container-image-button-mobile{
+        height: auto;
+        flex-direction: column;
+    }
+    .profil-image-mobile{
+        align-self: flex-start;
+    }
+    .container-btn{
+        justify-content: space-between!important;
     }
 }
 /* END TABLET VIEW SMALL TO MEDIUM*/
@@ -1335,6 +1373,9 @@ a:hover {
     bottom: 0;
     margin-bottom: 30px;
 }
+a.container-arrow {
+    justify-content: center;
+}
 .arrow span{
     display: block;
     width: 30px;
@@ -1401,4 +1442,13 @@ a:hover {
     display: flex;
     justify-content: center;
     margin: auto;
+}
+.home-banner-image-project{
+    max-height: 450px;
+}
+.project-description{
+    overflow-wrap: break-word;
+}
+.project-plan-card{
+    overflow-wrap: break-word;
 }
