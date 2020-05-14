@@ -118,7 +118,7 @@ class ProjectController extends AbstractController
         $requests = $requestManager->selectRequestForCollaboration($id);
 
         foreach ($collaborators as $collaborator) {
-            if ($collaborator['user_id'] == $_SESSION['id']) {
+            if (!empty($_SESSION['id']) and $collaborator['user_id'] == $_SESSION['id']) {
                 $isCollaborator = true;
             }
         }
@@ -129,14 +129,7 @@ class ProjectController extends AbstractController
             }
         }
 
-        if (!empty($_POST)) {
-            if ($_POST['isLiked'] == 0) {
-                $likeManager->like($_POST);
-            } else {
-                $likeManager->delete($_POST);
-            }
-            header('Location: /project/show/' . $id);
-        }
+        $this->like($_POST, $id);
 
         if (!empty($requests)) {
             foreach ($requests as $key => $request) {
@@ -405,6 +398,18 @@ class ProjectController extends AbstractController
             return $this->twig->render('Project/ask-collaboration.html.twig', ['project' => $project,
                 'projectOwner' => $projectOwner, 'currentUserInfo' => $currentUserInfo,
                 'skills' => $skills, 'errors' => $errorsArray]);
+        }
+    }
+    public function like($post, $id)
+    {
+        $likeManager = new LikeManager();
+        if (!empty($post)) {
+            if ($_POST['isLiked'] == 0) {
+                $likeManager->like($post);
+            } else {
+                $likeManager->delete($post);
+            }
+            header('Location: /project/show/' . $id);
         }
     }
 }
