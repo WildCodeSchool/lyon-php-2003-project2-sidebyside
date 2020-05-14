@@ -7,7 +7,8 @@
 
 /* GENERAL CSS */
 main {
-    margin-top: 62px;
+    margin-top: 72px;
+    min-height: 100vh;
 }
 h1 {
     padding-top: 20px;
@@ -53,7 +54,6 @@ h2 {
     font-weight: bold;
     background-color: var(--secondary-color);
     color: var(--primary-color);
-    font-weight: 900;
     font-family: Roboto, sans-serif;
 }
 .container-button {
@@ -111,11 +111,13 @@ h2 {
 .btn-modify-manage {
     align-self: flex-end;
     right: 25px;
+    justify-content: flex-end;
 }
 .btn-home-create {
     height: 56px;
     width: 350px;
     font-size: 30px;
+    position: absolute;
 }
 
 .profil-home-carousel-small {
@@ -151,6 +153,7 @@ h2 {
     padding: 10px
 }
 .filter-home-search {
+    padding-top: 80px;
     width: 100%;
     display: flex;
     flex-flow: row-reverse;
@@ -527,6 +530,13 @@ select:-webkit-autofill:focus {
     .project-title {
         font-size: 20px;
         width: 170px;
+        display: contents;
+    }
+    .manage-project-title a{
+        padding-right: 20px;
+    }
+    .container-banner-project a {
+        justify-content: flex-end;
     }
     .project-title-home h5 {
         font-size: 20px;
@@ -560,6 +570,12 @@ select:-webkit-autofill:focus {
         align-items: center;
         flex-direction: column;
         z-index: 3;
+    }
+    .manage-project-title a{
+        padding-right: 20px;
+    }
+    .container-banner-project a {
+        justify-content: flex-end;
     }
     .message-container-myMsg {
         width: 100%;
@@ -630,6 +646,7 @@ select:-webkit-autofill:focus {
         font-size: 20px;
         padding-bottom: 10px;
         text-align: end;
+        display: contents;
     }
     .app-title {
         font-size: 42px;
@@ -844,6 +861,7 @@ select:-webkit-autofill:focus {
         margin-top: 70px;
         position: absolute;
         color: white;
+        width: 100%;
     }
     .app-title {
         font-size: 62px;
@@ -911,6 +929,7 @@ select:-webkit-autofill:focus {
         width: 8%;
         height: 30%;
         margin-top: 15%;
+        display: none;
     }
     .similar-project-card{
         padding: 0;
@@ -955,6 +974,11 @@ select:-webkit-autofill:focus {
     }
     .body-all-project h5 {
         text-align: end;
+    }
+    .container-banner-project .btn-modify-manage {
+        align-self: flex-end;
+        right: 25px;
+        justify-content: flex-end;
     }
 }
 /* END DESKTOP VIEW LARGE */
@@ -1253,7 +1277,7 @@ div.search-profil-description p {
 div.carousel-similar h5 {
     font-weight: bold;
     font-size: 30px;
-    background: #fff;
+    background: var(--secondary-color);
     color: #000;
     justify-content: center;
     margin: auto;
@@ -1358,4 +1382,23 @@ a:hover {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
     background: var(--secondary-color);
+}
+.btn-search-filter{
+    background: var(--secondary-color);
+    margin: 5px;
+    border-radius: 5px;
+    margin-right: 35px;
+    width: 100px;
+    padding: 0 10px;
+}
+.anchor-search{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+.invalid-message{
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
 }

@@ -1,4 +1,4 @@
-a{
+footer a{
     text-decoration: none;
     color: var(--background-color);
 }
@@ -27,7 +27,7 @@ a{
 .footer-cgu-mobile{
     display: none;
 }
-a:hover{
+footer a:hover{
     color: var(--secondary-color);
 }
 @media all and (max-width: 700px){
