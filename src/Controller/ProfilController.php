@@ -178,6 +178,7 @@ class ProfilController extends AbstractController
 
     public function messages($id)
     {
+        $this->acces($_SESSION);
         $messageManager = new MessageManager();
         $userManager = new UserManager();
         $messages = $messageManager->selectByUserReturnAuthor($id);

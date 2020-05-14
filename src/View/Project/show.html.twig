@@ -1,5 +1,6 @@
 {% extends 'layout.html.twig' %}
 
+
 {% block content %}
     <div class="container-banner-project">
         <h1 class="project-title">
@@ -81,7 +82,7 @@
                     {% if userInfo|length == 1 %}
                         <img src="/assets/images/icons/miscellaneous.png">
                         <p class="requests-popup-p">
-                            <a href="/Project/manage/{{ userInfo[1]['project_id'] }}" class="aProfilName">
+                            <a href="/Project/manage/{{ currentProject.id }}" class="aProfilName">
                                 <strong>
                                     {{ userInfo[0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
                                     veut collaborer
@@ -91,7 +92,7 @@
                     {% elseif userInfo|length == 2 %}
                         <img src="/assets/images/icons/miscellaneous.png">
                         <p class="requests-popup-p">
-                            <a href="/Project/manage/{{ userInfo[1]['project_id'] }}" class="aProfilName">
+                            <a href="/Project/manage/{{ currentProject.id }}" class="aProfilName">
                                 <strong>{{ userInfo[0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
                                     et {{ userInfo[1][0]['first_name'] }} {{ userInfo[1][0]['last_name'] }}
                                     veulent collaborer
@@ -101,7 +102,7 @@
                     {% elseif userInfo|length > 2 %}
                         <img src="/assets/images/icons/miscellaneous.png">
                         <p class="requests-popup-p">
-                            <a href="/Project/manage/{{ userInfo[1]['project_id'] }}" class="aProfilName">
+                            <a href="/Project/manage/{{ currentProject.id }}" class="aProfilName">
                                 <strong>{{ userInfo [0][0]['first_name'] }} {{ userInfo[0][0]['last_name'] }}
                                     et {{ userInfo|length - 1 }}
                                     autres Siders veulent collaborer
@@ -115,7 +116,9 @@
                 <h2 class="project-description-title">Description</h2>
                 <div class="container-content-card">
                     <div class="card-body project-description">
-                        {{ currentProject.description }}
+                        {% for line in currentProject.description %}
+                            <div>{{ line }}</div>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/project.png">
                 </div>
@@ -125,7 +128,9 @@
                 <h2 class="project-plan-title">Plan de Projet</h2>
                 <div class="container-content-card">
                     <div class="card-body project-plan-description">
-                        {{ currentProject.plan }}
+                        {% for line in currentProject.plan %}
+                            <div>{{ line }}</div>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/architecture.png">
                 </div>
@@ -146,7 +151,9 @@
                 <h2 class="about-team-project-title">A propos de l'équipe</h2>
                 <div class="container-content-card">
                     <div class="card-body about-team-project-description">
-                        {{ currentProject.team_description }}
+                        {% for line in currentProject.team_description %}
+                            <div>{{ line }}</div>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/group.png">
                 </div>

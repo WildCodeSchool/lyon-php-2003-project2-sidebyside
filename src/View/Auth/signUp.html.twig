@@ -1,6 +1,15 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}Inscription - SideBySide{% endblock %}
+{% block stylesheet %}
+    <style>
+        main {
+            min-height: auto;
+        }
+    </style>
+{% endblock %}
+
+
 
 {% block header %}
     <header>
@@ -87,6 +96,10 @@
         </form>
     </div>
 {% endblock %}
+
+{% block footer %}
+{% endblock %}
+
 
 {% block javascript %}
     <script src = "/assets/js/getImageName.js" />

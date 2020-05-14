@@ -584,6 +584,9 @@ Hate de venir vous aider dans vos projets et apporter mon expertise', null, '202
 INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (30, 'Malin', 'Sophia', 'Sophia@gmail.com', '$2y$10$NCBNuO6E7gtxnV8nxuFG8ulFn6yZEvXkTdud6/gZzjgh/ouXtvPZu', '69000', '/assets/uploads/profils/5eb91ccbd23af.png', '/assets/uploads/profils/5eb91d6112983.png', 'Bonjour,
 Moi c''est Sophia, Fan de bricolage depuis petite.
 J''ai hâte de participer à vos projets.', null, '2020-05-11 11:06:26');
+INSERT INTO sidebyside.users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (32, 'Martinot', 'Matthieu', 'Matthieu@gmail.com', '$2y$10$FmFicDredTYzh4.23Yakl.07aBHSiSpLcJELjodpzMMjXoAtgcutG', '69005', '/assets/uploads/profils/5ebbff86a420d.png', '/assets/uploads/profils/5eb92db93e0a5.jpg', 'Zen comme Zen
+Hub comme Hub
+Soumissez', null, '2020-05-13 16:09:10');
 
 
 
