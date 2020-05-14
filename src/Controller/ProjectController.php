@@ -125,7 +125,7 @@ class ProjectController extends AbstractController
         }
 
         foreach ($requests as $request) {
-            if ($request['user_id'] == $_SESSION['id']) {
+            if (!empty($_SESSION['id']) and $request['user_id'] == $_SESSION['id']) {
                 $isRequest = true;
             }
         }
