@@ -1,24 +1,40 @@
-<div class="row">
+<div class="row container-all-profils">
+    {% if projects is empty %}
+        <div class="invalid-auth">Aucun projet n'a été trouvé !</div>
+    {% endif %}
     {% for project in projects %}
-        <div class="card col-12 col-sm-12 col-md-6 col-lg-6" style="width: 18rem;">
+        <div class="card col-8 col-md-5 card-all-profil" style="">
             <a href="/Project/show/{{ project.id }}">
-                <img src="/assets/images/project_img.jpg/" class="card-img-top" alt="project-image">
-                <div class="card-body">
-                    <h5 class="title">{{ project.title }}</h5>
-                    <div class="collapse" id="collapseDescription{{ project.id }}">
-                        <div class="card card-body">
-                            {{ project.description }}
+                <div class="project-card-banner-image home-banner-image-project">
+                    <img src="{{ project.banner_image }}" class="card-img-top card-image-all-profil" alt="project-image">
+                </div>
+                <div class="image-profil-all-project">
+                    <img class="project-owner-profil-image-all-project"
+                         src="{{ project.profil_picture }}">
+                </div>
+                <div class="card-body body-all-project">
+                    <h5 class="title all-project-title">{{ project.title }}</h5>
+                </div>
+            </a>
+            <section class="section section-select">
+                <div class="container-select container-search-project">
+                    <div class="content is-medium">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 style="font-weight: bold;">En savoir plus..</h3>
+                                <div class="toggle-icon-container">
+                                    <i class="fas fa-chevron-right" id="fa-project"></i>
+                                </div>
+                            </div>
+                            <div class="box-body collapsed">
+                                <div class="card card-body">
+                                    {{ project.description }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </a>
-            <p>
-                <button class="btn" type="button" data-toggle="collapse"
-                        data-target="#collapseDescription{{ project.id }}" aria-expanded="false"
-                        aria-controls="collapseDescription">
-                    En savoir plus..
-                </button>
-            </p>
+            </section>
         </div>
     {% endfor %}
 </div>

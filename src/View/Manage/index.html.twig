@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Side-by-Side{% endblock %}
+
+{% block content %}
+    <div class="container-banner-project">
+        <h1 class="project-title manage-project-title">
+            <a href="/Project/show/{{ project.id }}">{{ project.title }}</a>
+        </h1>
+        {% if projectOwner.id == isConnected.id %}
+            <a class="project-title btn-modify-manage" href="/Project/edit/{{ project.id }}">
+                <button class="btn btn-yellow-square" type="button">Modifier</button>
+            </a>
+        {% endif %}
+        <img class="banner-project-image" src="{{ project.banner_image }}">
+    </div>
+    <div class="container-image-button">
+        <a href="/Profil/user/{{ projectOwner.id }}">
+            <div class="container-image-profil">
+                <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+            </div>
+        </a>
+    </div>
+    <h1>Gestion du Projet</h1>
+    {% if projectOwner.id == isConnected.id %}
+        <h3 class="h3-title">Demandes de collaboration</h3>
+        {% if requests is defined %}
+            {% include 'Manage/_requestCarousel.html.twig' %}
+        {% else %}
+            <div class="manage-info">
+                <p>Aucune demande de collaboration</p>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% include 'Manage/_formMessage.html.twig' %}
+
+{% endblock %}

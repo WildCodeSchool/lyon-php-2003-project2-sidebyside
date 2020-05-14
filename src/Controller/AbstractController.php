@@ -9,6 +9,7 @@
 
 namespace App\Controller;
 
+use App\Model\UserManager;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
@@ -39,5 +40,15 @@ abstract class AbstractController
         );
         $this->twig->addExtension(new DebugExtension());
         $this->twig->addGlobal('isConnected', $_SESSION);
+    }
+
+    public function acces(array $session) : bool
+    {
+        if (empty($session['id'])) {
+            header("Location: /auth/signin ");
+            return false;
+        } else {
+            return true;
+        }
     }
 }

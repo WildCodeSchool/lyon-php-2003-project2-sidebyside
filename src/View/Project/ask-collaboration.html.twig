@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+ {% block content %}
+     <main style="margin-top: 72px">
+         <div class="container-banner-project">
+             <h1 class="project-title">
+                 {{ project.title }}
+             </h1>
+             <img class="banner-project-image" src="{{ project.banner_image }}">
+         </div>
+
+         <div class="container">
+             <div class="row">
+                 <div class="container-image-button">
+                     <div class="container-image-profil">
+                         <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <form method="POST" class="ask-form">
+             <h1> Demande de Collaboration</h1>
+             <div class="form-group area-ask">
+                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                           placeholder="Votre message" name="ask-message"></textarea>
+                 {% if errors.empty is defined %}
+                     <small class="invalid-auth">{{ errors.empty }}</small>
+                 {% endif %}
+             </div>
+             <button type="submit" class="btn btn-sign">Envoyer</button>
+             <small id="" class="forget">Votre mail ainsi que votre nom complet seront communiqués au créateur du
+                 projet</small>
+         </form>
+     </main>
+ {% endblock %}

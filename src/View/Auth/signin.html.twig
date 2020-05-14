@@ -1,6 +1,15 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}Connexion{% endblock %}
+{% block stylesheet %}
+    <style>
+        main{
+            margin-top: 0;
+            min-height: auto;
+        }
+    </style>
+{% endblock %}
+
 
 {% block header %}
     <!----------------- Header Logo + Back Button ----------------->
@@ -11,7 +20,7 @@
                 <img src="/assets/images/sbs_black.png" width="50px" alt="">
             </a>
             <!-- Button Back to Home -->
-            <a href="" class="link-back">
+            <a href="/" class="link-back">
                 <button type="submit" class="btn btn-back">Retour</button>
             </a>
         </div>
@@ -46,3 +55,7 @@
         </div>
     </div>
 {% endblock %}
+
+{% block footer %}
+{% endblock %}
+

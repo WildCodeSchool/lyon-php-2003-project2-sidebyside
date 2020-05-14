@@ -1,6 +1,15 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}Inscription - SideBySide{% endblock %}
+{% block stylesheet %}
+    <style>
+        main {
+            min-height: auto;
+        }
+    </style>
+{% endblock %}
+
+
 
 {% block header %}
     <header>
@@ -24,21 +33,21 @@
                 <input type="text" class="form-control form-control-sign" id="first_name"
                        placeholder="Prenom*" name="first_name" value="{{ user.first_name }}">
                 {% if errors.post['first_name'] is defined %}
-                    <small class="text-danger">{{ errors.post['first_name'] }}</small>
+                    <small class="invalid-auth"">{{ errors.post['first_name'] }}</small>
                 {% endif %}
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-sign" id="last_name"
                        placeholder="Nom*" name="last_name" value="{{ user.last_name }}">
                 {% if errors.post['last_name'] is defined %}
-                    <small class="text-danger">{{ errors.post['last_name'] }}</small>
+                    <small class="invalid-auth"">{{ errors.post['last_name'] }}</small>
                 {% endif %}
             </div>
             <div class="form-group">
                 <input type="email" class="form-control form-control-sign" id="email"
                        placeholder="Email*" name="email" value="{{ user.email }}">
                 {% if errors.post['email'] is defined %}
-                    <small class="text-danger">{{ errors.post['email'] }}</small>
+                    <small class="invalid-auth">{{ errors.post['email'] }}</small>
                 {% endif %}
             </div>
             <div class="form-group">
@@ -51,30 +60,30 @@
                 <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
                 <input type="file" id="profil_picture" name="profil_picture" style="display: none">
                 {% if errors.upload is defined %}
-                    <small class="text-danger">{{ errors.upload }}</small>
+                    <small class="invalid-auth">{{ errors.upload }}</small>
                 {% endif %}
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-sign" id="password"
                        placeholder="Mot de passe*" name="password" value="">
                 {% if errors.post['password'] is defined %}
-                    <small class="text-danger">{{ errors.post['password'] }}</small>
+                    <small class="invalid-auth">{{ errors.post['password'] }}</small>
                 {% endif %}
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-sign" id="password_check"
                        placeholder="Répétez votre Mot de passe*" name="password_check" value="">
                 {% if errors.post['pwd'] is defined %}
-                    <small class="text-danger">{{ errors.post['pwd'] }}</small>
+                    <small class="invalid-auth"">{{ errors.post['pwd'] }}</small>
                 {% elseif errors.post['password_check'] is defined %}
-                    <div><small class="text-danger">{{ errors.post['password_check'] }}</small></div>
+                    <div><small class="invalid-auth">{{ errors.post['password_check'] }}</small></div>
                 {% endif %}
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-sign" id="zip_code"
                        placeholder="Code Postal*" name="zip_code" value="">
                 {% if errors.post['zip_code'] is defined %}
-                    <small class="text-danger">{{ errors.post['zip_code'] }}</small>
+                    <small class="invalid-auth">{{ errors.post['zip_code'] }}</small>
                 {% endif %}
             </div>
             <div class="form-group form-group-submit">
@@ -87,6 +96,10 @@
         </form>
     </div>
 {% endblock %}
+
+{% block footer %}
+{% endblock %}
+
 
 {% block javascript %}
     <script src = "/assets/js/getImageName.js" />

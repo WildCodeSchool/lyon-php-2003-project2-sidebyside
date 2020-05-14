@@ -1,0 +1,38 @@
+<div class="card manage-card">
+    <div class="card-body">
+        <div class="card-request-top">
+            <a href="/Profil/user/{{ userInfo[i].id }}">
+                <div class="container-profil-picture">
+                    <img class="project-owner-profil-image profil-image" src="{{ userInfo[i].profil_picture }}">
+                </div>
+            </a>
+            <div class="card-request-top-info">
+                <a class="aProfilName" href="/Profil/user/{{ userInfo[i].id }}">
+                    <h5 class="card-title">{{ userInfo[i].first_name }} {{ userInfo[i].last_name }}</h5>
+                </a>
+                <h6 class="card-subtitle mb-2 text-muted">{{ userInfo[i].email }}</h6>
+                <p>dép. ({{ userInfo[i].zip_code|slice(0, 2) }})</p>
+                <p>
+                    {% for skill in userInfo[i]['skills'] %}
+                        <span class="skill-name">#{{ skill.name }} </span>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        <div class="card-request-content">
+            <p class="card-text card-text-manage">{{ requests[i].message }}</p>
+            <div class="card-request-btn-container">
+                <a href="/project/setCollaborator/{{ userInfo[i].id }}/{{ project.id }}/{{ project.title }}/1">
+                    <button class="btn btn-yellow-round" type="button">
+                        Accepter
+                    </button>
+                </a>
+                <a href="/project/setCollaborator/{{ userInfo[i].id }}/{{ project.id }}/{{ project.title }}/0">
+                    <button class="btn btn-white-round" type="button">
+                        Ignorer
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

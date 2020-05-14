@@ -11,7 +11,7 @@ class ProjectManager extends AbstractManager
     /**
      *  Initializes this class.
      */
-  
+
     public function __construct()
     {
         parent::__construct(self::TABLE);
@@ -21,36 +21,78 @@ class ProjectManager extends AbstractManager
      * @param string $keyword
      * @return array
      */
-    public function selectByWord(string $keyword) : array
+    public function selectByWord(string $keyword): array
     {
-        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, u.first_name, p.id  FROM projects p
-                  JOIN users u ON p.project_owner_id=u.id WHERE u.first_name LIKE :keyword OR p.title LIKE :keyword 
-                  OR p.description LIKE :keyword OR p.zip_code LIKE :keyword OR u.first_name LIKE :keyword";
+        $query = "SELECT p.id, p.title, p.description, p.zip_code, p.banner_image, p.created_at, p.project_owner_id,
+                    u.first_name,  u.last_name, u.profil_picture
+                    FROM projects p 
+                    JOIN users u ON p.project_owner_id=u.id  
+                    WHERE title LIKE :keyword 
+                    OR p.zip_code LIKE :keyword
+                    OR u.first_name LIKE :keyword
+                    OR u.last_name LIKE :keyword";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':keyword', "%$keyword%");
         $statement->execute();
 
-        return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        return $statement->fetchAll();
+    }
+
+    /**
+     * @param string $userId
+     * @return array
+     */
+    public function selectIWorkOnByUserId(string $userId): array
+    {
+        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, p.id, p.project_owner_id, phc.user_id
+                    FROM projects p 
+                    LEFT JOIN project_has_collaborators phc
+                    ON phc.project_id=p.id
+                    WHERE phc.user_id=:id
+                 ";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':id', $userId);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    /**
+     * @param string $userId
+     * @return array
+     */
+    public function selectByOwnerId(string $userId): array
+    {
+        $query = "SELECT p.title, p.description, p.zip_code, p.banner_image, p.id, p.project_owner_id
+                    FROM projects p
+                    WHERE p.project_owner_id=:id";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':id', $userId);
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
 
     /**
      * @param array $project
+     * @param int $sessionId
      * @return int
      */
-    public function insert(array $project): int
+    public function insert(array $project, int $sessionId): int
     {
         // prepared request
-        //TODO category and skills
+
         $statement = $this->pdo->prepare(
             "INSERT INTO $this->table
 (`title`, `description`, `deadline`, `zip_code`, `project_owner_id`, `category_id`, `banner_image`, `created_at`)
                         VALUES 
- (:title, :description, :deadline, :zip_code, 1, :category_id, :banner_image, NOW())"
+ (:title, :description, :deadline, :zip_code, :project_owner_id , :category_id, :banner_image, NOW())"
         );
         $statement->bindValue('title', $project['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $project['description'], \PDO::PARAM_STR);
         $statement->bindValue('deadline', $project['deadline']);
         $statement->bindValue('zip_code', $project['zip_code'], \PDO::PARAM_STR);
+        $statement->bindValue('project_owner_id', $sessionId, \PDO::PARAM_INT);
         $statement->bindValue('category_id', $project['category_id'], \PDO::PARAM_INT);
         $statement->bindValue('banner_image', $project['banner_image']);
 
@@ -74,10 +116,10 @@ class ProjectManager extends AbstractManager
         return $this->pdo->query('SELECT id FROM ' . $this->table . ' ORDER BY id DESC ')->fetch();
     }
 
-    public function selectProjectOwner($id)
+    public function askProjectOwner($id)
     {
         $statement = $this->pdo->prepare('SELECT u.profil_picture, u.id FROM users as u
-                JOIN projects as p ON u.id = p.project_owner_id WHERE u.id=:id');
+                JOIN projects as p ON u.id = p.project_owner_id WHERE p.project_owner_id=:id');
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
@@ -85,6 +127,7 @@ class ProjectManager extends AbstractManager
     }
 
     // REQUEST TO UPDATE PROJECT INFOS
+
     /**
      * @param array $project
      * @return bool

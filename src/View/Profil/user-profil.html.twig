@@ -1,0 +1,70 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ current_user.first_name }}{% endblock %}
+
+{% block content %}
+    <div class="container-banner-project">
+        <h1 class="project-title project-show-title">
+            {{ current_user.first_name|capitalize }} {{ current_user.last_name|capitalize }}
+        </h1>
+        <img class="banner-project-image" src="{{ current_user.banner_image }}">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="container-image-button">
+                <a href="/Profil/user/{{ current_user.id }}">
+                    <div class="container-image-profil">
+                        <img class="project-owner-profil-image" src="{{ current_user.profil_picture }}">
+                    </div>
+                </a>
+                <div class="container-button">
+                    {% if isConnected.id == current_user.id %}
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/profil/updateuser/{{ isConnected.id }}';">
+                            Modifier
+                        </button>
+                    {% else %}
+                        <button class="btn btn-yellow-square" type="button"
+                                onclick="window.location.href = '/profil/messages/{{ current_user.id }}';">
+                            Contacter
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profil-page-content">
+        <div class="card col-8 project-description-card profil">
+            <h2 class="project-description-title">Biographie</h2>
+            <div class="container-content-card">
+                <div class="card-body project-description">
+                    {% for line in current_user.description %}
+                        <div>{{ line }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="card col-8 project-description-card">
+            <h2 class="project-description-title">Compétences</h2>
+            <div class="container-content-card">
+                <div class="card-body project-description profil-skills">
+                    {% for skill in skills %}
+                        {% if skill.user_id == current_user.id %}
+                            <p class="skill-name">#{{ skill.name }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="card col-8 project-description-card profil">
+            <h2 class="project-description-title">Projets en cours</h2>
+            <div class="user-project-carousel">
+                {% if projects[0]|length == 0 and projects[1]|length == 0 %}
+                    <p>Aucun projets en cours</p>
+                {% else %}
+                    {% include 'Profil/_myProjectsCaroussel.html.twig' %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

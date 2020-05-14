@@ -59,17 +59,30 @@ a.navbar-create-project {
     font-size: 25px;
     color: #000;
     text-decoration: none;
+    border-radius: 5px;
 }
 .navbar-profil{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 25px;
+    background: #000;
+    z-index: 3;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
     height: 50px;
     width: 50px;
+    border: none;
+    padding: 0;
+}
+.navbar-profil-img {
+    /*margin-top: -5px;*/
+    height: 50px;
+}
+.dropdown-menu {
+    transform: translateX(-120px);
 }
 .container-right>* {
-    margin-left: 20px;
+    margin: 0 10px;
 }
 
 /*_______________________________________________ Mobile View _______________________________________________*/
@@ -79,14 +92,12 @@ a.navbar-create-project {
         padding: 10px 0 0 0;
     }
 
-    .navbar-profil {
-        display: none;
-    }
-
     .navbar-mobile {
         margin-bottom: 10px;
     }
-
+    .container-right>* {
+        margin: 0 10px 10px;
+    }
     .not-in-desktop {
         display: flex;
     }

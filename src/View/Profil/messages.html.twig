@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Messages: {{ user.first_name|capitalize }} {{ user.last_name|capitalize }}{% endblock %}
+
+{% block content %}
+    <div class="container-banner-project">
+        <h1 class="project-title">
+            {{ user.first_name|capitalize }} {{ user.last_name|capitalize }}
+        </h1>
+        <img class="banner-project-image" src="{{ user.banner_image }}">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="container-image-button">
+                <a href="/Profil/user/{{ user.id }}">
+                    <div class="container-image-profil">
+                        <img class="project-owner-profil-image" src="{{ user.profil_picture }}">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="message-container">
+        <h1>Messages</h1>
+
+        {% if isConnected.id != userId %}
+            {% include 'Profil/_formMessage.html.twig' %}
+        {% endif %}
+        {% if messages is empty %}
+            <small class="invalid-auth invalid-message">Aucun message !</small>
+        {% endif %}
+        {% if isConnected.id != userId %}
+            {% for message in messages %}
+                {% if message.to_user is not empty and message.author != 1 %}
+                    {% include 'Profil/_messagesList.html.twig' %}
+                {% endif %}
+            {% endfor %}
+        {% else%}
+            {% for message in messages %}
+                {% if message.to_user is not empty %}
+                    {% include 'Profil/_messagesList.html.twig' %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

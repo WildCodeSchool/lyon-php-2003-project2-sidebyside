@@ -1,0 +1,9 @@
+.not-found{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    font-size: 200px;
+    font-weight: bold;
+    text-shadow: 10px 10px 0px var(--secondary-color);
+}

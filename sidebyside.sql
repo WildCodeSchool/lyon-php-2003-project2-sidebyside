@@ -37,7 +37,6 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Batiment'),(2,'Electronic'),(3,'Jardinage'),(4,'Internet');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,15 +48,15 @@ DROP TABLE IF EXISTS `project_has_collaborators`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `project_has_collaborators` (
-  `projet_id` int NOT NULL,
+  `project_id` int NOT NULL,
   `user_id` int NOT NULL,
   `join_at` date NOT NULL,
   `comment` varchar(600) DEFAULT NULL,
   `comment_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`projet_id`,`user_id`),
+  PRIMARY KEY (`project_id`,`user_id`),
   KEY `fk_projet_has_users_users1_idx` (`user_id`),
-  KEY `fk_projet_has_users_projet1_idx` (`projet_id`),
-  CONSTRAINT `fk_projet_has_users_projet1` FOREIGN KEY (`projet_id`) REFERENCES `projects` (`id`),
+  KEY `fk_projet_has_users_projet1_idx` (`project_id`),
+  CONSTRAINT `fk_projet_has_users_projet1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`),
   CONSTRAINT `fk_projet_has_users_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -68,7 +67,6 @@ CREATE TABLE `project_has_collaborators` (
 
 LOCK TABLES `project_has_collaborators` WRITE;
 /*!40000 ALTER TABLE `project_has_collaborators` DISABLE KEYS */;
-INSERT INTO `project_has_collaborators` VALUES (1,2,'2020-04-10',NULL,NULL),(1,5,'2020-04-01',NULL,NULL),(2,3,'2020-03-12','',NULL),(3,7,'2020-02-01',NULL,NULL),(4,5,'2020-04-04','',NULL);
 /*!40000 ALTER TABLE `project_has_collaborators` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +123,6 @@ CREATE TABLE `project_need_skills` (
 
 LOCK TABLES `project_need_skills` WRITE;
 /*!40000 ALTER TABLE `project_need_skills` DISABLE KEYS */;
-INSERT INTO `project_need_skills` VALUES (1,1),(2,1),(5,1),(8,2),(9,2),(7,3),(3,4),(5,4);
 /*!40000 ALTER TABLE `project_need_skills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +159,6 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Maison en bois','Voici mon projet de maison en bois naturel bla blaokjauihsiufruifi','PLAN oijfeorijjehgegoijeroigjeroijgeoijrgoijeg','54879','2020-04-18',NULL,NULL,1,1,'2020-01-01'),(2,'Cabanon de jardin','Je voudrais une cabane de jardin pour mes enfant, venez maidez','PLAN oijfeorijjehgegoijeroigjeroijgeoijrgoijeg','01589','2020-08-22',NULL,NULL,2,1,'2020-01-10'),(3,'Jardin autonome partager','Créeons ensemble un jardin que l\'on partagerait ensemble','PLAN oijfeorijjehgegoijeroigjeroijgeoijrgoijeg','73000','2020-08-22',NULL,NULL,3,3,'2020-01-20'),(4,'Plateforme d\'echange','Developpont une plateforme d\'echange entre particulier','PLAN oijfeorijjehgegoijeroigjeroijgeoijrgoijeg','95000','2021-04-10',NULL,NULL,4,4,'2020-02-15');
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,18 +182,17 @@ CREATE TABLE `skills` (
 
 LOCK TABLES `skills` WRITE;
 /*!40000 ALTER TABLE `skills` DISABLE KEYS */;
-INSERT INTO `skills` VALUES (1,'Menuisier'),(2,'Macon'),(3,'Electricien'),(4,'Devellopeur'),(5,'Electricien'),(6,'Bucheron'),(7,'Ingenieur'),(8,'Boulanger'),(9,'Guitariste');
 /*!40000 ALTER TABLE `skills` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_ask_collaboration_projets`
+-- Table structure for table `user_ask_collaboration_projects`
 --
 
-DROP TABLE IF EXISTS `user_ask_collaboration_projets`;
+DROP TABLE IF EXISTS user_ask_collaboration_projects;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
-CREATE TABLE `user_ask_collaboration_projets` (
+CREATE TABLE `user_ask_collaboration_projects` (
   `user_id` int NOT NULL,
   `project_id` int NOT NULL,
   `message` varchar(500) NOT NULL,
@@ -212,12 +207,12 @@ CREATE TABLE `user_ask_collaboration_projets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_ask_collaboration_projets`
+-- Dumping data for table `user_ask_collaboration_projects`
 --
 
-LOCK TABLES `user_ask_collaboration_projets` WRITE;
-/*!40000 ALTER TABLE `user_ask_collaboration_projets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_ask_collaboration_projets` ENABLE KEYS */;
+LOCK TABLES user_ask_collaboration_projects WRITE;
+/*!40000 ALTER TABLE user_ask_collaboration_projects DISABLE KEYS */;
+/*!40000 ALTER TABLE user_ask_collaboration_projects ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -276,7 +271,6 @@ CREATE TABLE `user_has_comments` (
 
 LOCK TABLES `user_has_comments` WRITE;
 /*!40000 ALTER TABLE `user_has_comments` DISABLE KEYS */;
-INSERT INTO `user_has_comments` VALUES (1,2,'Super user',1,'2020-04-17 21:56:52'),(1,3,'Super user',4,'2020-04-15 21:57:02'),(2,1,'Super user',5,'2020-04-17 21:56:52'),(2,3,'Super user',2,'2020-04-15 21:57:02'),(3,4,'Super user',1,'2020-04-17 21:56:52'),(3,5,'Super user',2,'2020-04-15 21:57:02'),(4,1,'Super user',5,'2020-04-17 21:56:52'),(4,2,'Super user',3,'2020-04-15 21:57:02'),(5,3,'Super user',1,'2020-04-09 21:57:37'),(5,4,'Super user',2,'2020-04-11 21:56:52'),(5,6,'Super user',4,'2020-04-14 21:57:58'),(5,7,'Super user',3,'2020-04-17 21:56:52'),(7,1,'Super user',5,'2020-04-17 21:56:52');
 /*!40000 ALTER TABLE `user_has_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +298,6 @@ CREATE TABLE `user_has_skills` (
 
 LOCK TABLES `user_has_skills` WRITE;
 /*!40000 ALTER TABLE `user_has_skills` DISABLE KEYS */;
-INSERT INTO `user_has_skills` VALUES (7,1),(1,3),(1,4),(5,4),(6,5),(3,6),(2,7),(4,7),(5,8),(6,8),(3,9),(4,9);
 /*!40000 ALTER TABLE `user_has_skills` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,6 +330,32 @@ LOCK TABLES `user_like_projects` WRITE;
 /*!40000 ALTER TABLE `user_like_projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8 */;
+CREATE TABLE  `messages`
+(
+    id         int auto_increment
+        primary key,
+    author     int      not null,
+    to_project int      null,
+    to_user    int      null,
+    message    text     not null,
+    created_at datetime not null
+);
+
+--
+-- Dumping data for table `user_like_projects`
+--
+
+
+
+
 --
 -- Table structure for table `users`
 --
@@ -364,9 +383,216 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+INSERT INTO category (id, name) VALUES (1, 'Internet');
+INSERT INTO category (id, name) VALUES (2, 'Construction');
+INSERT INTO category (id, name) VALUES (3, 'Musique');
+INSERT INTO category (id, name) VALUES (4, 'Rénovation');
+INSERT INTO category (id, name) VALUES (5, 'Electronique');
+INSERT INTO category (id, name) VALUES (6, 'Jardinage');
+INSERT INTO project_has_collaborators (project_id, user_id, join_at, comment, comment_at) VALUES (5, 12, '2020-05-11', null, null);
+INSERT INTO project_has_collaborators (project_id, user_id, join_at, comment, comment_at) VALUES (5, 13, '2020-05-11', null, null);
+INSERT INTO project_has_collaborators (project_id, user_id, join_at, comment, comment_at) VALUES (7, 14, '2020-05-11', null, null);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (13, 5);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (14, 5);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (17, 5);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (18, 6);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (19, 6);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (1, 7);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (3, 7);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (4, 7);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (5, 7);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (7, 7);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (18, 8);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (19, 8);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (21, 9);
+INSERT INTO project_need_skills (skill_id, project_id) VALUES (22, 9);
+INSERT INTO projects (id, title, description, plan, zip_code, deadline, banner_image, team_description, project_owner_id, category_id, created_at) VALUES (5, 'Site d''échange', 'Bonjour,
+J''ai comme projet de créer un site d''échange entre particuliers.', 'Création d''une maquette.
+Création d''une charte graphique
+Rédaction des US et création du Backlog
+Création du Repo GitHub', '73000', '2020-12-01', '/assets/uploads/projects/5eb93739cb9d5.jpg', '', 14, 1, '2020-05-11 13:30:01');
+INSERT INTO projects (id, title, description, plan, zip_code, deadline, banner_image, team_description, project_owner_id, category_id, created_at) VALUES (6, 'Groupe de musique', 'Mon projet:
+
+Créer un groupe de musique Rock', null, '85000', '2021-01-08', '/assets/uploads/projects/5eb938748a6fd.jpg', null, 3, 1, '2020-05-11 13:35:16');
+INSERT INTO projects (id, title, description, plan, zip_code, deadline, banner_image, team_description, project_owner_id, category_id, created_at) VALUES (7, 'Ma maison autonome', 'Bonjour,
+Je décide enfin a poster sur le site le projet de ma vie.
+Qui est la création de ma maison 100% autonome.
+J''ai une faible expérience en construction donc j''ai besoin de votre aide.', null, '69000', '2020-11-21', '/assets/uploads/projects/5eb940ecaa80b.jpg', null, 5, 2, '2020-05-11 14:11:24');
+INSERT INTO projects (id, title, description, plan, zip_code, deadline, banner_image, team_description, project_owner_id, category_id, created_at) VALUES (8, 'Création de musiques', 'Dans l''univers de la musique depuis petit je recherche des collaborateur pour créer et publier des musique libre de droit pour les créateur de continue Youtube.', null, '73000', '2021-12-24', '/assets/uploads/projects/5eb942a8efebc.jpg', null, 22, 3, '2020-05-11 14:18:48');
+INSERT INTO projects (id, title, description, plan, zip_code, deadline, banner_image, team_description, project_owner_id, category_id, created_at) VALUES (9, 'Jardin collectif', 'Bonjour,
+J''ai pour projet d''acheter et partager une parcelle de terre afin de partager un potager.', null, '69000', '2020-10-17', '/assets/uploads/projects/5eb94540a76f6.jpg', null, 12, 6, '2020-05-11 14:29:52');
+INSERT INTO skills (id, name) VALUES (1, 'Menuiserie');
+INSERT INTO skills (id, name) VALUES (2, 'Carrelage');
+INSERT INTO skills (id, name) VALUES (3, 'Charpente');
+INSERT INTO skills (id, name) VALUES (4, 'Couvreur');
+INSERT INTO skills (id, name) VALUES (5, 'Électricité');
+INSERT INTO skills (id, name) VALUES (6, 'Géométrie');
+INSERT INTO skills (id, name) VALUES (7, 'Maconnerie');
+INSERT INTO skills (id, name) VALUES (8, 'Mécanique auto');
+INSERT INTO skills (id, name) VALUES (9, 'Peinture');
+INSERT INTO skills (id, name) VALUES (10, 'Plomberie');
+INSERT INTO skills (id, name) VALUES (11, 'Soudure');
+INSERT INTO skills (id, name) VALUES (13, 'Informatique');
+INSERT INTO skills (id, name) VALUES (14, 'Développement Web');
+INSERT INTO skills (id, name) VALUES (15, 'Électronique');
+INSERT INTO skills (id, name) VALUES (16, 'Pâtisserie');
+INSERT INTO skills (id, name) VALUES (17, 'Art Graphique');
+INSERT INTO skills (id, name) VALUES (18, 'Musique');
+INSERT INTO skills (id, name) VALUES (19, 'M.A.O');
+INSERT INTO skills (id, name) VALUES (20, 'Ingénierie');
+INSERT INTO skills (id, name) VALUES (21, 'Jardinerie');
+INSERT INTO skills (id, name) VALUES (22, 'Paysagiste');
+INSERT INTO user_ask_collaboration_projects (user_id, project_id, message, status, created_at) VALUES (12, 5, 'Bonjour,
+J''aimerais vous rejoindre dans le développement du site.
+
+Cordialement', 'ok', '2020-05-11 14:53:29');
+INSERT INTO user_ask_collaboration_projects (user_id, project_id, message, status, created_at) VALUES (13, 5, 'Salut,
+Je suis développeuse et j''aimerais participer au projet.', 'ok', '2020-05-11 15:21:01');
+INSERT INTO user_ask_collaboration_projects (user_id, project_id, message, status, created_at) VALUES (14, 7, 'Bonjour,
+Je Voudrais collaborer', 'ok', '2020-05-11 15:26:55');
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (4, 1);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (14, 1);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (17, 1);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (18, 1);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (23, 1);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (30, 1);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (4, 3);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (14, 3);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (23, 3);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (24, 3);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (6, 4);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (10, 5);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (14, 5);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (20, 5);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (30, 5);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (18, 6);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (6, 7);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (8, 7);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (14, 7);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (3, 8);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (10, 8);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (21, 8);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (25, 8);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (7, 9);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (19, 9);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (30, 9);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (24, 10);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (7, 11);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (18, 11);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (21, 11);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (3, 13);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (9, 13);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (14, 13);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (15, 13);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (16, 13);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (17, 13);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (18, 13);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (9, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (12, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (13, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (14, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (15, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (16, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (17, 14);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (1, 15);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (19, 15);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (5, 16);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (26, 16);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (2, 17);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (22, 17);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (24, 17);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (2, 18);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (3, 18);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (15, 18);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (19, 18);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (22, 18);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (15, 19);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (1, 20);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (2, 20);
+INSERT INTO user_has_skills (user_id, skill_id) VALUES (26, 20);
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (1, 'Siders', 'Bot', 'Bot@gmail.com', '$2y$10$JxL743/w0pp23xeDyTa7OOAwrCZcSKItyFh6O8ABIBX1VdEiL3Aq6', '73000', '/assets/uploads/profils/5eb91e2a8c8a8.gif', '/assets/uploads/profils/5eb91fc607c62.jpg', 'Bonjour,
+Mon petit prénom pour les intimes c''est Side
+C''es moi le Bot du site, qui m''occupe d''envoyer vos petit messages avec amour.', null, '2020-05-11 10:58:25');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (2, 'Carré', 'Alice', 'Alice@gmail.com', '$2y$10$UFeLRX2wfUfWf6niBmy91Or7u82G86ybGgaeYEzRDxTjJtI8.rflq', '73500', '/assets/uploads/profils/5eb920d636cae.png', '/assets/uploads/profils/5eb920d636ce6.png', 'Bonjour,
+Alice, ingénieur de métiers, je suis passionné par la musique et l''art', null, '2020-05-11 10:41:27');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (3, 'Cugnard', 'Johnny', 'Johnny@gmail.com', '$2y$10$b0gSrE7FzF2YI/5WvTrJ3ONPoprSnUnrpVjtpaRXWg7QBytB6PxXy', '73000', '/assets/uploads/profils/5eb924351067d.jpg', '/assets/uploads/profils/5eb923054d683.jpg', 'Fan de Musique et mécanicien a mes heure perdu !', null, '2020-05-11 10:44:46');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (4, 'Bertrand', 'Hassan', 'Hassan@gmail.com', '$2y$10$ysepihPLd3weRthS0zwcHe7CvZRbm1XLXe9Qky6HD0o4e.ePYiN2u', '05000', '/assets/uploads/profils/5eb925012c67d.png', '/assets/uploads/profils/5eb9257be1fa4.jpg', 'Menuisier de père en fils, depuis 15 ans dans le bois, j''adore aider mon entourage.', null, '2020-05-11 10:45:16');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (5, 'Bardamu', 'Sylvia', 'Sylvia@gmail.com', '$2y$10$hUJDc.DI93w7wgIe1zGxU.mkF4wu53Liqu9vuNqovBtOYHDnhC8N6', '58000', '/assets/uploads/profils/5eb9260d3d16f.png', '/assets/uploads/profils/5eb91d6112983.png', 'Sylvia 45 ans
+Je serais ravi de vous donner un coup de main dans vos projets de pâtisserie', null, '2020-05-11 10:46:14');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (6, 'Berrurier', 'Jessy', 'Jessy@gmail.com', '$2y$10$jlZC00kOXXVY1rZ2owWCLeBvtH8snRFLkXWt.AnoP.kyn.hCEexwG', '01000', '/assets/uploads/profils/5eb926c6d74d0.png', '/assets/uploads/profils/5eb926c6d74fe.jpg', 'Maçon de métier je suis disponible pour vous aider !', null, '2020-05-11 10:46:56');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (7, 'Coullon', 'Arthur', 'Arthur@gmail.com', '$2y$10$w1VEp2WbE8VzravcnpmNF.BViXIEd4qT4D/83WsaMCXIwKK9SsLMW', '69000', '/assets/uploads/profils/5eb927b3dcf60.png', '/assets/uploads/profils/5eb927b3dcf8b.jpg', 'Bonjour,
+Arthur, Peintre, je suis passionné par la peinture et la nature.', null, '2020-05-11 10:47:39');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (8, 'Dejardin', 'Mohamed', 'Mohamed@gmail.com', '$2y$10$okNPn.HexywPC8OOoTThPuMc1QRNGenvkUeWL92dVtB2mZ4d6bAhu', '69000', '/assets/uploads/profils/5eb92db93e06b.png', '/assets/uploads/profils/5eb92db93e0a5.jpg', 'Moi c''est Mohamed,
+Dispo les weekend-end pour vous aider.', null, '2020-05-11 10:48:15');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (9, 'Elalaoui', 'Renée', 'Renee@gmail.com', '$2y$10$1g3xxPOB3CF/Syg6IbLHoelC1395pW0/ZA/n0nXjWU1g5U6MtXPK2', '95000', '/assets/uploads/profils/5eb92e37b21b8.jpg', '/assets/uploads/profils/5eb92e37b21e6.jpg', 'Bonjour,
+Dans le développement web et plus généralement dans l’informatique depuis 10ans', null, '2020-05-11 10:48:59');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (10, 'Dupont', 'Valérie', 'Valerie@gmail.com', '$2y$10$QAlBT8vTeo/vEIqNQmPVdudC.wkxSLClHVa3RPCxLQXvmfWN3ueY2', '85000', '/assets/uploads/profils/5eb92f3429963.png', '/assets/uploads/profils/5eb92f3429991.jpg', 'Bonjour,
+Valérie, Mécanicienne, j''ai mon propre garage et je peut vous aider dans vos projet de rénovation automobile.', null, '2020-05-11 10:49:41');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (11, 'Francois', 'Martin', 'Martin@gmail.com', '$2y$10$oCWkyrKHG6mYpl0HBgkGQuwYQl2PYHzMa9j1Bvxs6WNcYN3ffQdzC', '85520', '/assets/uploads/profils/5eb92f976edc8.png', '/assets/uploads/profils/5eb92f976edee.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 10:50:10');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (12, 'Loupiot', 'Laura', 'Laura@gmail.com', '$2y$10$14hmIRkO9WzcwICadh6zGufvmOoBvewLpR3teqHevY8Qdc51uGHYm', '73000', '/assets/uploads/profils/5eb92fe361d5e.png', '/assets/uploads/profils/5eb92fe361da5.png', 'Je suis developpeuse PHP & Java', null, '2020-05-11 10:50:39');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (13, 'Sunna', 'Justine', 'Justine@gmail.com', '$2y$10$koDWfFoNPlCI/OWbhNDluutbS25DR4JgqBtPLFeZMFCW7u8KT46Oe', '73000', '/assets/uploads/profils/5eb93029c731c.png', '/assets/uploads/profils/5eb93029c738a.png', 'Justine,
+Je suis developpeuse PHP & Symfony', null, '2020-05-11 10:51:17');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (14, 'Cr7t3k', 'Guillaume', 'Guillaume@gmail.com', '$2y$10$UejDrLYbJ0yqSDhxx3aUROhAUjVN2rmb15mt5KevvlEIfAUZrkUxu', '73520', '/assets/uploads/profils/5eb9309a39bfb.png', '/assets/uploads/profils/5eb9309a39c32.jpg', 'Bonjour,
+Je suis Developpeur Web Full Stack', null, '2020-05-11 10:51:41');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (15, 'Simplito', 'Gael', 'Gael@gmail.com', '$2y$10$HfK9Qm0UvjGv7/FpK3xmf.wZxu312z0Kd8g5GsVTEgSj5Jw.eZnqa', '69000', '/assets/uploads/profils/5eb92f976edc8.png', '/assets/uploads/profils/5eb9309a39c32.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 10:52:18');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (16, 'Raph', 'Raphael', 'Raphael@gmail.com', '$2y$10$qgcnPZApw5EOOQgPdjzaGOKIOu7eIvdF5TBt/oeQKBhIY2XUsosHu', '69000', '/assets/uploads/profils/5eb927b3dcf60.png', '/assets/uploads/profils/5eb927b3dcf8b.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 10:52:42');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (17, 'Alc', 'Stephane', 'Stephane@gmail.com', '$2y$10$DKS0Y9JPRb1Vib9jScfQpOIkWy1tUYRHPx7PI8WzrDy4/uxdPD9wm', '69000', '/assets/uploads/profils/5eb927b3dcf60.png', '/assets/uploads/profils/5eb92f976edee.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 10:53:03');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (18, 'Thibault', 'Yvon', 'Yvon@gmail.com', '$2y$10$wKEhIOxBhJJmlIfF3YI4Bu030mFeehB6plLw3QNmNOQit0CDev0AO', '73000', '/assets/uploads/profils/5eb92db93e06b.png', '/assets/uploads/profils/5eb92db93e0a5.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 10:59:29');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (19, 'Smith', 'Alex', 'Alex@gmail.com', '$2y$10$US9Hao3MEh93i3l5pmJ.petPTB7biigtps4EhUhVb4aAkxBZFzmKW', '73000', '/assets/uploads/profils/5eb92f976edc8.png', '/assets/uploads/profils/5eb923054d683.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 10:59:52');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (20, 'Crosby', 'Julian', 'Julian@gmail.com', '$2y$10$lKLvDybld4BCr5kfGbVIhOpav6efERWahMllw6jMomF77/d7v1De2', '69001', '/assets/uploads/profils/5eb92db93e06b.png', '/assets/uploads/profils/5eb92f976edee.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:00:15');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (21, 'Bibeau', 'Martin', 'Martin@gmail.com', '$2y$10$XFuv7mkv3vhtUUe4HM2SMujzJoYlDSZNxwXr2g1h3wfbKbVW8QhR2', '69009', '/assets/uploads/profils/5eb92f976edc8.png', '/assets/uploads/profils/5eb9257be1fa4.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:00:40');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (22, 'Allard', 'Benoit', 'Benoit@gmail.com', '$2y$10$f8jigU9iyw/aPZ9xFqRj9OXNtPRm1QT8.84ROaVc8iBU32soEz0kK', '69005', '/assets/uploads/profils/5eb92db93e06b.png', '/assets/uploads/profils/5eb923054d683.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:01:03');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (23, 'Gingras', 'Marc', 'Marc@gmail.com', '$2y$10$YK2QH.NsvyPITDa.VINuWen6bPnFl8SOMlJ9.Zi04SCrSHev69hK6', '36150', '/assets/uploads/profils/5eb92f976edc8.png', '/assets/uploads/profils/5eb9257be1fa4.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:01:30');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (24, 'Bibeau', 'Rita', 'Rita@gmail.com', '$2y$10$o12E9HcOkmlXntTuqEVMpuebu60E4T/WrUQOFGETBWjEYipjN7qrq', '36150', '/assets/uploads/profils/5eb93029c731c.png', '/assets/uploads/profils/5eb91d6112983.png', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:01:48');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (25, 'Dupuis', 'Carole', 'Carole@gmail.com', '$2y$10$busyRaXLThSt4.lh5Lt.HO6THmfU4YoI6KEjsCebHXzj09d8idMzO', '48920', '/assets/uploads/profils/5eb92f3429963.png', '/assets/uploads/profils/5eb91d6112983.png', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:02:12');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (26, 'Pomme', 'Olivia', 'Olivia@gmail.com', '$2y$10$bvVEroPUxKakeMyBZe9YuOHV4engN3NU/4LrN.h2X.BeqmMtw8j56', '69050', '/assets/uploads/profils/5eb93029c731c.png', '/assets/uploads/profils/5eb92f3429991.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:04:37');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (27, 'Roulo', 'Emma', 'Emma@gmail.com', '$2y$10$YObJW4EAKEpI07z6gFqYvOtqiN68hemQ0ZHX/rdecjQE4lNtaT/Au', '86930', '/assets/uploads/profils/5eb92f3429963.png', '/assets/uploads/profils/5eb91d6112983.png', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:05:06');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (28, 'None', 'Ava', 'Ava@gmail.com', '$2y$10$pPxYxu5vnib029fUgb.h8Os6B0Dzz1tCKUD26tvR1w6k2Nh4Akafq', '73560', '/assets/uploads/profils/5eb93029c731c.png', '/assets/uploads/profils/5eb92f3429991.jpg', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:05:34');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (29, 'Mode', 'Mia', 'Mia@gmail.com', '$2y$10$t6bocb2tLsoWnDuSj1p21.iEvETVdAg7PO2AbY5OKfeNQo/Y6Tzba', '69000', '/assets/uploads/profils/5eb92f3429963.png', '/assets/uploads/profils/5eb91d6112983.png', 'Bonjour,
+Disponible pour vos projet.
+Hate de venir vous aider dans vos projets et apporter mon expertise', null, '2020-05-11 11:06:05');
+INSERT INTO users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (30, 'Malin', 'Sophia', 'Sophia@gmail.com', '$2y$10$NCBNuO6E7gtxnV8nxuFG8ulFn6yZEvXkTdud6/gZzjgh/ouXtvPZu', '69000', '/assets/uploads/profils/5eb91ccbd23af.png', '/assets/uploads/profils/5eb91d6112983.png', 'Bonjour,
+Moi c''est Sophia, Fan de bricolage depuis petite.
+J''ai hâte de participer à vos projets.', null, '2020-05-11 11:06:26');
+INSERT INTO sidebyside.users (id, last_name, first_name, email, password, zip_code, profil_picture, banner_image, description, is_admin, created_at) VALUES (32, 'Martinot', 'Matthieu', 'Matthieu@gmail.com', '$2y$10$FmFicDredTYzh4.23Yakl.07aBHSiSpLcJELjodpzMMjXoAtgcutG', '69005', '/assets/uploads/profils/5ebbff86a420d.png', '/assets/uploads/profils/5eb92db93e0a5.jpg', 'Zen comme Zen
+Hub comme Hub
+Soumissez', null, '2020-05-13 16:09:10');
+
+
+
+
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Tomb','Jean','mail@mail.com','123456','73590',NULL,NULL,'Salut les amis',NULL,'2020-01-17 19:35:59'),(2,'Marteau','Luc','mail@mail.com','123456','45698',NULL,NULL,'Description de moi',NULL,'2020-02-17 19:36:42'),(3,'Caillou','Pierre','mail@mail.com','123456','89523',NULL,NULL,'J\'aime les oiseaux',NULL,'2020-02-25 19:37:45'),(4,'Siceaux','Mickael','mail@mail.com','123456','05896',NULL,NULL,'Ma description de fou',NULL,'2020-03-17 19:39:12'),(5,'Balais','Patrick','mail@mail.com','124597','54632',NULL,NULL,'Salut les petite loutres',NULL,'2020-03-20 19:44:11'),(6,'Palais','Martin','mail@mail.com','8zedi6','974',NULL,NULL,'Ma description de fou',NULL,'2020-03-20 19:44:11'),(7,'Pates','Jeremy','mail@mail.com','54zefze','01695',NULL,NULL,'Description de moi',NULL,'2020-04-17 19:46:11');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

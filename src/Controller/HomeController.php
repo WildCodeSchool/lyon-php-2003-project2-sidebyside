@@ -36,13 +36,14 @@ class HomeController extends AbstractController
         );
     }
 
+
     public function search()
     {
         $isSearched = true;
         $errorsArray = [];
 
-        if (!empty($_POST)) {
-            $keyword = trim($_POST['search']);
+        if (!empty($_GET)) {
+            $keyword = trim($_GET['key']);
 
             if (empty($keyword)) {
                 $errorsArray['keyword'] = '1 caractère minimum';
@@ -57,7 +58,10 @@ class HomeController extends AbstractController
 
             return $this->twig->render(
                 'Home/index.html.twig',
-                ['users' => $users, 'skills' => $skills, 'isSearched' => $isSearched, 'projects' => $projects]
+                [
+                    'users' => $users, 'skills' => $skills, 'isSearched' => $isSearched,
+                    'projects' => $projects, 'keyword' => $keyword
+                ]
             );
         }
     }
@@ -66,6 +70,13 @@ class HomeController extends AbstractController
     {
         return $this->twig->render(
             'Home/cgu.html.twig'
+        );
+    }
+
+    public function notFound()
+    {
+        return $this->twig->render(
+            'Home/404.html.twig'
         );
     }
 }
