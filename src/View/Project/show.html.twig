@@ -115,7 +115,9 @@
                 <h2 class="project-description-title">Description</h2>
                 <div class="container-content-card">
                     <div class="card-body project-description">
-                        {{ currentProject.description }}
+                        {% for line in currentProject.description %}
+                            <div>{{ line }}</div>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/project.png">
                 </div>
@@ -125,7 +127,9 @@
                 <h2 class="project-plan-title">Plan de Projet</h2>
                 <div class="container-content-card">
                     <div class="card-body project-plan-description">
-                        {{ currentProject.plan }}
+                        {% for line in currentProject.plan %}
+                            <div>{{ line }}</div>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/architecture.png">
                 </div>
@@ -146,7 +150,9 @@
                 <h2 class="about-team-project-title">A propos de l'équipe</h2>
                 <div class="container-content-card">
                     <div class="card-body about-team-project-description">
-                        {{ currentProject.team_description }}
+                        {% for line in currentProject.team_description %}
+                            <div>{{ line }}</div>
+                        {% endfor %}
                     </div>
                     <img class="project-description-img" src="/assets/images/group.png">
                 </div>

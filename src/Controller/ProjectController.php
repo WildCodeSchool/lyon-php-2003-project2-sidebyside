@@ -104,7 +104,6 @@ class ProjectController extends AbstractController
         $projectSkills = $skillManager->getAllForProject($id);
         $project['skills'] = $projectSkills; //Ajoute directement les skills au tableau project
         $project['category'] = $category;
-        $currentProject = $projectManager->selectOneById($id);
         $similarProjects = $projectManager->selectAllExceptCurrent($id);
         $projectOwner = $projectManager->selectProjectOwner($id);
         $collabManager = new CollabManager();
@@ -116,6 +115,9 @@ class ProjectController extends AbstractController
         $projectOwner = $userManager->selectOneById($projectOwner['id']);
         $requestManager = new RequestManager();
         $requests = $requestManager->selectRequestForCollaboration($id);
+        $project['description'] = explode("\n", $project['description']);
+        $project['plan'] = explode("\n", $project['plan']);
+        $project['team_description'] = explode("\n", $project['team_description']);
 
         foreach ($collaborators as $collaborator) {
             if (!empty($_SESSION['id']) and $collaborator['user_id'] == $_SESSION['id']) {
@@ -142,7 +144,7 @@ class ProjectController extends AbstractController
             return $this->twig->render(
                 'Project/show.html.twig',
                 [
-                    'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+                    'project' => $project, 'id' => $id, 'currentProject' => $project,
                     'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
                     'isCollaborator' => $isCollaborator, 'userInfo' => $userInfo,
                     'isRequest' => $isRequest, 'likes' => $likes
@@ -153,7 +155,7 @@ class ProjectController extends AbstractController
         return $this->twig->render(
             'Project/show.html.twig',
             [
-                'project' => $project, 'id' => $id, 'currentProject' => $currentProject,
+                'project' => $project, 'id' => $id, 'currentProject' => $project,
                 'similarProjects' => $similarProjects, 'projectOwner' => $projectOwner,
                 'isCollaborator' => $isCollaborator, 'isRequest' => $isRequest, 'likes' => $likes
             ]
