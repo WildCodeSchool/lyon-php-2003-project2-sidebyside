@@ -3,20 +3,20 @@
 
 {% block content %}
     <div class="container-banner-project">
-        <h1 class="project-title">
+        <h1 class="project-title project-show-title">
             {{ currentProject.title }}
         </h1>
         <img class="banner-project-image" src="{{ currentProject.banner_image }}">
     </div>
     <div class="container">
     <div class="row container-detail-project">
-        <div class="container-image-button">
-            <a href="/Profil/user/{{ projectOwner.id }}">
+        <div class="container-image-button container-image-button-mobile">
+            <a href="/Profil/user/{{ projectOwner.id }}" class="profil-image-mobile">
                 <div class="container-image-profil">
                     <img class="project-owner-profil-image" src="{{ projectOwner.profil_picture }}">
                 </div>
             </a>
-            <div class="container-button">
+            <div class="container-button container-button-mobile">
                 {% if isConnected.id %}
                     {% if likes|length == 0 %}
                         <strong>Soyez le premier à aimer ce projet !</strong>
