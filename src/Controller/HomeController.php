@@ -42,8 +42,8 @@ class HomeController extends AbstractController
         $isSearched = true;
         $errorsArray = [];
 
-        if (!empty($_POST)) {
-            $keyword = trim($_POST['search']);
+        if (!empty($_GET)) {
+            $keyword = trim($_GET['key']);
 
             if (empty($keyword)) {
                 $errorsArray['keyword'] = '1 caractère minimum';
